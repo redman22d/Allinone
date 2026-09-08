@@ -1,0 +1,29 @@
+/**
+ * Tutor LMS Course Format - classic wp-admin metabox styles.
+ */
+
+.tcf-metabox p {
+	margin: 0 0 12px;
+}
+
+.tcf-metabox label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+
+.tcf-metabox select,
+.tcf-metabox input[type="number"] {
+	width: 100%;
+}
+
+.tcf-metabox .description {
+	display: block;
+	margin-top: 4px;
+}
+
+.tcf-live-only {
+	border-top: 1px solid #dcdcde;
+	margin-top: 12px;
+	padding-top: 12px;
+}

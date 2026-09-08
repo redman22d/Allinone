@@ -1,0 +1,470 @@
+.tlms-ipe-dashboard-fields {
+	margin-top: 0;
+}
+
+.tlms-ipe-field .tutor-label {
+	display: block;
+	margin-bottom: 12px;
+}
+
+.tlms-ipe-checkbox-list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.tlms-ipe-checkbox {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+}
+
+.tlms-ipe-dashboard-extra {
+	margin-top: 16px;
+}
+
+.tlms-ipe-profile-card { margin-top: 0; }
+.tlms-ipe-repeat-list { display: flex; flex-direction: column; gap: 12px; }
+.tlms-ipe-repeat-row {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(140px, .6fr) auto;
+	gap: 12px;
+	align-items: end;
+	padding: 14px;
+	border: 1px solid rgba(0,0,0,.08);
+	border-radius: 10px;
+	background: rgba(0,0,0,.015);
+}
+.tlms-ipe-repeat-field { min-width: 0; }
+.tlms-ipe-repeat-field .tutor-label { display:block; margin-bottom:6px; }
+.tlms-ipe-repeat-field .tutor-form-control { width:100%; }
+.tlms-ipe-remove-row { white-space: nowrap; }
+.tlms-ipe-multi-select { width:100%; min-height: 160px; border: 1px solid rgba(0,0,0,.14); border-radius: 8px; padding: 8px; background:#fff; }
+.tlms-ipe-help { margin: 0; font-size: 12px; }
+
+.tlms-ipe-public-extra {
+	display: block;
+	margin: 12px 0 18px;
+	padding: 0;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	border-radius: 12px;
+	background: #fff;
+	overflow: hidden;
+}
+.tlms-ipe-public-extra > summary { list-style: none; }
+.tlms-ipe-public-extra > summary::-webkit-details-marker { display: none; }
+.tlms-ipe-public-drawer-toggle {
+	display: flex; align-items: center; justify-content: space-between; gap: 12px;
+	min-height: 48px; padding: 12px 14px; cursor: pointer; font-size: 14px; line-height: 1.3;
+	font-weight: 700; background: rgba(0,0,0,.015); border-bottom: 1px solid transparent;
+}
+.tlms-ipe-public-extra[open] .tlms-ipe-public-drawer-toggle { border-bottom-color: rgba(0,0,0,.07); }
+.tlms-ipe-public-drawer-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+.tlms-ipe-public-drawer-chevron { font-size: 17px; line-height: 1; opacity: .55; transition: transform .18s ease; }
+.tlms-ipe-public-extra:not([open]) .tlms-ipe-public-drawer-chevron { transform: rotate(-90deg); }
+.tlms-ipe-public-drawer-body { display:flex; flex-direction:column; gap:12px; padding:12px 14px; }
+.tlms-ipe-public-section { margin: 0; padding: 0 0 12px; border-bottom: 1px solid rgba(0,0,0,.07); }
+.tlms-ipe-public-section:last-child { padding-bottom: 0; border-bottom: 0; }
+.tlms-ipe-public-section h4 { margin: 0 0 8px; font-size: 15px; line-height: 1.25; }
+.tlms-ipe-info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.tlms-ipe-label { display: block; margin-bottom: 2px; font-size: 10px; opacity: .65; text-transform: uppercase; letter-spacing: .04em; }
+.tlms-ipe-info-grid strong { font-size: 13px; line-height: 1.35; font-weight: 600; }
+.tlms-ipe-timeline { display: flex; flex-direction: column; gap: 6px; }
+.tlms-ipe-timeline-row { display: flex; justify-content: space-between; gap: 10px; padding: 8px 10px; border: 1px solid rgba(0,0,0,.07); border-radius: 7px; background: rgba(0,0,0,.015); }
+.tlms-ipe-timeline-row > div { display: flex; flex-direction: column; gap: 1px; }
+.tlms-ipe-timeline-row strong { font-size: 13px; line-height: 1.25; }
+.tlms-ipe-timeline-row span,
+.tlms-ipe-timeline-row time { font-size: 11px; line-height: 1.25; opacity: .7; }
+.tlms-ipe-timeline-row time { white-space: nowrap; }
+.tlms-ipe-tag-list { display: flex; flex-wrap: wrap; gap: 5px; }
+.tlms-ipe-tag { display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 999px; background: rgba(0,0,0,.055); font-size: 11px; line-height: 1.2; }
+
+.tlms-ipe-main-heading { margin: 0 0 2px; }
+.tlms-ipe-compact-card { padding: 16px; }
+.tlms-ipe-compact-card.tutor-card { gap: 12px; }
+.tlms-ipe-section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+.tlms-ipe-section-head .tutor-h6 { margin: 0; }
+.tlms-ipe-selection-count { font-size: 12px; color: rgba(0,0,0,.55); white-space: nowrap; }
+.tlms-ipe-choice-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.tlms-ipe-choice-pill { display: flex; align-items: center; gap: 8px; min-height: 38px; padding: 8px 10px; border: 1px solid rgba(0,0,0,.1); border-radius: 8px; cursor: pointer; background: #fff; font-size: 13px; }
+.tlms-ipe-choice-pill:has(input:checked) { border-color: currentColor; background: rgba(0,0,0,.025); }
+.tlms-ipe-choice-pill input { margin: 0; }
+.tlms-ipe-repeat-list { gap: 8px; }
+.tlms-ipe-repeat-row { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(110px, .5fr) auto; gap: 8px; padding: 10px; border-radius: 8px; background: rgba(0,0,0,.018); }
+.tlms-ipe-mini-label { display: block; margin: 0 0 4px; font-size: 11px; line-height: 1.2; color: rgba(0,0,0,.62); }
+.tlms-ipe-mini-input { min-height: 38px; padding: 7px 9px !important; font-size: 13px !important; }
+.tlms-ipe-remove-row { min-height: 38px; padding: 0 10px !important; }
+.tlms-ipe-check-dropdown { position: relative; }
+.tlms-ipe-dropdown-toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; padding: 9px 12px; border: 1px solid rgba(0,0,0,.14); border-radius: 8px; background: #fff; cursor: pointer; text-align: left; font-size: 13px; color: inherit; }
+.tlms-ipe-dropdown-toggle:hover { border-color: rgba(0,0,0,.28); }
+.tlms-ipe-dropdown-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tlms-ipe-chevron { font-size: 16px; line-height: 1; opacity: .6; }
+.tlms-ipe-dropdown-panel { display: none; position: absolute; z-index: 9999; left: 0; right: 0; top: calc(100% + 6px); max-height: 310px; overflow: auto; padding: 8px; border: 1px solid rgba(0,0,0,.13); border-radius: 10px; background: #fff; box-shadow: 0 8px 26px rgba(0,0,0,.12); }
+.tlms-ipe-check-dropdown.is-open .tlms-ipe-dropdown-panel { display: block; }
+.tlms-ipe-dropdown-search { position: sticky; top: 0; padding-bottom: 8px; background: #fff; z-index: 1; }
+.tlms-ipe-dropdown-search input { width: 100%; min-height: 38px; padding: 7px 9px; border: 1px solid rgba(0,0,0,.12); border-radius: 7px; font-size: 13px; }
+.tlms-ipe-dropdown-options { display: flex; flex-direction: column; gap: 2px; }
+.tlms-ipe-option { display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 6px 8px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.tlms-ipe-option:hover { background: rgba(0,0,0,.04); }
+.tlms-ipe-option input { margin: 0; }
+.tlms-ipe-category-option { padding-left: calc(8px + var(--tlms-ipe-indent, 0px)); }
+
+.tlms-ipe-location-grid { align-items: start; }
+.tlms-ipe-location-field .tutor-label { display: block; margin: 0 0 6px; }
+.tlms-ipe-location-dropdown { position: relative; }
+.tlms-ipe-location-dropdown .tlms-ipe-dropdown-panel { max-height: 300px; }
+.tlms-ipe-location-dropdown .tlms-ipe-option { min-height: 34px; }
+.tlms-ipe-location-dropdown .tlms-ipe-option input { width: 16px; height: 16px; }
+
+.tlms-ipe-teach-list {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 5px;
+}
+.tlms-ipe-teach-group {
+	display: block;
+	font-size: 12px;
+	line-height: 1.45;
+}
+.tlms-ipe-teach-parent-name { font-weight: 700; }
+.tlms-ipe-teach-colon { margin: 0 4px; opacity: .5; }
+.tlms-ipe-teach-child-name { font-weight: 400; }
+.tlms-ipe-teach-separator { margin-right: 4px; }
+
+@media (max-width: 782px) {
+	.tlms-ipe-choice-grid { grid-template-columns: 1fr; }
+	.tlms-ipe-repeat-row { grid-template-columns: 1fr 1fr; }
+	.tlms-ipe-repeat-row .tlms-ipe-remove-row { grid-column: 1 / -1; width: max-content; }
+	.tlms-ipe-info-grid { grid-template-columns: 1fr; }
+	.tlms-ipe-timeline-row { flex-direction: column; }
+}
+
+@media (max-width: 480px) {
+	.tlms-ipe-repeat-row { grid-template-columns: 1fr; }
+	.tlms-ipe-repeat-row .tlms-ipe-remove-row { grid-column: auto; width: 100%; }
+}
+
+/* ==========================================================================
+ * v1.3.3 — social icons
+ *
+ * Tutor LMS 4 settings rows use:
+ *   .tutor-social-field { display:flex }
+ *   .tutor-social-icon  { position:relative; top:37px }
+ * that 37px hack is meant to sit the 20px SVG next to the input (under the
+ * label). Previous plugin CSS reset top:0 and forced align-items:center on
+ * the extra networks, so Instagram/Telegram/WhatsApp/TikTok floated next to
+ * the label while Facebook/X/Website stayed on the input — and the fallback
+ * globe/phone SVGs still showed through.
+ *
+ * Rules below:
+ *  1. Never fight Tutor's row layout with align-items:center / top:0.
+ *  2. Paint brand glyphs via ::after mask so the 20px box stays intact.
+ *  3. Public-profile icons inherit currentColor and 1em so they match the
+ *     native white font-icons on the cover (learners + instructors).
+ * ========================================================================== */
+
+.tutor-social-field {
+	display: flex !important;
+	flex-direction: row !important;
+	align-items: flex-start !important;
+	gap: 12px;
+}
+
+.tutor-social-field .tutor-social-icon {
+	position: relative !important;
+	flex: 0 0 20px;
+	width: 20px;
+	height: 20px;
+	min-width: 20px;
+	min-height: 20px;
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+	line-height: 0;
+	box-sizing: border-box;
+	/* Fallback before JS measures the input. Tutor uses 37px; 32px is closer
+	   to label + gap on the 4.x settings form. JS overwrites this inline. */
+	top: 32px !important;
+	transform: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	align-self: flex-start !important;
+}
+
+.tutor-social-field .tutor-social-icon svg {
+	display: block;
+	width: 20px;
+	height: 20px;
+}
+
+/* Hide the globe/phone fallback SVG but keep its 20px box. */
+.tutor-social-field:has(#_tutor_profile_instagram) .tutor-social-icon svg,
+.tutor-social-field:has(#_tutor_profile_telegram) .tutor-social-icon svg,
+.tutor-social-field:has(#_tutor_profile_whatsapp) .tutor-social-icon svg,
+.tutor-social-field:has(#_tutor_profile_tiktok) .tutor-social-icon svg {
+	opacity: 0;
+}
+
+.tutor-social-field:has(#_tutor_profile_instagram) .tutor-social-icon::after,
+.tutor-social-field:has(#_tutor_profile_telegram) .tutor-social-icon::after,
+.tutor-social-field:has(#_tutor_profile_whatsapp) .tutor-social-icon::after,
+.tutor-social-field:has(#_tutor_profile_tiktok) .tutor-social-icon::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 20px;
+	height: 20px;
+	pointer-events: none;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+}
+
+.tutor-social-field:has(#_tutor_profile_instagram) .tutor-social-icon::after {
+	background-color: #E4405F;
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\'%3E%3Cpath fill=\'%23000\' d=\'M14.5 3c.3 2.6 1.7 4.2 4.3 4.4v2.8c-1.5 0-2.9-.5-4.2-1.4v6.5c0 3.6-2.8 6.2-6.4 6.2S1.8 18.9 1.8 15.3 4.6 9.1 8.2 9.1c.4 0 .8 0 1.2.1v3c-.4-.1-.8-.2-1.2-.2-1.9 0-3.3 1.5-3.3 3.3s1.4 3.3 3.3 3.3 3.2-1.5 3.2-3.3V3h3.1z\'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%200%201536%201408'%3E%3Cpath fill='%23000' d='M949%20459Q1024%20534%201024%20640Q1024%20746%20949%20821Q874%20896%20768%20896Q662%20896%20587%20821Q512%20746%20512%20640Q512%20534%20587%20459Q662%20384%20768%20384Q874%20384%20949%20459ZM1047%20919Q1162%20804%201162%20640Q1162%20476%201047%20361Q932%20246%20768%20246Q604%20246%20489%20361Q374%20476%20374%20640Q374%20804%20489%20919Q604%201034%20768%201034Q932%201034%201047%20919ZM1243%201115Q1270%201088%201270%201050Q1270%201012%201243%20985Q1216%20958%201178%20958Q1140%20958%201113%20985Q1086%201012%201086%201050Q1086%201088%201113%201115Q1140%201142%201178%201142Q1216%201142%201243%201115ZM315%201239Q265%201219%20227%201181Q189%201143%20169%201093Q158%201064%20150.5%201021.5Q143%20979%20140.5%20918.5Q138%20858%20137.5%20822Q137%20786%20137.5%20716.5Q138%20647%20138%20640Q138%20633%20137.5%20563.5Q137%20494%20137.5%20458Q138%20422%20140.5%20361.5Q143%20301%20150.5%20258.5Q158%20216%20169%20187Q189%20137%20227%2099Q265%2061%20315%2041Q344%2030%20386.5%2022.5Q429%2015%20489.5%2012.5Q550%2010%20586%209.5Q622%209%20691.5%209.5Q761%2010%20768%2010Q775%2010%20844.5%209.5Q914%209%20950%209.5Q986%2010%201046.5%2012.5Q1107%2015%201149.5%2022.5Q1192%2030%201221%2041Q1271%2061%201309%2099Q1347%20137%201367%20187Q1378%20216%201385.5%20258.5Q1393%20301%201395.5%20361.5Q1398%20422%201398.5%20458Q1399%20494%201398.5%20563.5Q1399%20633%201398%20640Q1398%20647%201398.5%20716.5Q1399%20786%201398.5%20822Q1399%20858%201395.5%20918.5Q1393%20979%201385.5%201021.5Q1378%201064%201367%201093Q1347%201143%201309%201181Q1271%201219%201221%201239Q1192%201250%201149.5%201257.5Q1107%201265%201046.5%201267.5Q986%201270%20950%201270.5Q914%201271%20844.5%201270.5Q775%201270%20768%201270Q761%201270%20691.5%201270.5Q622%201271%20586%201270.5Q550%201270%20489.5%201267.5Q429%201265%20386.5%201257.5Q344%201250%20315%201239ZM1531%20323Q1521%20115%201407%201Q1293%20-113%201085%20-123Q997%20-128%20768%20-128Q539%20-128%20451%20-123Q243%20-113%20129%201Q15%20115%205%20323Q0%20411%200%20640Q0%20869%205%20957Q15%201165%20129%201279Q243%201393%20451%201403Q539%201408%20768%201408Q997%201408%201085%201403Q1293%201393%201407%201279Q1521%201165%201531%20957Q1536%20869%201536%20640Q1536%20411%201531%20323Z'/%3E%3C/svg%3E");
+}
+
+.tutor-social-field:has(#_tutor_profile_telegram) .tutor-social-icon::after {
+	background-color: #26A5E4;
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%20-256%201792%201792'%3E%3Cpath fill='%23000' d='M1189%20229L1336%20922Q1345%20966%201325.5%20985Q1306%201004%201274%20992L410%20659Q381%20648%20370.5%20634Q360%20620%20368%20607.5Q376%20595%20400%20588L621%20519L1134%20842Q1155%20856%201166%20848Q1173%20843%201162%20833L747%20458L731%20230Q754%20230%20776%20252L884%20356L1108%20191Q1172%20155%201189%20229ZM1721%20988Q1792%20822%201792%20640Q1792%20458%201721%20292Q1650%20126%201530%206Q1410%20-114%201244%20-185Q1078%20-256%20896%20-256Q714%20-256%20548%20-185Q382%20-114%20262%206Q142%20126%2071%20292Q0%20458%200%20640Q0%20822%2071%20988Q142%201154%20262%201274Q382%201394%20548%201465Q714%201536%20896%201536Q1078%201536%201244%201465Q1410%201394%201530%201274Q1650%201154%201721%20988Z'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%20-256%201792%201792'%3E%3Cpath fill='%23000' d='M1189%20229L1336%20922Q1345%20966%201325.5%20985Q1306%201004%201274%20992L410%20659Q381%20648%20370.5%20634Q360%20620%20368%20607.5Q376%20595%20400%20588L621%20519L1134%20842Q1155%20856%201166%20848Q1173%20843%201162%20833L747%20458L731%20230Q754%20230%20776%20252L884%20356L1108%20191Q1172%20155%201189%20229ZM1721%20988Q1792%20822%201792%20640Q1792%20458%201721%20292Q1650%20126%201530%206Q1410%20-114%201244%20-185Q1078%20-256%20896%20-256Q714%20-256%20548%20-185Q382%20-114%20262%206Q142%20126%2071%20292Q0%20458%200%20640Q0%20822%2071%20988Q142%201154%20262%201274Q382%201394%20548%201465Q714%201536%20896%201536Q1078%201536%201244%201465Q1410%201394%201530%201274Q1650%201154%201721%20988Z'/%3E%3C/svg%3E");
+}
+
+.tutor-social-field:has(#_tutor_profile_whatsapp) .tutor-social-icon::after {
+	background-color: #25D366;
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%20-134%201536%201548'%3E%3Cpath fill='%23000' d='M1172%20465Q1174%20460%201174%20450Q1174%20417%201157%20374Q1141%20335%201086%20308.5Q1031%20282%20984%20282Q927%20282%20794%20344Q696%20389%20624%20462Q552%20535%20476%20647Q404%20754%20405%20841V849Q408%20940%20479%201007Q503%201029%20531%201029Q537%201029%20549%201027.5Q561%201026%20568%201026Q587%201026%20594.5%201019.5Q602%201013%20610%20992Q618%20972%20643%20904Q668%20836%20668%20829Q668%20808%20633.5%20771.5Q599%20735%20599%20725Q599%20718%20604%20710Q638%20637%20706%20573Q762%20520%20857%20472Q869%20465%20879%20465Q894%20465%20933%20513.5Q972%20562%20985%20562Q998%20562%201082.5%20518Q1167%20474%201172%20465ZM782%2032Q909%2032%201025.5%2082Q1142%20132%201226%20216Q1310%20300%201360%20416.5Q1410%20533%201410%20660Q1410%20787%201360%20903.5Q1310%201020%201226%201104Q1142%201188%201025.5%201238Q909%201288%20782%201288Q655%201288%20538.5%201238Q422%201188%20338%201104Q254%201020%20204%20903.5Q154%20787%20154%20660Q154%20457%20274%20292L195%2059L437%20136Q595%2032%20782%2032ZM782%20-94Q587%20-94%20417%200L0%20-134L136%20271Q28%20449%2028%20660Q28%20813%2088%20952.5Q148%201092%20249%201193Q350%201294%20489.5%201354Q629%201414%20782%201414Q935%201414%201074.5%201354Q1214%201294%201315%201193Q1416%201092%201476%20952.5Q1536%20813%201536%20660Q1536%20507%201476%20367.5Q1416%20228%201315%20127Q1214%2026%201074.5%20-34Q935%20-94%20782%20-94Z'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%20-134%201536%201548'%3E%3Cpath fill='%23000' d='M1172%20465Q1174%20460%201174%20450Q1174%20417%201157%20374Q1141%20335%201086%20308.5Q1031%20282%20984%20282Q927%20282%20794%20344Q696%20389%20624%20462Q552%20535%20476%20647Q404%20754%20405%20841V849Q408%20940%20479%201007Q503%201029%20531%201029Q537%201029%20549%201027.5Q561%201026%20568%201026Q587%201026%20594.5%201019.5Q602%201013%20610%20992Q618%20972%20643%20904Q668%20836%20668%20829Q668%20808%20633.5%20771.5Q599%20735%20599%20725Q599%20718%20604%20710Q638%20637%20706%20573Q762%20520%20857%20472Q869%20465%20879%20465Q894%20465%20933%20513.5Q972%20562%20985%20562Q998%20562%201082.5%20518Q1167%20474%201172%20465ZM782%2032Q909%2032%201025.5%2082Q1142%20132%201226%20216Q1310%20300%201360%20416.5Q1410%20533%201410%20660Q1410%20787%201360%20903.5Q1310%201020%201226%201104Q1142%201188%201025.5%201238Q909%201288%20782%201288Q655%201288%20538.5%201238Q422%201188%20338%201104Q254%201020%20204%20903.5Q154%20787%20154%20660Q154%20457%20274%20292L195%2059L437%20136Q595%2032%20782%2032ZM782%20-94Q587%20-94%20417%200L0%20-134L136%20271Q28%20449%2028%20660Q28%20813%2088%20952.5Q148%201092%20249%201193Q350%201294%20489.5%201354Q629%201414%20782%201414Q935%201414%201074.5%201354Q1214%201294%201315%201193Q1416%201092%201476%20952.5Q1536%20813%201536%20660Q1536%20507%201476%20367.5Q1416%20228%201315%20127Q1214%2026%201074.5%20-34Q935%20-94%20782%20-94Z'/%3E%3C/svg%3E");
+}
+
+.tutor-social-field:has(#_tutor_profile_tiktok) .tutor-social-icon::after {
+	background-color: currentColor;
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M14.5 3c.3 2.6 1.7 4.2 4.3 4.4v2.8c-1.5 0-2.9-.5-4.2-1.4v6.5c0 3.6-2.8 6.2-6.4 6.2S1.8 18.9 1.8 15.3 4.6 9.1 8.2 9.1c.4 0 .8 0 1.2.1v3c-.4-.1-.8-.2-1.2-.2-1.9 0-3.3 1.5-3.3 3.3s1.4 3.3 3.3 3.3 3.2-1.5 3.2-3.3V3h3.1z'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%20-134%201536%201548'%3E%3Cpath fill='%23000' d='M1172%20465Q1174%20460%201174%20450Q1174%20417%201157%20374Q1141%20335%201086%20308.5Q1031%20282%20984%20282Q927%20282%20794%20344Q696%20389%20624%20462Q552%20535%20476%20647Q404%20754%20405%20841V849Q408%20940%20479%201007Q503%201029%20531%201029Q537%201029%20549%201027.5Q561%201026%20568%201026Q587%201026%20594.5%201019.5Q602%201013%20610%20992Q618%20972%20643%20904Q668%20836%20668%20829Q668%20808%20633.5%20771.5Q599%20735%20599%20725Q599%20718%20604%20710Q638%20637%20706%20573Q762%20520%20857%20472Q869%20465%20879%20465Q894%20465%20933%20513.5Q972%20562%20985%20562Q998%20562%201082.5%20518Q1167%20474%201172%20465ZM782%2032Q909%2032%201025.5%2082Q1142%20132%201226%20216Q1310%20300%201360%20416.5Q1410%20533%201410%20660Q1410%20787%201360%20903.5Q1310%201020%201226%201104Q1142%201188%201025.5%201238Q909%201288%20782%201288Q655%201288%20538.5%201238Q422%201188%20338%201104Q254%201020%20204%20903.5Q154%20787%20154%20660Q154%20457%20274%20292L195%2059L437%20136Q595%2032%20782%2032ZM782%20-94Q587%20-94%20417%200L0%20-134L136%20271Q28%20449%2028%20660Q28%20813%2088%20952.5Q148%201092%20249%201193Q350%201294%20489.5%201354Q629%201414%20782%201414Q935%201414%201074.5%201354Q1214%201294%201315%201193Q1416%201092%201476%20952.5Q1536%20813%201536%20660Q1536%20507%201476%20367.5Q1416%20228%201315%20127Q1214%2026%201074.5%20-34Q935%20-94%20782%20-94Z'/%3E%3C/svg%3E");
+}
+
+/* Once JS has swapped in a real brand SVG, drop the mask overlay. */
+.tutor-social-field .tutor-social-icon[data-tlms-ipe-icon]::after {
+	display: none !important;
+}
+.tutor-social-field .tutor-social-icon[data-tlms-ipe-icon] svg {
+	opacity: 1 !important;
+}
+
+/* ----- Public cover + dashboard profile card: one size, one color, one line ----- */
+
+.tutor-social-container,
+.tutor-user-profile-social {
+	display: flex !important;
+	align-items: center !important;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.tutor-social-container a,
+.tutor-user-profile-social a.tutor-social-link {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	line-height: 1 !important;
+	vertical-align: middle !important;
+	position: relative !important;
+	top: 0 !important;
+	transform: none !important;
+	margin: 0 !important;
+	box-sizing: border-box;
+}
+
+.tutor-social-container a {
+	width: 1em;
+	height: 1em;
+	font-size: inherit;
+	color: inherit;
+}
+
+.tutor-user-profile-social a.tutor-social-link {
+	width: 16px;
+	height: 16px;
+	min-width: 16px;
+	min-height: 16px;
+	padding: 0;
+}
+
+.tutor-user-profile-social a.tutor-social-link svg {
+	display: block;
+	width: 16px;
+	height: 16px;
+	margin: 0;
+}
+
+.tutor-social-container a.tutor-icon-brand-instagram,
+.tutor-social-container a.tutor-icon-brand-telegram,
+.tutor-social-container a.tutor-icon-brand-whatsapp,
+.tutor-social-container a.tutor-icon-brand-tiktok,
+a.tutor-icon-brand-instagram.tlms-ipe-social-icon,
+a.tutor-icon-brand-telegram.tlms-ipe-social-icon,
+a.tutor-icon-brand-whatsapp.tlms-ipe-social-icon,
+a.tutor-icon-brand-tiktok.tlms-ipe-social-icon {
+	font-family: inherit !important;
+	background-color: currentColor;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+}
+
+.tutor-social-container a.tutor-icon-brand-instagram,
+a.tutor-icon-brand-instagram.tlms-ipe-social-icon {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm11 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%20-256%201792%201792'%3E%3Cpath fill='%23000' d='M1189%20229L1336%20922Q1345%20966%201325.5%20985Q1306%201004%201274%20992L410%20659Q381%20648%20370.5%20634Q360%20620%20368%20607.5Q376%20595%20400%20588L621%20519L1134%20842Q1155%20856%201166%20848Q1173%20843%201162%20833L747%20458L731%20230Q754%20230%20776%20252L884%20356L1108%20191Q1172%20155%201189%20229ZM1721%20988Q1792%20822%201792%20640Q1792%20458%201721%20292Q1650%20126%201530%206Q1410%20-114%201244%20-185Q1078%20-256%20896%20-256Q714%20-256%20548%20-185Q382%20-114%20262%206Q142%20126%2071%20292Q0%20458%200%20640Q0%20822%2071%20988Q142%201154%20262%201274Q382%201394%20548%201465Q714%201536%20896%201536Q1078%201536%201244%201465Q1410%201394%201530%201274Q1650%201154%201721%20988Z'/%3E%3C/svg%3E");
+}
+
+.tutor-social-container a.tutor-icon-brand-telegram,
+a.tutor-icon-brand-telegram.tlms-ipe-social-icon {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M21.9 4.5 18.4 21c-.3 1.2-1 1.5-2 .9l-5.5-4.1-2.7 2.6c-.3.3-.5.5-1 .5l.4-5.6L18.6 6c.5-.4-.1-.6-.7-.2L6.4 13.3 1 11.6c-1.2-.4-1.2-1.2.2-1.8L20.3 3.7c1-.4 1.9.2 1.6.8z'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M21.9 4.5 18.4 21c-.3 1.2-1 1.5-2 .9l-5.5-4.1-2.7 2.6c-.3.3-.5.5-1 .5l.4-5.6L18.6 6c.5-.4-.1-.6-.7-.2L6.4 13.3 1 11.6c-1.2-.4-1.2-1.2.2-1.8L20.3 3.7c1-.4 1.9.2 1.6.8z'/%3E%3C/svg%3E");
+}
+
+.tutor-social-container a.tutor-icon-brand-whatsapp,
+a.tutor-icon-brand-whatsapp.tlms-ipe-social-icon {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%20-134%201536%201548'%3E%3Cpath fill='%23000' d='M1172%20465Q1174%20460%201174%20450Q1174%20417%201157%20374Q1141%20335%201086%20308.5Q1031%20282%20984%20282Q927%20282%20794%20344Q696%20389%20624%20462Q552%20535%20476%20647Q404%20754%20405%20841V849Q408%20940%20479%201007Q503%201029%20531%201029Q537%201029%20549%201027.5Q561%201026%20568%201026Q587%201026%20594.5%201019.5Q602%201013%20610%20992Q618%20972%20643%20904Q668%20836%20668%20829Q668%20808%20633.5%20771.5Q599%20735%20599%20725Q599%20718%20604%20710Q638%20637%20706%20573Q762%20520%20857%20472Q869%20465%20879%20465Q894%20465%20933%20513.5Q972%20562%20985%20562Q998%20562%201082.5%20518Q1167%20474%201172%20465ZM782%2032Q909%2032%201025.5%2082Q1142%20132%201226%20216Q1310%20300%201360%20416.5Q1410%20533%201410%20660Q1410%20787%201360%20903.5Q1310%201020%201226%201104Q1142%201188%201025.5%201238Q909%201288%20782%201288Q655%201288%20538.5%201238Q422%201188%20338%201104Q254%201020%20204%20903.5Q154%20787%20154%20660Q154%20457%20274%20292L195%2059L437%20136Q595%2032%20782%2032ZM782%20-94Q587%20-94%20417%200L0%20-134L136%20271Q28%20449%2028%20660Q28%20813%2088%20952.5Q148%201092%20249%201193Q350%201294%20489.5%201354Q629%201414%20782%201414Q935%201414%201074.5%201354Q1214%201294%201315%201193Q1416%201092%201476%20952.5Q1536%20813%201536%20660Q1536%20507%201476%20367.5Q1416%20228%201315%20127Q1214%2026%201074.5%20-34Q935%20-94%20782%20-94Z'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0%20-134%201536%201548'%3E%3Cpath fill='%23000' d='M1172%20465Q1174%20460%201174%20450Q1174%20417%201157%20374Q1141%20335%201086%20308.5Q1031%20282%20984%20282Q927%20282%20794%20344Q696%20389%20624%20462Q552%20535%20476%20647Q404%20754%20405%20841V849Q408%20940%20479%201007Q503%201029%20531%201029Q537%201029%20549%201027.5Q561%201026%20568%201026Q587%201026%20594.5%201019.5Q602%201013%20610%20992Q618%20972%20643%20904Q668%20836%20668%20829Q668%20808%20633.5%20771.5Q599%20735%20599%20725Q599%20718%20604%20710Q638%20637%20706%20573Q762%20520%20857%20472Q869%20465%20879%20465Q894%20465%20933%20513.5Q972%20562%20985%20562Q998%20562%201082.5%20518Q1167%20474%201172%20465ZM782%2032Q909%2032%201025.5%2082Q1142%20132%201226%20216Q1310%20300%201360%20416.5Q1410%20533%201410%20660Q1410%20787%201360%20903.5Q1310%201020%201226%201104Q1142%201188%201025.5%201238Q909%201288%20782%201288Q655%201288%20538.5%201238Q422%201188%20338%201104Q254%201020%20204%20903.5Q154%20787%20154%20660Q154%20457%20274%20292L195%2059L437%20136Q595%2032%20782%2032ZM782%20-94Q587%20-94%20417%200L0%20-134L136%20271Q28%20449%2028%20660Q28%20813%2088%20952.5Q148%201092%20249%201193Q350%201294%20489.5%201354Q629%201414%20782%201414Q935%201414%201074.5%201354Q1214%201294%201315%201193Q1416%201092%201476%20952.5Q1536%20813%201536%20660Q1536%20507%201476%20367.5Q1416%20228%201315%20127Q1214%2026%201074.5%20-34Q935%20-94%20782%20-94Z'/%3E%3C/svg%3E");
+}
+
+.tutor-social-container a.tutor-icon-brand-tiktok,
+a.tutor-icon-brand-tiktok.tlms-ipe-social-icon {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M14.5 3c.3 2.6 1.7 4.2 4.3 4.4v2.8c-1.5 0-2.9-.5-4.2-1.4v6.5c0 3.6-2.8 6.2-6.4 6.2S1.8 18.9 1.8 15.3 4.6 9.1 8.2 9.1c.4 0 .8 0 1.2.1v3c-.4-.1-.8-.2-1.2-.2-1.9 0-3.3 1.5-3.3 3.3s1.4 3.3 3.3 3.3 3.2-1.5 3.2-3.3V3h3.1z'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M14.5 3c.3 2.6 1.7 4.2 4.3 4.4v2.8c-1.5 0-2.9-.5-4.2-1.4v6.5c0 3.6-2.8 6.2-6.4 6.2S1.8 18.9 1.8 15.3 4.6 9.1 8.2 9.1c.4 0 .8 0 1.2.1v3c-.4-.1-.8-.2-1.2-.2-1.9 0-3.3 1.5-3.3 3.3s1.4 3.3 3.3 3.3 3.2-1.5 3.2-3.3V3h3.1z'/%3E%3C/svg%3E");
+}
+
+/* v1.5.8 fix — Tutor still embeds its own fallback glyph (a globe/phone
+ * icon, from Icon::GLOBE / Icon::ANDROID_PHONE) as a literal <svg> child
+ * inside these anchors on the PUBLIC profile ("tutor-social-container" /
+ * "tutor-user-profile-social"), not just inside the dashboard settings
+ * form. That wrong glyph was painted on top of the correct brand mask
+ * above, so visitors saw the fallback icon instead of the real one. Hide
+ * it everywhere these brand classes are used, regardless of container. */
+a.tutor-icon-brand-instagram.tlms-ipe-social-icon svg,
+a.tutor-icon-brand-telegram.tlms-ipe-social-icon svg,
+a.tutor-icon-brand-whatsapp.tlms-ipe-social-icon svg,
+a.tutor-icon-brand-tiktok.tlms-ipe-social-icon svg {
+	opacity: 0 !important;
+}
+
+.tutor-social-container a.tutor-icon-brand-instagram::before,
+.tutor-social-container a.tutor-icon-brand-telegram::before,
+.tutor-social-container a.tutor-icon-brand-whatsapp::before,
+.tutor-social-container a.tutor-icon-brand-tiktok::before,
+a.tutor-icon-brand-instagram.tlms-ipe-social-icon::before,
+a.tutor-icon-brand-telegram.tlms-ipe-social-icon::before,
+a.tutor-icon-brand-whatsapp.tlms-ipe-social-icon::before,
+a.tutor-icon-brand-tiktok.tlms-ipe-social-icon::before,
+.tutor-social-container a.tutor-icon-brand-instagram::after,
+.tutor-social-container a.tutor-icon-brand-telegram::after,
+.tutor-social-container a.tutor-icon-brand-whatsapp::after,
+.tutor-social-container a.tutor-icon-brand-tiktok::after {
+	content: none !important;
+	display: none !important;
+}
+
+/* Tutor LMS renders separate social blocks for desktop and mobile.
+ * Keep exactly one responsive block visible, while leaving the active
+ * block's native display/layout untouched.
+ */
+@media (min-width: 783px) {
+	body.tlms-ipe-public-profile .tutor-social-container.content-for-mobile { display: none !important; }
+}
+@media (max-width: 782px) {
+	body.tlms-ipe-public-profile .profile-rating-media.content-for-desktop { display: none !important; }
+}
+
+
+/* v1.4.0 — verification */
+.tlms-ipe-verification-card {
+	margin: 18px 0;
+	padding: 18px;
+	border: 1px solid rgba(30, 136, 229, .18);
+	border-radius: 14px;
+	background: linear-gradient(180deg, rgba(30, 136, 229, .055), #fff);
+}
+.tlms-ipe-verification-copy { display:flex; align-items:flex-start; gap:12px; }
+.tlms-ipe-verification-copy h3 { margin:0 0 5px; font-size:17px; }
+.tlms-ipe-verification-copy p { margin:0; font-size:13px; line-height:1.5; opacity:.75; }
+.tlms-ipe-verification-mark { width:34px; height:34px; min-width:34px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#1e88e5; color:#fff; font-weight:800; box-shadow:0 2px 8px rgba(30,136,229,.25); }
+.tlms-ipe-verification-cta { margin-top:14px; }
+.tlms-ipe-verification-status { margin-top:14px; display:flex; flex-direction:column; gap:3px; padding:11px 12px; border-radius:9px; font-size:13px; }
+.tlms-ipe-verification-pending { background:rgba(255,193,7,.09); }
+.tlms-ipe-verification-rejected { background:rgba(244,67,54,.08); }
+.tlms-ipe-verification-form { margin-top:16px; padding-top:16px; border-top:1px solid rgba(0,0,0,.07); }
+.tlms-ipe-verification-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.tlms-ipe-verification-grid label { display:flex; flex-direction:column; gap:5px; font-size:12px; font-weight:600; }
+.tlms-ipe-verification-grid input,
+.tlms-ipe-verification-grid select,
+.tlms-ipe-verification-grid textarea { width:100%; box-sizing:border-box; min-height:40px; border:1px solid rgba(0,0,0,.14); border-radius:8px; padding:8px 10px; background:#fff; font:inherit; font-weight:400; }
+.tlms-ipe-verification-grid textarea { min-height:96px; resize:vertical; }
+.tlms-ipe-verification-full { grid-column:1/-1; }
+.tlms-ipe-verification-form-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:14px; }
+.tlms-ipe-verified-sticker {
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
+	gap:4px;
+	min-height:22px;
+	margin-left:8px;
+	padding:3px 8px;
+	box-sizing:border-box;
+	border-radius:4px;
+	background:#1677e8;
+	color:#fff;
+	font:700 11px/1.2 Arial,sans-serif;
+	letter-spacing:0;
+	vertical-align:middle;
+	white-space:nowrap;
+	box-shadow:0 1px 3px rgba(0,0,0,.16);
+}
+.tlms-ipe-verified-sticker > span { font-size:12px; line-height:1; }
+/* Badge rendered inside the public profile name heading, right beside the instructor name. */
+.tlms-ipe-profile-verified-sticker { position:static; display:inline-flex; margin:0 0 0 10px; vertical-align:middle; transform:translateY(-1px); text-transform:none; letter-spacing:0; }
+.profile-name h3 .tlms-ipe-profile-verified-sticker,
+.profile-name h2 .tlms-ipe-profile-verified-sticker,
+.profile-name h1 .tlms-ipe-profile-verified-sticker { flex-shrink:0; }
+
+/* Requested desktop right shift: keep the desktop social block aligned to the right of the profile header area. */
+@media (min-width:783px) {
+	body.tlms-ipe-public-profile .tutor-social-container.content-for-desktop { margin-left:auto !important; }
+}
+@media (max-width:782px) {
+	.tlms-ipe-verification-grid { grid-template-columns:1fr; }
+	.tlms-ipe-verification-full { grid-column:auto; }
+	.tlms-ipe-verification-form-actions { flex-wrap:wrap; }
+	.tlms-ipe-verification-form-actions > * { flex:1; text-align:center; }
+	.tlms-ipe-verified-sticker { margin-left:6px; padding:3px 6px; font-size:10px; }
+}
+
+
+/* v1.5.8 — isolate plugin styling from Tutor LMS native settings/navigation. */
+.tlms-ipe-location-help { display:block; margin-top:5px; font-size:11px; line-height:1.35; opacity:.62; }
+.tlms-ipe-private-session-control { display:flex; align-items:center; min-height:42px; }
+.tlms-ipe-accept-private-label { display:inline-flex; align-items:center; gap:9px; margin:0; cursor:pointer; }
+.tlms-ipe-accept-private-label .tutor-label { display:inline; margin:0; }
+
+/* v1.6.1 — grouped location display: one Wilaya per line, with a compact
+ * three-line preview and an accessible Show more toggle for long lists. */
+.tlms-ipe-location-display { min-width: 0; }
+.tlms-ipe-location-lines { display: flex; flex-direction: column; gap: 3px; margin-top: 2px; }
+.tlms-ipe-location-line { line-height: 1.45; word-break: break-word; }
+.tlms-ipe-location-lines.tlms-ipe-location-collapsed { max-height: calc(1.45em * 3 + 6px); overflow: hidden; }
+.tlms-ipe-location-more { margin-top: 5px; padding: 0; border: 0; background: none; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; text-decoration: underline; }
+
+/* v1.6.2 — reliable three-line location preview. */
+.tlms-ipe-location-lines.tlms-ipe-location-collapsed .tlms-ipe-location-line:nth-child(n+4) { display: none; }
+.tlms-ipe-location-more { display: inline-block; }
