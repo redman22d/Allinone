@@ -17,9 +17,9 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Register the hub page. Hooked at a lower priority than the modules' own
- * `admin_menu` registrations (they use the default 10, or 101 for the
- * Sponsorship Manager) so this appears first in Tutor's submenu.
+ * Register after Tutor has registered its parent menu. WordPress uses the
+ * parent menu to derive the page hook; registering before it can produce
+ * a different hook and an erroneous access-denied screen.
  *
  * @return void
  */
@@ -33,7 +33,7 @@ function tls_suite_register_hub_page() {
 		'tls_suite_render_hub_page'
 	);
 }
-add_action( 'admin_menu', 'tls_suite_register_hub_page', 5 );
+add_action( 'admin_menu', 'tls_suite_register_hub_page', 110 );
 
 /**
  * One row of the hub table: a module's name, one-line description, active

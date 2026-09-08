@@ -3,7 +3,7 @@
  * Plugin Name:       Tutor LMS Suite
  * Plugin URI:        https://example.com/tutor-lms-suite
  * Description:       All-in-one Tutor LMS add-on: course delivery format fields, advanced course search with sponsorships, per-instructor offline payment/checkout, extended instructor profiles, and private 1-to-1 tutoring sessions. Merges what used to be five separate plugins into one.
- * Version:           1.0.2
+ * Version:           1.0.3
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Requires Plugins:  tutor
@@ -44,7 +44,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TLS_SUITE_VERSION', '1.0.2' );
+define( 'TLS_SUITE_VERSION', '1.0.3' );
 define( 'TLS_SUITE_FILE', __FILE__ );
 define( 'TLS_SUITE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'TLS_SUITE_URL', plugin_dir_url( __FILE__ ) );

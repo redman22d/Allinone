@@ -36,3 +36,18 @@ The sandbox had no native PHP, WordPress, Tutor LMS, or MySQL installation. Nati
 - Test receipt access as the student, owning instructor, administrator, unrelated logged-in user, and guest. Check expired/tampered URLs and direct storage URLs.
 - Complete checkout → receipt upload → approval/rejection → enrollment, reminder/expiry jobs, private-session request → proposal → payment, and calendar display.
 - Check dashboard permalinks after activation and inspect PHP/database logs with `WP_DEBUG_LOG` on and `WP_DEBUG_DISPLAY` off.
+
+
+## 1.0.3 — reported issues and profile-link support
+
+- Overview now registers at `admin_menu` priority 110, after Tutor's usual parent menu registration. The page still requires `manage_options`; instructors without administrator access are intentionally not allowed to open site-wide settings. This addresses the registration-order cause of the reported error; verify against the installed Tutor version and any admin-menu/security plugins.
+- Search no longer reads or writes persistent location selections. URL/server-rendered filters remain authoritative; an old localStorage wilaya or municipality cannot override a fresh visit or a shared search URL.
+- Payment details now imports and displays controls for Facebook, Instagram, TikTok, X/Twitter, LinkedIn, Telegram, YouTube, Website and GitHub. Phone/WhatsApp retain their separate controls. New networks default to hidden. Existing visibility choices survive re-import, which is available even after contact details were configured.
+- Checkout and the public contact helper both honor each network's visibility. Malformed URL inputs and non-web protocols are rejected.
+- Added standalone tests for contact import, visibility persistence, AJAX save/re-import and hub registration/capability. These pass along with the original regression suite and all JavaScript syntax checks. WordPress browser testing is still required.
+
+### Verify this update
+
+1. Replace the plugin with 1.0.3 on staging, clear page/CDN caches, and open Tutor LMS → Suite Overview as an administrator.
+2. Visit a search URL with no location parameters after previously selecting a wilaya. Confirm no location is selected; then check a URL with explicit wilaya/municipality parameters and verify those selections remain.
+3. Open instructor dashboard → Payment Details. Import profile links, enable only the desired “Show on payment page” switches, and save. Check checkout as a student, then re-import to confirm hidden links remain hidden.

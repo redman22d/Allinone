@@ -28,7 +28,7 @@ $tioc_can_add    = count( $tioc_methods ) < Methods::MAX_METHODS;
 $tioc_contact    = Contact::get( $tioc_user_id );
 $tioc_imported   = Contact::imported( $tioc_user_id );
 $tioc_configured = Contact::is_configured( $tioc_user_id );
-$tioc_can_import = ! $tioc_configured && ( $tioc_imported['phone'] || $tioc_imported['whatsapp'] || $tioc_imported['facebook'] || $tioc_imported['instagram'] || $tioc_imported['tiktok'] || $tioc_imported['x'] );
+$tioc_can_import = (bool) ( $tioc_imported['phone'] || $tioc_imported['whatsapp'] || array_filter( array_intersect_key( $tioc_imported, Contact::social_networks() ) ) );
 ?>
 <div class="tioc-dash tioc-dash-setup">
 
@@ -90,22 +90,13 @@ $tioc_can_import = ! $tioc_configured && ( $tioc_imported['phone'] || $tioc_impo
 			<div class="tioc-field tioc-social-settings">
 				<label class="tioc-label"><?php esc_html_e( 'Social profiles', 'tutor-instructor-offline-payment' ); ?></label>
 				<div class="tioc-social-grid">
-					<div class="tioc-social-setting">
-						<input class="tioc-input" type="url" id="tioc-contact-facebook" name="facebook" value="<?php echo esc_attr( $tioc_contact['facebook'] ); ?>" placeholder="Facebook URL">
-						<label class="tioc-checkbox"><input type="checkbox" name="show_facebook" value="1" <?php checked( ! empty( $tioc_contact['show_facebook'] ) ); ?>> <?php esc_html_e( 'Show Facebook', 'tutor-instructor-offline-payment' ); ?></label>
-					</div>
-					<div class="tioc-social-setting">
-						<input class="tioc-input" type="url" id="tioc-contact-instagram" name="instagram" value="<?php echo esc_attr( $tioc_contact['instagram'] ); ?>" placeholder="Instagram URL">
-						<label class="tioc-checkbox"><input type="checkbox" name="show_instagram" value="1" <?php checked( ! empty( $tioc_contact['show_instagram'] ) ); ?>> <?php esc_html_e( 'Show Instagram', 'tutor-instructor-offline-payment' ); ?></label>
-					</div>
-					<div class="tioc-social-setting">
-						<input class="tioc-input" type="url" id="tioc-contact-tiktok" name="tiktok" value="<?php echo esc_attr( $tioc_contact['tiktok'] ); ?>" placeholder="TikTok URL">
-						<label class="tioc-checkbox"><input type="checkbox" name="show_tiktok" value="1" <?php checked( ! empty( $tioc_contact['show_tiktok'] ) ); ?>> <?php esc_html_e( 'Show TikTok', 'tutor-instructor-offline-payment' ); ?></label>
-					</div>
-					<div class="tioc-social-setting">
-						<input class="tioc-input" type="url" id="tioc-contact-x" name="x" value="<?php echo esc_attr( $tioc_contact['x'] ); ?>" placeholder="X / Twitter URL">
-						<label class="tioc-checkbox"><input type="checkbox" name="show_x" value="1" <?php checked( ! empty( $tioc_contact['show_x'] ) ); ?>> <?php esc_html_e( 'Show X / Twitter', 'tutor-instructor-offline-payment' ); ?></label>
-					</div>
+					<?php foreach ( Contact::social_networks() as $tioc_network => $tioc_label ) : ?>
+                    <div class="tioc-social-setting">
+                        <label for="tioc-contact-<?php echo esc_attr( $tioc_network ); ?>"><?php echo esc_html( $tioc_label ); ?></label>
+                        <input class="tioc-input" type="url" id="tioc-contact-<?php echo esc_attr( $tioc_network ); ?>" name="<?php echo esc_attr( $tioc_network ); ?>" value="<?php echo esc_attr( $tioc_contact[ $tioc_network ] ); ?>">
+                        <label class="tioc-checkbox"><input type="checkbox" name="show_<?php echo esc_attr( $tioc_network ); ?>" value="1" <?php checked( ! empty( $tioc_contact[ 'show_' . $tioc_network ] ) ); ?>> <?php esc_html_e( 'Show on payment page', 'tutor-instructor-offline-payment' ); ?></label>
+                    </div>
+                    <?php endforeach; ?>
 				</div>
 				<p class="tioc-help"><?php esc_html_e( 'Each network has its own checkout switch. Turn off only the accounts you do not want students to see.', 'tutor-instructor-offline-payment' ); ?></p>
 			</div>

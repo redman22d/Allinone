@@ -29,6 +29,11 @@ class Contact {
 	 */
 	const META_KEY = '_tioc_contact';
 
+	/** Supported profile links shared by import, setup and checkout. */
+	public static function social_networks() {
+		return array( 'facebook' => 'Facebook', 'instagram' => 'Instagram', 'tiktok' => 'TikTok', 'x' => 'X / Twitter', 'linkedin' => 'LinkedIn', 'telegram' => 'Telegram', 'youtube' => 'YouTube', 'website' => 'Website', 'github' => 'GitHub' );
+	}
+
 	/**
 	 * Blank record.
 	 *
@@ -42,12 +47,22 @@ class Contact {
 			'instagram'     => '',
 			'tiktok'        => '',
 			'x'             => '',
+			'linkedin'             => '',
+			'telegram'             => '',
+			'youtube'             => '',
+			'website'             => '',
+			'github'             => '',
 			'show_phone'    => 1,
 			'show_whatsapp' => 1,
 			'show_facebook'  => 1,
 			'show_instagram' => 1,
 			'show_tiktok'    => 1,
 			'show_x'         => 1,
+			'show_linkedin'         => 0,
+			'show_telegram'         => 0,
+			'show_youtube'         => 0,
+			'show_website'         => 0,
+			'show_github'         => 0,
 		);
 	}
 
@@ -87,16 +102,19 @@ class Contact {
 
 		$contact['phone']         = self::sanitize_number( $contact['phone'] );
 		$contact['whatsapp']      = self::sanitize_number( $contact['whatsapp'] );
-		foreach ( array( 'facebook', 'instagram', 'tiktok', 'x' ) as $social ) {
+		foreach ( array_keys( self::social_networks() ) as $social ) {
 			$contact[ $social ] = self::sanitize_url( isset( $contact[ $social ] ) ? $contact[ $social ] : '' );
 		}
 		$contact['show_phone']    = empty( $contact['show_phone'] ) ? 0 : 1;
 		$contact['show_whatsapp'] = empty( $contact['show_whatsapp'] ) ? 0 : 1;
-		foreach ( array( 'facebook', 'instagram', 'tiktok', 'x' ) as $network ) {
+		foreach ( array_keys( self::social_networks() ) as $network ) {
 			$show_key = 'show_' . $network;
 			$contact[ $show_key ] = empty( $contact[ $show_key ] ) ? 0 : 1;
 		}
-		$contact['show_socials'] = ! empty( $contact['show_facebook'] ) || ! empty( $contact['show_instagram'] ) || ! empty( $contact['show_tiktok'] ) || ! empty( $contact['show_x'] ) ? 1 : 0;
+		$contact['show_socials'] = 0;
+		foreach ( self::social_networks() as $network => $label ) {
+			if ( ! empty( $contact[ 'show_' . $network ] ) ) $contact['show_socials'] = 1;
+		}
 
 		if ( $fallback ) {
 			$imported = self::imported( $user_id );
@@ -109,7 +127,7 @@ class Contact {
 				$contact['whatsapp'] = $imported['whatsapp'] ? $imported['whatsapp'] : $contact['phone'];
 			}
 
-			foreach ( array( 'facebook', 'instagram', 'tiktok', 'x' ) as $network ) {
+			foreach ( array_keys( self::social_networks() ) as $network ) {
 				if ( '' === $contact[ $network ] && ! empty( $imported[ $network ] ) ) {
 					$contact[ $network ] = self::sanitize_url( $imported[ $network ] );
 				}
@@ -160,15 +178,28 @@ class Contact {
 			'instagram'     => self::sanitize_url( isset( $input['instagram'] ) ? $input['instagram'] : '' ),
 			'tiktok'        => self::sanitize_url( isset( $input['tiktok'] ) ? $input['tiktok'] : '' ),
 			'x'             => self::sanitize_url( isset( $input['x'] ) ? $input['x'] : '' ),
+			'linkedin'             => self::sanitize_url( isset( $input['linkedin'] ) ? $input['linkedin'] : '' ),
+			'telegram'             => self::sanitize_url( isset( $input['telegram'] ) ? $input['telegram'] : '' ),
+			'youtube'             => self::sanitize_url( isset( $input['youtube'] ) ? $input['youtube'] : '' ),
+			'website'             => self::sanitize_url( isset( $input['website'] ) ? $input['website'] : '' ),
+			'github'             => self::sanitize_url( isset( $input['github'] ) ? $input['github'] : '' ),
 			'show_phone'    => empty( $input['show_phone'] ) ? 0 : 1,
 			'show_whatsapp' => empty( $input['show_whatsapp'] ) ? 0 : 1,
 			'show_facebook'  => empty( $input['show_facebook'] ) ? 0 : 1,
 			'show_instagram' => empty( $input['show_instagram'] ) ? 0 : 1,
 			'show_tiktok'    => empty( $input['show_tiktok'] ) ? 0 : 1,
 			'show_x'         => empty( $input['show_x'] ) ? 0 : 1,
+			'show_linkedin'         => empty( $input['show_linkedin'] ) ? 0 : 1,
+			'show_telegram'         => empty( $input['show_telegram'] ) ? 0 : 1,
+			'show_youtube'         => empty( $input['show_youtube'] ) ? 0 : 1,
+			'show_website'         => empty( $input['show_website'] ) ? 0 : 1,
+			'show_github'         => empty( $input['show_github'] ) ? 0 : 1,
 		);
 
-		$record['show_socials'] = ! empty( $record['show_facebook'] ) || ! empty( $record['show_instagram'] ) || ! empty( $record['show_tiktok'] ) || ! empty( $record['show_x'] ) ? 1 : 0;
+		$record['show_socials'] = 0;
+		foreach ( self::social_networks() as $network => $label ) {
+			if ( ! empty( $record[ 'show_' . $network ] ) ) $record['show_socials'] = 1;
+		}
 
 		foreach ( array( 'phone', 'whatsapp' ) as $field ) {
 			if ( '' !== $record[ $field ] && ! self::looks_like_number( $record[ $field ] ) ) {
@@ -266,6 +297,11 @@ class Contact {
 			'instagram'=> ! empty( $socials['instagram'] ) ? self::sanitize_url( $socials['instagram'] ) : '',
 			'tiktok'   => ! empty( $socials['tiktok'] ) ? self::sanitize_url( $socials['tiktok'] ) : '',
 			'x'        => ! empty( $socials['x'] ) ? self::sanitize_url( $socials['x'] ) : ( ! empty( $socials['twitter'] ) ? self::sanitize_url( $socials['twitter'] ) : '' ),
+			'linkedin' => ! empty( $socials['linkedin'] ) ? self::sanitize_url( $socials['linkedin'] ) : '',
+			'telegram' => ! empty( $socials['telegram'] ) ? self::sanitize_url( $socials['telegram'] ) : '',
+			'youtube' => ! empty( $socials['youtube'] ) ? self::sanitize_url( $socials['youtube'] ) : '',
+			'website' => ! empty( $socials['website'] ) ? self::sanitize_url( $socials['website'] ) : '',
+			'github' => ! empty( $socials['github'] ) ? self::sanitize_url( $socials['github'] ) : '',
 			'source'   => $source,
 		);
 	}
@@ -296,6 +332,7 @@ class Contact {
 			'linkedin'  => array( '_tutor_profile_linkedin', 'tutor_profile_linkedin', 'profile_linkedin', 'linkedin' ),
 			'website'   => array( '_tutor_profile_website', 'tutor_profile_website', 'profile_website', 'website' ),
 			'github'    => array( '_tutor_profile_github', 'tutor_profile_github', 'profile_github', 'github' ),
+			'youtube' => array( '_tutor_profile_youtube', 'tutor_profile_youtube', 'youtube' ),
 			'telegram'  => array( '_tutor_profile_telegram', 'tutor_profile_telegram', 'profile_telegram', 'telegram' ),
 		);
 
@@ -324,10 +361,10 @@ class Contact {
 				continue;
 			}
 
-			foreach ( array( 'facebook', 'instagram', 'tiktok', 'x', 'twitter', 'whatsapp' ) as $network ) {
+			foreach ( array_merge( array_keys( self::social_networks() ), array( 'twitter', 'whatsapp' ) ) as $network ) {
 				$value = isset( $bundle[ $network ] ) ? $bundle[ $network ] : '';
 				$canonical = 'twitter' === $network ? 'x' : $network;
-				if ( '' === (string) $value || ! empty( $socials[ $canonical ] ) ) {
+				if ( ! is_string( $value ) || '' === trim( $value ) || ! empty( $socials[ $canonical ] ) ) {
 					continue;
 				}
 				if ( is_string( $value ) ) {
@@ -434,7 +471,7 @@ class Contact {
 		$whatsapp = $contact['show_whatsapp'] ? $contact['whatsapp'] : '';
 
 		$socials = array();
-		foreach ( array( 'facebook', 'instagram', 'tiktok', 'x' ) as $network ) {
+		foreach ( array_keys( self::social_networks() ) as $network ) {
 			$show_key = 'show_' . $network;
 			if ( ! empty( $contact[ $show_key ] ) && ! empty( $contact[ $network ] ) ) {
 				$socials[ $network ] = $contact[ $network ];
@@ -533,7 +570,8 @@ class Contact {
 	 * @return string
 	 */
 	public static function sanitize_url( $url ) {
-		$url = trim( (string) $url );
+		if ( ! is_string( $url ) ) return '';
+		$url = trim( $url );
 		if ( '' === $url ) {
 			return '';
 		}

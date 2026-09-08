@@ -354,7 +354,7 @@ $tioc_submit_text = apply_filters( 'tioc_checkout_submit_text', $tioc_submit_tex
 										: '';
 									
 									$tioc_socials = array();
-					foreach ( array( 'facebook', 'instagram', 'tiktok', 'x' ) as $tioc_network ) {
+					foreach ( array_keys( Contact::social_networks() ) as $tioc_network ) {
 						$tioc_show_key = 'show_' . $tioc_network;
 						if ( ! empty( $tioc_contact[ $tioc_show_key ] ) && ! empty( $tioc_contact[ $tioc_network ] ) ) {
 							$tioc_socials[ $tioc_network ] = $tioc_contact[ $tioc_network ];
@@ -418,7 +418,7 @@ $tioc_submit_text = apply_filters( 'tioc_checkout_submit_text', $tioc_submit_tex
 															<span class="tioc-contact-copy"><strong><?php esc_html_e( 'WhatsApp', 'tutor-instructor-offline-payment' ); ?></strong><small><?php echo esc_html( $tioc_contact['whatsapp'] ); ?></small></span>
 													</a>
 													<?php endif; ?>
-													<?php foreach ( array( 'facebook' => 'Facebook', 'instagram' => 'Instagram', 'tiktok' => 'TikTok', 'x' => 'X' ) as $tioc_social_key => $tioc_social_label ) : ?>
+													<?php foreach ( Contact::social_networks() as $tioc_social_key => $tioc_social_label ) : ?>
 														<?php if ( ! empty( $tioc_socials[ $tioc_social_key ] ) ) : ?>
 															<a class="tioc-contact-btn tioc-contact-social tioc-contact-<?php echo esc_attr( $tioc_social_key ); ?>" href="<?php echo esc_url( $tioc_socials[ $tioc_social_key ], array( 'http', 'https' ) ); ?>" target="_blank" rel="noopener nofollow" aria-label="<?php echo esc_attr( $tioc_social_label ); ?>">
 																<span class="tioc-contact-icon tioc-contact-icon-svg" aria-hidden="true"><?php
@@ -426,7 +426,8 @@ $tioc_submit_text = apply_filters( 'tioc_checkout_submit_text', $tioc_submit_tex
 																	case 'facebook': echo '<svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3c-3.31 0-5 1.69-5 5v3H6v4h3v4h4v-4h3.2l.8-4H13V9c0-.67.33-1 1-1Z"/></svg>'; break;
 																	case 'instagram': echo '<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2"/></svg>'; break;
 																	case 'tiktok': echo '<svg viewBox="0 0 24 24"><path d="M15 3c.4 2.5 1.8 4 4 4v3c-1.7 0-3.1-.5-4-1.3V15a5 5 0 1 1-5-5c.4 0 .7 0 1 .1v3.1a2 2 0 1 0 1 1.8V3h3Z"/></svg>'; break;
-																	default: echo '<svg viewBox="0 0 24 24"><path d="M5 4h4.7l3.4 4.5L17 4h2l-4.9 5.6L19.5 20h-4.7l-3.8-5L6.8 20h-2l5.1-5.9L5 4Zm3.3 2 7.6 12h.8L9.1 6h-.8Z"/></svg>'; break;
+																	case 'x': echo '<svg viewBox="0 0 24 24"><path d="M5 4h4.7l3.4 4.5L17 4h2l-4.9 5.6L19.5 20h-4.7l-3.8-5L6.8 20h-2l5.1-5.9L5 4Zm3.3 2 7.6 12h.8L9.1 6h-.8Z"/></svg>'; break;
+ default: echo '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3v18" stroke="currentColor" stroke-width="2"/></svg>'; break;
 																}
 														?></span>
 																<span class="tioc-contact-copy"><strong><?php echo esc_html( $tioc_social_label ); ?></strong><small><?php esc_html_e( 'Open profile', 'tutor-instructor-offline-payment' ); ?></small></span>

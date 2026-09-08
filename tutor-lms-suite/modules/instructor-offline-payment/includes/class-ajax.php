@@ -167,12 +167,22 @@ class Ajax {
 				'instagram'     => isset( $_POST['instagram'] ) ? wp_unslash( $_POST['instagram'] ) : '',
 				'tiktok'        => isset( $_POST['tiktok'] ) ? wp_unslash( $_POST['tiktok'] ) : '',
 				'x'             => isset( $_POST['x'] ) ? wp_unslash( $_POST['x'] ) : '',
+				'linkedin'             => isset( $_POST['linkedin'] ) ? wp_unslash( $_POST['linkedin'] ) : '',
+				'telegram'             => isset( $_POST['telegram'] ) ? wp_unslash( $_POST['telegram'] ) : '',
+				'youtube'             => isset( $_POST['youtube'] ) ? wp_unslash( $_POST['youtube'] ) : '',
+				'website'             => isset( $_POST['website'] ) ? wp_unslash( $_POST['website'] ) : '',
+				'github'             => isset( $_POST['github'] ) ? wp_unslash( $_POST['github'] ) : '',
 				'show_phone'    => empty( $_POST['show_phone'] ) ? 0 : 1,
 				'show_whatsapp' => empty( $_POST['show_whatsapp'] ) ? 0 : 1,
 				'show_facebook'  => empty( $_POST['show_facebook'] ) ? 0 : 1,
 				'show_instagram' => empty( $_POST['show_instagram'] ) ? 0 : 1,
 				'show_tiktok'    => empty( $_POST['show_tiktok'] ) ? 0 : 1,
 				'show_x'         => empty( $_POST['show_x'] ) ? 0 : 1,
+				'show_linkedin'         => empty( $_POST['show_linkedin'] ) ? 0 : 1,
+				'show_telegram'         => empty( $_POST['show_telegram'] ) ? 0 : 1,
+				'show_youtube'         => empty( $_POST['show_youtube'] ) ? 0 : 1,
+				'show_website'         => empty( $_POST['show_website'] ) ? 0 : 1,
+				'show_github'         => empty( $_POST['show_github'] ) ? 0 : 1,
 			)
 		);
 
@@ -198,7 +208,7 @@ class Ajax {
 		$user_id  = self::guard_instructor();
 		$imported = Contact::imported( $user_id );
 
-		$has_social = ! empty( $imported['facebook'] ) || ! empty( $imported['instagram'] ) || ! empty( $imported['tiktok'] ) || ! empty( $imported['x'] );
+		$has_social = (bool) array_filter( array_intersect_key( $imported, Contact::social_networks() ) );
 
 		if ( ! $imported['phone'] && ! $imported['whatsapp'] && ! $has_social ) {
 			wp_send_json_error(
@@ -218,12 +228,22 @@ class Ajax {
 				'instagram'     => $imported['instagram'] ? $imported['instagram'] : $existing['instagram'],
 				'tiktok'        => $imported['tiktok'] ? $imported['tiktok'] : $existing['tiktok'],
 				'x'             => $imported['x'] ? $imported['x'] : $existing['x'],
+				'linkedin'             => $imported['linkedin'] ? $imported['linkedin'] : $existing['linkedin'],
+				'telegram'             => $imported['telegram'] ? $imported['telegram'] : $existing['telegram'],
+				'youtube'             => $imported['youtube'] ? $imported['youtube'] : $existing['youtube'],
+				'website'             => $imported['website'] ? $imported['website'] : $existing['website'],
+				'github'             => $imported['github'] ? $imported['github'] : $existing['github'],
 				'show_phone'    => $existing['show_phone'],
 				'show_whatsapp' => $existing['show_whatsapp'],
 				'show_facebook'  => isset( $existing['show_facebook'] ) ? $existing['show_facebook'] : 1,
 				'show_instagram' => isset( $existing['show_instagram'] ) ? $existing['show_instagram'] : 1,
 				'show_tiktok'    => isset( $existing['show_tiktok'] ) ? $existing['show_tiktok'] : 1,
 				'show_x'         => isset( $existing['show_x'] ) ? $existing['show_x'] : 1,
+				'show_linkedin'         => isset( $existing['show_linkedin'] ) ? $existing['show_linkedin'] : 0,
+				'show_telegram'         => isset( $existing['show_telegram'] ) ? $existing['show_telegram'] : 0,
+				'show_youtube'         => isset( $existing['show_youtube'] ) ? $existing['show_youtube'] : 0,
+				'show_website'         => isset( $existing['show_website'] ) ? $existing['show_website'] : 0,
+				'show_github'         => isset( $existing['show_github'] ) ? $existing['show_github'] : 0,
 			)
 		);
 

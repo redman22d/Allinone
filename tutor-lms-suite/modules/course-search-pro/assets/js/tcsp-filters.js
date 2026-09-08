@@ -7,30 +7,8 @@
 	}
 
 	var cfg = tcspConfig;
-	var LOCATION_STATE_KEY = 'tcsp_location_filters_v1';
-
-	function getSavedLocationState() {
-		try {
-			var raw = window.localStorage.getItem( LOCATION_STATE_KEY );
-			return raw ? JSON.parse( raw ) : {};
-		} catch ( err ) { return {}; }
-	}
-
-	function saveLocationState() {
-		var state = { wilaya: [], municipality: [] };
-		$( '.tcsp-wilaya input[name="tcsp_wilaya[]"]:checked' ).each( function () { state.wilaya.push( String( this.value ) ); } );
-		$( '.tcsp-municipality input[name="tcsp_municipality[]"]:checked' ).each( function () { state.municipality.push( String( this.value ) ); } );
-		try { window.localStorage.setItem( LOCATION_STATE_KEY, JSON.stringify( state ) ); } catch ( err ) {}
-	}
-
-	function restoreWilayaState() {
-		var state = getSavedLocationState();
-		if ( ! Array.isArray( state.wilaya ) || ! state.wilaya.length ) { return; }
-		$( '.tcsp-wilaya input[name="tcsp_wilaya[]"]' ).each( function () {
-			this.checked = state.wilaya.indexOf( String( this.value ) ) !== -1;
-		} );
-	}
-
+	// The server-rendered URL filters are authoritative. Do not restore stale
+	// selections from another visit (or the old standalone plugin).
 	function rebuildMunicipalities() {
 		var $municipality = $( '.tcsp-municipality' ).first();
 		var $wilaya = $( '.tcsp-wilaya' ).first();
@@ -62,10 +40,7 @@
 		$panel.find( 'input[name="tcsp_municipality[]"]:checked' ).each( function () {
 			saved.push( String( this.value ) );
 		} );
-		if ( ! saved.length ) {
-			var stored = getSavedLocationState();
-			if ( Array.isArray( stored.municipality ) ) { saved = stored.municipality.map( String ); }
-		}
+
 
 		$municipality.toggleClass( 'tcsp-municipality-hidden', ! enabled );
 		$municipality.toggleClass( 'tcsp-multiselect--disabled', ! enabled );
@@ -176,11 +151,8 @@
 		if ( $wrap.hasClass( 'tcsp-course_type' ) ) {
 			syncCourseFormatFilter();
 		}
-		if ( $wrap.hasClass( 'tcsp-wilaya' ) || $wrap.hasClass( 'tcsp-municipality' ) ) {
-			saveLocationState();
-		}
+
 	} );
-	restoreWilayaState();
 	$( rebuildMunicipalities );
 	$( syncCourseFormatFilter );
 
