@@ -7,6 +7,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+require_once dirname( __DIR__, 3 ) . '/includes/class-social-networks.php';
+
 use TUTOR\Icon;
 use TUTOR\Input;
 use TUTOR\User;
@@ -22,6 +24,7 @@ class Tlms_Ipe_Plugin {
 	const META_TELEGRAM       = '_tutor_profile_telegram';
 	const META_WHATSAPP       = '_tutor_profile_whatsapp';
 	const META_TIKTOK         = '_tutor_profile_tiktok';
+	const META_YOUTUBE        = '_tutor_profile_youtube';
 	const META_TUTORING_TYPES = '_tlms_ipe_tutoring_types';
 	const META_ACCEPT_PRIVATE = '_tlms_ipe_accept_private_sessions';
 	const META_WILAYA         = '_tlms_ipe_wilaya';
@@ -94,34 +97,7 @@ class Tlms_Ipe_Plugin {
 	 * @return array
 	 */
 	public function register_social_icons( $icons ) {
-		$icons[ self::META_INSTAGRAM ] = array(
-			'label'        => __( 'Instagram', 'tutor-lms-ipe' ),
-			'placeholder'  => 'https://instagram.com/username',
-			'icon_classes' => 'tutor-icon-brand-instagram tlms-ipe-social-icon',
-			'svg_icon'     => Icon::GLOBE,
-			'pattern'      => '^https?:\/\/(www\.)?instagram\.com\/[A-Za-z0-9._]+\/?$',
-		);
-		$icons[ self::META_TELEGRAM ]  = array(
-			'label'        => __( 'Telegram', 'tutor-lms-ipe' ),
-			'placeholder'  => 'https://t.me/username',
-			'icon_classes' => 'tutor-icon-brand-telegram tlms-ipe-social-icon',
-			'svg_icon'     => Icon::GLOBE,
-			'pattern'      => '^https?:\/\/(t\.me|telegram\.me)\/[A-Za-z0-9_]+\/?$',
-		);
-		$icons[ self::META_WHATSAPP ]  = array(
-			'label'        => __( 'WhatsApp', 'tutor-lms-ipe' ),
-			'placeholder'  => 'https://wa.me/213555123456',
-			'icon_classes' => 'tutor-icon-brand-whatsapp tlms-ipe-social-icon',
-			'svg_icon'     => Icon::ANDROID_PHONE,
-			'pattern'      => '^(https?:\/\/(wa\.me\/|api\.whatsapp\.com\/send\?phone=).+|(\+|00)?[0-9 ]{8,20})$',
-		);
-		$icons[ self::META_TIKTOK ]    = array(
-			'label'        => __( 'TikTok', 'tutor-lms-ipe' ),
-			'placeholder'  => 'https://tiktok.com/@username',
-			'icon_classes' => 'tutor-icon-brand-tiktok tlms-ipe-social-icon',
-			'svg_icon'     => Icon::GLOBE,
-			'pattern'      => '^https?:\/\/(www\.)?tiktok\.com\/@[A-Za-z0-9._]+\/?$',
-		);
+		$icons = TLS_Suite_Social_Networks::profile_fields( $icons );
 
 		// Tutor's native LinkedIn field is already present. Only improve its
 		// suggested URL; do not replace or duplicate Tutor's field.

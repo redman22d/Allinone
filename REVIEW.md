@@ -51,3 +51,22 @@ The sandbox had no native PHP, WordPress, Tutor LMS, or MySQL installation. Nati
 1. Replace the plugin with 1.0.3 on staging, clear page/CDN caches, and open Tutor LMS → Suite Overview as an administrator.
 2. Visit a search URL with no location parameters after previously selecting a wilaya. Confirm no location is selected; then check a URL with explicit wilaya/municipality parameters and verify those selections remain.
 3. Open instructor dashboard → Payment Details. Import profile links, enable only the desired “Show on payment page” switches, and save. Check checkout as a student, then re-import to confirm hidden links remain hidden.
+
+
+## 1.0.4 — YouTube profile link
+
+- Registered `_tutor_profile_youtube` through Tutor's native social-field registry, with a channel-handle placeholder and a YouTube URL form pattern. Existing definitions for the same key are preserved.
+- Added YouTube to the profile JavaScript brand-icon renderer for settings and profile links.
+- The existing offline-payment import reads this same metadata key; its separate payment visibility switch remains unchanged.
+- Added standalone registration, URL-pattern, existing-field preservation and direct-meta import checks. PHP parsing, contact regressions and JavaScript syntax checks passed. Native Tutor save/render flows still need a staging browser check; the URL pattern is form validation, not a new server-side security boundary.
+
+Suggested follow-ups (not implemented): consolidate social-network definitions into one shared registry; show instructors a preview of student-visible payment details; offer an explicit reset-all search button; add WordPress/Tutor integration tests for profile saving, permissions and checkout; verify private-receipt server protection and benchmark search before further optimization.
+
+
+## 1.0.5 — usability, shared configuration and automation
+
+- Shared social registry now owns profile field definitions, payment network labels and legacy visibility defaults. Contact defaults, import, saving and AJAX payload construction iterate the registry instead of maintaining repeated field lists.
+- Added a **saved student-visible contact preview** below payment contact settings. It uses the public contact helper, excludes hidden networks, escapes URLs/text, and explicitly instructs instructors to save changes before previewing. This is not a live or full-checkout preview.
+- The existing reset link is now always available, including before applying selections. **Reset all filters** returns to the course archive, clearing category/tag context, location, search text and pagination; it has a homepage fallback when no archive exists.
+- Added reset and preview regression checks, a GitHub Actions PHP 7.4/8.3 matrix, and an opt-in real WordPress/Tutor smoke script guarded to local/development environments with test-user cleanup.
+- Locally verified PHP parsing and standalone tests with PHP 8.5 WebAssembly plus all JS syntax checks. The GitHub matrix and real WordPress smoke script have not been run locally. Browser-level profile saving, payment/booking flows and visual checks still require staging.

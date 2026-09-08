@@ -44,3 +44,17 @@ check(Contact::get(7, false)['show_linkedin'] === 1, 'AJAX persists checked visi
 try { (new TutorInstructorOfflinePayment\Ajax())->import_contact(); } catch (RuntimeException $e) { check($e->getMessage() === 'json-success', 'AJAX profile re-import succeeds'); }
 $record = Contact::get(7, false);
 check($record['linkedin'] === $meta['_tutor_profile_linkedin'] && $record['show_linkedin'] === 1 && $record['show_telegram'] === 0, 'Re-import updates URLs and preserves visibility choices');
+$meta['_tutor_profile_youtube'] = 'https://www.youtube.com/@teacher';
+check(Contact::imported(7)['youtube'] === $meta['_tutor_profile_youtube'], 'Import the new profile YouTube field before legacy bundled data');
+function esc_html($text) { return htmlspecialchars($text, ENT_QUOTES, 'UTF-8'); }
+function esc_html_e($text, $domain) { echo esc_html($text); }
+function esc_url($text, $protocols) { return esc_html(esc_url_raw($text, $protocols)); }
+$preview_record = Contact::get(7);
+$preview_record['show_phone'] = $preview_record['show_whatsapp'] = 0;
+$preview_record['show_linkedin'] = 1;
+$preview_record['show_telegram'] = 0;
+Contact::save(7, $preview_record);
+ob_start();
+require dirname(__DIR__) . '/tutor-lms-suite/modules/instructor-offline-payment/templates/dashboard/partials/contact-preview.php';
+$html = ob_get_clean();
+check(strpos($html, 'https://linkedin.com/in/test') !== false && strpos($html, 'https://t.me/test') === false, 'Saved preview includes visible links only');

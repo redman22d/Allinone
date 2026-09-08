@@ -1,0 +1,29 @@
+name: Plugin checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.4', '8.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring
+          coverage: none
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Standalone regression checks
+        run: |
+          set -e
+          php tests/regression.php
+          php tests/contact.php
+          php tests/menu.php
+          php tests/profile-socials.php
+          php tests/reset.php
+          find tutor-lms-suite -name '*.js' -print0 | xargs -0 -n1 node --check

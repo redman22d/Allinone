@@ -363,11 +363,9 @@ class TCSP_Filters_UI {
 				<?php endif; ?>
 
 				<button type="submit" class="tcsp-apply-btn"><?php esc_html_e( 'Apply', 'tutor-course-search-pro' ); ?></button>
-				<?php if ( $has_active ) : ?>
 					<a href="<?php echo esc_url( $this->reset_url() ); ?>" class="tcsp-reset-btn">
-						<?php esc_html_e( 'Reset filters', 'tutor-course-search-pro' ); ?>
+						<?php esc_html_e( 'Reset all filters', 'tutor-course-search-pro' ); ?>
 					</a>
-				<?php endif; ?>
 			</div>
 		</form>
 		<?php $this->render_sponsored_carousel(); ?>
@@ -496,23 +494,12 @@ class TCSP_Filters_UI {
 
 	/**
 	 * "Reset filters" sends the visitor back to the current course
-	 * archive / taxonomy / search page with all tcsp_* filters and
+	 * archive with taxonomy context, all tcsp_* filters, pagination and
 	 * search text stripped.
 	 *
 	 * @return string
 	 */
 	private function reset_url() {
-		if ( is_tax( 'course-category' ) ) {
-			$term = get_queried_object();
-			return $term ? get_term_link( $term ) : get_post_type_archive_link( TCSP_Plugin::COURSE_CPT );
-		}
-		if ( is_tax( 'course-tag' ) ) {
-			$term = get_queried_object();
-			return $term ? get_term_link( $term ) : get_post_type_archive_link( TCSP_Plugin::COURSE_CPT );
-		}
-		if ( is_search() ) {
-			return get_post_type_archive_link( TCSP_Plugin::COURSE_CPT );
-		}
 		$archive_link = get_post_type_archive_link( TCSP_Plugin::COURSE_CPT );
 		return $archive_link ? $archive_link : home_url( '/' );
 	}

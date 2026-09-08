@@ -106,6 +106,8 @@ $tioc_can_import = (bool) ( $tioc_imported['phone'] || $tioc_imported['whatsapp'
 			</div>
 		</form>
 
+		<?php require __DIR__ . '/partials/contact-preview.php'; ?>
+
 		<?php if ( $tioc_can_import ) : ?>
 			<form class="tioc-inline-form tioc-mt-8" data-tioc-action="tioc_import_contact">
 				<button type="submit" class="tioc-btn tioc-btn-ghost">

@@ -9,6 +9,8 @@ namespace TutorInstructorOfflinePayment;
 
 defined( 'ABSPATH' ) || exit;
 
+require_once dirname( __DIR__, 3 ) . '/includes/class-social-networks.php';
+
 /**
  * Offline payments live or die on being able to reach the person who is holding
  * the money, so every instructor gets one phone number and one WhatsApp number
@@ -31,7 +33,7 @@ class Contact {
 
 	/** Supported profile links shared by import, setup and checkout. */
 	public static function social_networks() {
-		return array( 'facebook' => 'Facebook', 'instagram' => 'Instagram', 'tiktok' => 'TikTok', 'x' => 'X / Twitter', 'linkedin' => 'LinkedIn', 'telegram' => 'Telegram', 'youtube' => 'YouTube', 'website' => 'Website', 'github' => 'GitHub' );
+		return \TLS_Suite_Social_Networks::labels();
 	}
 
 	/**
@@ -40,30 +42,12 @@ class Contact {
 	 * @return array
 	 */
 	public static function defaults() {
-		return array(
-			'phone'         => '',
-			'whatsapp'      => '',
-			'facebook'      => '',
-			'instagram'     => '',
-			'tiktok'        => '',
-			'x'             => '',
-			'linkedin'             => '',
-			'telegram'             => '',
-			'youtube'             => '',
-			'website'             => '',
-			'github'             => '',
-			'show_phone'    => 1,
-			'show_whatsapp' => 1,
-			'show_facebook'  => 1,
-			'show_instagram' => 1,
-			'show_tiktok'    => 1,
-			'show_x'         => 1,
-			'show_linkedin'         => 0,
-			'show_telegram'         => 0,
-			'show_youtube'         => 0,
-			'show_website'         => 0,
-			'show_github'         => 0,
-		);
+        $defaults = array( 'phone' => '', 'whatsapp' => '', 'show_phone' => 1, 'show_whatsapp' => 1 );
+        foreach ( self::social_networks() as $network => $label ) {
+            $defaults[ $network ] = '';
+            $defaults[ 'show_' . $network ] = \TLS_Suite_Social_Networks::default_visible( $network );
+        }
+        return $defaults;
 	}
 
 	/**
@@ -171,30 +155,12 @@ class Contact {
 			return new \WP_Error( 'tioc_invalid_user', __( 'Invalid user.', 'tutor-instructor-offline-payment' ) );
 		}
 
-		$record = array(
-			'phone'         => self::sanitize_number( isset( $input['phone'] ) ? $input['phone'] : '' ),
-			'whatsapp'      => self::sanitize_number( isset( $input['whatsapp'] ) ? $input['whatsapp'] : '' ),
-			'facebook'      => self::sanitize_url( isset( $input['facebook'] ) ? $input['facebook'] : '' ),
-			'instagram'     => self::sanitize_url( isset( $input['instagram'] ) ? $input['instagram'] : '' ),
-			'tiktok'        => self::sanitize_url( isset( $input['tiktok'] ) ? $input['tiktok'] : '' ),
-			'x'             => self::sanitize_url( isset( $input['x'] ) ? $input['x'] : '' ),
-			'linkedin'             => self::sanitize_url( isset( $input['linkedin'] ) ? $input['linkedin'] : '' ),
-			'telegram'             => self::sanitize_url( isset( $input['telegram'] ) ? $input['telegram'] : '' ),
-			'youtube'             => self::sanitize_url( isset( $input['youtube'] ) ? $input['youtube'] : '' ),
-			'website'             => self::sanitize_url( isset( $input['website'] ) ? $input['website'] : '' ),
-			'github'             => self::sanitize_url( isset( $input['github'] ) ? $input['github'] : '' ),
-			'show_phone'    => empty( $input['show_phone'] ) ? 0 : 1,
-			'show_whatsapp' => empty( $input['show_whatsapp'] ) ? 0 : 1,
-			'show_facebook'  => empty( $input['show_facebook'] ) ? 0 : 1,
-			'show_instagram' => empty( $input['show_instagram'] ) ? 0 : 1,
-			'show_tiktok'    => empty( $input['show_tiktok'] ) ? 0 : 1,
-			'show_x'         => empty( $input['show_x'] ) ? 0 : 1,
-			'show_linkedin'         => empty( $input['show_linkedin'] ) ? 0 : 1,
-			'show_telegram'         => empty( $input['show_telegram'] ) ? 0 : 1,
-			'show_youtube'         => empty( $input['show_youtube'] ) ? 0 : 1,
-			'show_website'         => empty( $input['show_website'] ) ? 0 : 1,
-			'show_github'         => empty( $input['show_github'] ) ? 0 : 1,
-		);
+        $record = array();
+        foreach ( array_merge( array( 'phone', 'whatsapp' ), array_keys( self::social_networks() ) ) as $field ) {
+            $value = isset( $input[ $field ] ) && is_string( $input[ $field ] ) ? $input[ $field ] : '';
+            $record[ $field ] = in_array( $field, array( 'phone', 'whatsapp' ), true ) ? self::sanitize_number( $value ) : self::sanitize_url( $value );
+            $record[ 'show_' . $field ] = empty( $input[ 'show_' . $field ] ) ? 0 : 1;
+        }
 
 		$record['show_socials'] = 0;
 		foreach ( self::social_networks() as $network => $label ) {
@@ -290,20 +256,11 @@ class Contact {
 
 		$socials = self::tutor_socials( $user_id );
 
-		return array(
-			'phone'    => $phone,
-			'whatsapp' => $whatsapp ? $whatsapp : $phone,
-			'facebook' => ! empty( $socials['facebook'] ) ? self::sanitize_url( $socials['facebook'] ) : '',
-			'instagram'=> ! empty( $socials['instagram'] ) ? self::sanitize_url( $socials['instagram'] ) : '',
-			'tiktok'   => ! empty( $socials['tiktok'] ) ? self::sanitize_url( $socials['tiktok'] ) : '',
-			'x'        => ! empty( $socials['x'] ) ? self::sanitize_url( $socials['x'] ) : ( ! empty( $socials['twitter'] ) ? self::sanitize_url( $socials['twitter'] ) : '' ),
-			'linkedin' => ! empty( $socials['linkedin'] ) ? self::sanitize_url( $socials['linkedin'] ) : '',
-			'telegram' => ! empty( $socials['telegram'] ) ? self::sanitize_url( $socials['telegram'] ) : '',
-			'youtube' => ! empty( $socials['youtube'] ) ? self::sanitize_url( $socials['youtube'] ) : '',
-			'website' => ! empty( $socials['website'] ) ? self::sanitize_url( $socials['website'] ) : '',
-			'github' => ! empty( $socials['github'] ) ? self::sanitize_url( $socials['github'] ) : '',
-			'source'   => $source,
-		);
+        $record = array( 'phone' => $phone, 'whatsapp' => $whatsapp ? $whatsapp : $phone, 'source' => $source );
+        foreach ( self::social_networks() as $network => $label ) {
+            $record[ $network ] = self::sanitize_url( isset( $socials[ $network ] ) ? $socials[ $network ] : '' );
+        }
+        return $record;
 	}
 
 	/**

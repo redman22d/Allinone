@@ -2,24 +2,27 @@
     "use strict";
 
     var BRAND_PATHS = {
+        youtube: "M20 4H4a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h16a4 4 0 0 0 4-4V8a4 4 0 0 0-4-4ZM10 8l6 4-6 4V8Z",
         instagram: "M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5-3.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z",
         telegram: "M21.9 4.5 18.4 21c-.3 1.2-1 1.5-2 .9l-5.5-4.1-2.7 2.6c-.3.3-.5.5-1 .5l.4-5.6L18.6 6c.5-.4-.1-.6-.7-.2L6.4 13.3 1 11.6c-1.2-.4-1.2-1.2.2-1.8L20.3 3.7c1-.4 1.9.2 1.6.8z",
         whatsapp: "M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.6 5.9L0 24l6.4-1.7a11.9 11.9 0 0 0 5.6 1.4h.1c6.5 0 11.8-5.3 11.8-11.9 0-3.1-1.2-6.1-3.4-8.3zM12 21.6h-.1c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.1C1.9 6.5 6.4 2 12 2c2.6 0 5 1 6.8 2.8 1.8 1.8 2.8 4.2 2.8 6.8 0 5.5-4.3 10-9.6 10zm5.5-7.5c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.5-.7-2.5-1.3-3.5-2.9-.3-.5.3-.5.8-1.6.1-.2.1-.4 0-.6-.1-.2-.7-1.8-1-2.5-.3-.7-.5-.6-.7-.6h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.6.8.3 1.5.2 2 .1.6-.1 1.9-.8 2.1-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.6-.4z",
         tiktok: "M14.5 3c.3 2.6 1.7 4.2 4.3 4.4v2.8c-1.5 0-2.9-.5-4.2-1.4v6.5c0 3.6-2.8 6.2-6.4 6.2S1.8 18.9 1.8 15.3 4.6 9.1 8.2 9.1c.4 0 .8 0 1.2.1v3c-.4-.1-.8-.2-1.2-.2-1.9 0-3.3 1.5-3.3 3.3s1.4 3.3 3.3 3.3 3.2-1.5 3.2-3.3V3h3.1z"
     };
     var BRAND_VIEWBOXES = {
+        youtube: "0 0 24 24",
         instagram: "0 0 24 24",
         telegram: "0 0 24 24",
         whatsapp: "0 0 24 24",
         tiktok: "0 0 24 24"
     };
     var BRAND_FILLS = {
+        youtube: "#FF0000",
         instagram: "#E4405F",
         telegram: "#26A5E4",
         whatsapp: "#25D366",
         tiktok: "currentColor"
     };
-    var NETWORKS = ["instagram", "telegram", "whatsapp", "tiktok"];
+    var NETWORKS = ["instagram", "telegram", "whatsapp", "tiktok", "youtube"];
 
     function brandSvg(network, size, fill) {
         var path = BRAND_PATHS[network];
@@ -34,6 +37,7 @@
         if (href.indexOf("instagram.com") !== -1) return "instagram";
         if (href.indexOf("t.me") !== -1 || href.indexOf("telegram.") !== -1) return "telegram";
         if (href.indexOf("wa.me") !== -1 || href.indexOf("whatsapp") !== -1) return "whatsapp";
+        if (/^https?:\/\/(?:(?:www\.|m\.)?youtube\.com|youtu\.be)\//.test(href)) return "youtube";
         if (href.indexOf("tiktok.com") !== -1) return "tiktok";
         var hay = (
             (el.getAttribute && (el.getAttribute("aria-label") || el.getAttribute("title") || "")) +
