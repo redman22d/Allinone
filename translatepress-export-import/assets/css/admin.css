@@ -1,0 +1,48 @@
+/* TranslatePress Export / Import — admin styles */
+.tpei-wrap .tpei-subtitle {
+	color: #50575e;
+	margin-top: -6px;
+}
+.tpei-status-card {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-left: 4px solid #2271b1;
+	padding: 10px 14px;
+	margin: 12px 0 0;
+	max-width: 900px;
+}
+.tpei-status-card .tpei-meta {
+	color: #50575e;
+	margin-left: 12px;
+}
+.tpei-ok { color: #008a20; font-weight: 600; }
+.tpei-warn { color: #b32d2e; font-weight: 600; }
+.tpei-form {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	padding: 6px 20px 20px;
+	margin-top: 16px;
+	max-width: 900px;
+}
+.tpei-overview { max-width: 1100px; }
+.tpei-sample { max-width: 1100px; }
+.tpei-errors {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	padding: 10px 30px 14px;
+	max-width: 900px;
+}
+.tpei-help {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	padding: 6px 20px 20px;
+	margin-top: 16px;
+	max-width: 900px;
+}
+.tpei-help pre {
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	padding: 12px;
+	overflow: auto;
+}
+.tpei-help ul.ul-disc { list-style: disc; margin-left: 20px; }
