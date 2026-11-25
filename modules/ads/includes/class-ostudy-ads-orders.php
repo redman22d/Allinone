@@ -1352,6 +1352,7 @@ class OStudy_Ads_Orders {
     }
 
     public function ajax_renew() {
+        if ( function_exists( 'tls_rate_limited' ) && tls_rate_limited( 'ad_order_renew', 10, 600 ) ) { wp_send_json_error( array( 'message' => __( 'Too many requests. Please wait a moment.', 'tutor-learning-suite' ) ), 429 ); }
         $d = 'tutor-learning-suite';
         if ( is_user_logged_in() && ! check_ajax_referer( 'ostudy_ads_order', 'nonce', false ) ) {
             $this->fail( __( 'Your session expired. Please refresh the page and try again.', $d ), '', 403 );

@@ -1,5 +1,11 @@
 # Tutor Learning Suite – Changelog
 
+# Unreleased – deactivation and uninstall hygiene
+- Fix: deactivating the suite only removed the age-safety cron job. The bundled modules register their own deactivation hooks on their module file, which WordPress never fires for a bundled plugin, so `tioc_*`, `ostudy_ads_daily_orders`, `tcsp_process_scheduled_sponsorships` and `tlms_ps_maintenance` kept running after deactivation. A root `tls_deactivate()` now clears every suite cron hook (listed once in `tls_cron_hooks()`), drops the offline-payment rewrite flag and flushes rewrite rules.
+- Fix: `uninstall.php` did not clear the three offline-payment cron hooks or the age-safety sync hook, and the "delete all data" path left `_transient_timeout_*` rows (and `tlms`/`ostudy` transients) behind.
+- Ads: `ostudy_ads_order_renew` now goes through the same per-visitor `tls_rate_limited()` guard as the other public order endpoints.
+- README updated to 1.3.48; links to archived release notes now point to `docs/archive/`.
+
 # 1.3.48 – ads ordering upgrades and sponsorship redesign
 
 ## Ads 1.7.0

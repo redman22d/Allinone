@@ -1,12 +1,8 @@
-# Tutor Learning Suite — 1.3.44
-
-See [CHANGELOG-1.3.44.md](CHANGELOG-1.3.44.md) for the dashboard and portal UI refresh.
-
 # Tutor Learning Suite — UStudy integration
 
-**Plugin version:** 1.3.44  
-**Current release:** [1.3.44 changelog](CHANGELOG-1.3.44.md)  
-**Release notes:** [Changelog](CHANGELOG-1.3.44.md) · [Previous upgrade guide](UPGRADE-1.3.6.md) · [Private-session model](PRIVATE-SESSION-MODEL-1.3.6.md) · [Audit remediation](AUDIT-REMEDIATION-1.3.4.md) · [Age-safety notes](AGE-SAFETY-1.3.4.md)  
+**Plugin version:** 1.3.48  
+**Current release:** [CHANGELOG.md](CHANGELOG.md) (1.3.48 — ads ordering upgrades and sponsorship redesign)  
+**Release notes:** [Changelog](CHANGELOG.md) · [Upgrade guide](UPGRADE-1.3.33.md) · [Private-session model](docs/archive/PRIVATE-SESSION-MODEL-1.3.6.md) · [Audit remediation](docs/archive/AUDIT-REMEDIATION-1.3.4.md) · [Age-safety notes](docs/archive/AGE-SAFETY-1.3.4.md) · [Older notes](docs/archive/)  
 **Compatibility baseline:** Tutor LMS Core 4.2.1 and Tutor LMS Pro 4.2.0 (the exact versions in the supplied source archives). Other versions need compatibility testing.  
 **Theme:** Not included. Keep your current Tutor-LMS-compatible theme active.
 
@@ -21,7 +17,7 @@ The plugin does not include or modify Tutor LMS Core, Tutor LMS Pro, or any Word
 - Requests save the preferred slot in structured `requested_*` fields; the final `session_*` schedule fields are populated only when a tutor sends a proposal (or approves a free tryout at its selected time).
 - A preferred slot is not reserved by a pending request. A proposal/scheduled session blocks overlapping times. Declining a proposal clears its unaccepted final slot so the tutor can offer a fresh time.
 - Policy text snapshots, matching hashes and consent timestamps are recorded with each new request.
-- See [the full field mapping and model boundaries](PRIVATE-SESSION-MODEL-1.3.6.md).
+- See [the full field mapping and model boundaries](docs/archive/PRIVATE-SESSION-MODEL-1.3.6.md).
 
 ## 1.3.4 security and reliability remediation
 
@@ -66,13 +62,13 @@ The plugin does not include or modify Tutor LMS Core, Tutor LMS Pro, or any Word
 
 1. Back up the WordPress database, `wp-content`, and `wp-config.php`. Test on staging first.
 2. Confirm Tutor LMS Core 4.2.1 and Pro 4.2.0, or arrange compatibility testing for your installed versions.
-3. **Keep the separate DOB encryption key configured before upgrading the suite** as described in [AGE-SAFETY-1.3.4.md](AGE-SAFETY-1.3.4.md). Keep existing WordPress authentication salts unchanged until legacy encrypted dates have been migrated.
+3. **Keep the separate DOB encryption key configured before upgrading the suite** as described in [AGE-SAFETY-1.3.4.md](docs/archive/AGE-SAFETY-1.3.4.md). Keep existing WordPress authentication salts unchanged until legacy encrypted dates have been migrated.
 4. If the six component plugins are installed separately, deactivate their duplicates before activating this suite: OStudy Ads, Tutor Course Format, Tutor Course Search Pro, Tutor Instructor Offline Payment, Tutor LMS Instructor Profile Extra, and Tutor LMS Private Sessions. Do not delete their data.
 5. Keep Tutor LMS Core, Tutor LMS Pro and your existing theme active.
 6. Upload `tutor-learning-suite-1.3.44.zip` through **Plugins → Add New → Upload Plugin**, then activate it.
 7. Visit **Settings → Permalinks** and save once to refresh Tutor dashboard routes.
 8. Visit **Tools → TLS Child Safety**. If upgrading from 1.3.0, no DOB re-encryption migration is required. Review any pending guardian relationships using the site's documented verification procedure.
-9. Follow the staging acceptance checklist in [UPGRADE-1.3.4.md](UPGRADE-1.3.4.md), the audit status in [AUDIT-REMEDIATION-1.3.4.md](AUDIT-REMEDIATION-1.3.4.md), and the family-link notes in [AGE-SAFETY-1.3.4.md](AGE-SAFETY-1.3.4.md).
+9. Follow the staging acceptance checklist in [UPGRADE-1.3.4.md](docs/archive/UPGRADE-1.3.4.md), the audit status in [AUDIT-REMEDIATION-1.3.4.md](docs/archive/AUDIT-REMEDIATION-1.3.4.md), and the family-link notes in [AGE-SAFETY-1.3.4.md](docs/archive/AGE-SAFETY-1.3.4.md).
 
 Do not activate the component plugins separately while the suite is active. Doing so can register duplicate hooks/classes and process the same events twice. Deactivation does not delete data.
 
@@ -132,7 +128,7 @@ The platform relies on parent/guardian attestation and a site-admin verification
 - The audit table records actor/account IDs, event keys, timestamps and sanitized non-DOB details. It is an application audit trail, not tamper-proof storage against a database administrator.
 - The daily age refresh uses WordPress Cron. For reliable birthday transitions on low-traffic sites, configure a real server cron to invoke `wp-cron.php`.
 
-See [AGE-SAFETY-1.3.4.md](AGE-SAFETY-1.3.4.md) for the current family-link review, age transition and consent behaviour. Keep the existing encryption key; this update does not change the DOB encryption format.
+See [AGE-SAFETY-1.3.4.md](docs/archive/AGE-SAFETY-1.3.4.md) for the current family-link review, age transition and consent behaviour. Keep the existing encryption key; this update does not change the DOB encryption format.
 
 ## Other integration changes
 

@@ -8,9 +8,19 @@
  */
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) { exit; }
 
-wp_clear_scheduled_hook( 'tcsp_process_scheduled_sponsorships' );
-wp_clear_scheduled_hook( 'ostudy_ads_daily_orders' );
-wp_clear_scheduled_hook( 'tlms_ps_maintenance' );
+// Keep in sync with tls_cron_hooks() in tutor-learning-suite.php (the main file
+// is not loaded during uninstall, so the list is repeated here).
+foreach ( array(
+    'tls_age_safety_daily_sync',
+    'tlms_ps_maintenance',
+    'ostudy_ads_daily_orders',
+    'tcsp_process_scheduled_sponsorships',
+    'tioc_expire_overdue_orders',
+    'tioc_send_deadline_reminders',
+    'tioc_purge_expired_receipts',
+) as $tls_hook ) {
+    wp_clear_scheduled_hook( $tls_hook );
+}
 
 if ( ! get_option( 'tls_delete_data_on_uninstall' ) ) { return; }
 
@@ -22,7 +32,15 @@ foreach ( array( 'tlms_private_sessions', 'tlms_private_availability', 'tls_age_
 }
 
 // Options, transients and user meta created by the suite's modules.
-foreach ( array( 'tls\_%', 'tcsp\_%', 'tioc\_%', 'tcf\_%', 'tlms\_%', 'ostudy\_ads\_%', '\_transient\_tcsp\_%', '\_transient\_tioc\_%', '\_transient\_tls\_%' ) as $tls_like ) {
+foreach ( array(
+    'tls\_%', 'tcsp\_%', 'tioc\_%', 'tcf\_%', 'tlms\_%', 'ostudy\_ads\_%',
+    // Transients and their matching *_timeout_ rows (rate-limit buckets, filter-count caches, ad-order limits).
+    '\_transient\_tcsp\_%', '\_transient\_timeout\_tcsp\_%',
+    '\_transient\_tioc\_%', '\_transient\_timeout\_tioc\_%',
+    '\_transient\_tls\_%', '\_transient\_timeout\_tls\_%',
+    '\_transient\_tlms\_%', '\_transient\_timeout\_tlms\_%',
+    '\_transient\_ostudy\_%', '\_transient\_timeout\_ostudy\_%',
+) as $tls_like ) {
     $wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $tls_like ) ); // phpcs:ignore WordPress.DB
 }
 foreach ( array( '\_tls\_%', 'tls\_%', '\_tcsp\_%', 'tcsp\_%', '\_tioc\_%', 'tioc\_%', '\_tlms\_%', 'tlms\_%', '\_tcf\_%' ) as $tls_like ) {

@@ -62,7 +62,42 @@ function tls_activate() {
     TLS_Age_Safety::activate();
 }
 register_activation_hook( __FILE__, 'tls_activate' );
-register_deactivation_hook( __FILE__, array( 'TLS_Age_Safety', 'deactivate' ) );
+
+/**
+ * Deactivation: the bundled modules still call register_deactivation_hook() on
+ * their own __FILE__, but WordPress only fires that hook for the active plugin's
+ * main file, so those callbacks never run. Clear every scheduled event the suite
+ * registers here so deactivated sites are not left with orphaned cron jobs.
+ */
+function tls_deactivate() {
+    foreach ( tls_cron_hooks() as $hook ) {
+        wp_clear_scheduled_hook( $hook );
+    }
+    if ( function_exists( 'tioc_deactivate' ) ) {
+        tioc_deactivate(); // Also drops its pending rewrite flag and flushes rewrites.
+    } else {
+        flush_rewrite_rules();
+    }
+}
+register_deactivation_hook( __FILE__, 'tls_deactivate' );
+
+/**
+ * Every cron hook scheduled by the suite or one of its modules.
+ * Shared by deactivation and uninstall so the two lists cannot drift apart.
+ *
+ * @return string[]
+ */
+function tls_cron_hooks() {
+    return array(
+        'tls_age_safety_daily_sync',          // TLS_Age_Safety::CRON_HOOK
+        'tlms_ps_maintenance',                // TLMS_Private_Sessions::CRON_HOOK
+        'ostudy_ads_daily_orders',            // Ads orders daily job
+        'tcsp_process_scheduled_sponsorships',// Course Search Pro sponsorships
+        'tioc_expire_overdue_orders',         // Offline payment
+        'tioc_send_deadline_reminders',
+        'tioc_purge_expired_receipts',
+    );
+}
 
 // Opt-in "delete everything on uninstall" switch, shown under Settings > General.
 add_action( 'admin_init', function () {
