@@ -1,0 +1,327 @@
+TUTOR LEARNING SUITE 1.3.48 - CODE REVIEW: ISSUES AND SUGGESTED FIXES
+======================================================================
+Date: 2026-11-25
+Scope: all 67 PHP files (~34,000 lines) in the root plugin and the six
+bundled modules (ads, course-format, course-search, instructor-profile,
+offline-payment, private-sessions), plus README/CHANGELOG/uninstall.
+
+Method:
+  - Full-tree parse with a PHP 7.4-compatible parser (php binary not
+    available in the review sandbox, so no live WordPress run).
+  - Pattern review of: $wpdb usage, all 56 AJAX handlers (10 of them
+    guest-accessible), $_POST/$_GET handling, file uploads and private
+    file serving, capability and nonce checks, cron scheduling,
+    activation/deactivation/uninstall, documentation consistency.
+
+Overall verdict: the code base is in good shape. No syntax errors, no
+SQL injection vectors found, uploads are validated and payment receipts
+are stored outside the web root. The real defects are in plugin
+lifecycle handling (deactivation / uninstall) and documentation.
+
+Legend:  [FIXED] = already changed on branch arena/9b72d89a-allinone
+         [OPEN]  = recommendation, not changed
+
+
+----------------------------------------------------------------------
+SECTION A - BUGS
+----------------------------------------------------------------------
+
+A1. [FIXED] Cron jobs keep running after the plugin is deactivated
+    Severity: HIGH (orphaned scheduled events, PHP warnings in cron,
+              e-mails/expiry logic firing while the plugin is "off")
+
+    Where:
+      tutor-learning-suite.php (deactivation hook)
+      modules/ads/ostudy-tutor-lms-ads.php:39-40
+      modules/course-format/tutor-course-format.php:114
+      modules/offline-payment/tutor-instructor-offline-payment.php:91,105
+      modules/private-sessions/tutor-lms-private-sessions.php:3494-3495
+
+    Problem:
+      Each bundled module calls register_activation_hook(__FILE__, ...)
+      and register_deactivation_hook(__FILE__, ...) on its OWN file.
+      WordPress derives the hook name from plugin_basename(__FILE__) and
+      only fires "activate_<basename>" / "deactivate_<basename>" for the
+      plugin's MAIN file (tutor-learning-suite/tutor-learning-suite.php).
+      Hooks registered for modules/.../x.php therefore never run.
+      Activation was already worked around by tls_activate() calling each
+      module's activate function, but deactivation only did
+      TLS_Age_Safety::deactivate(). Result: these events remained
+      scheduled after deactivation:
+        tioc_expire_overdue_orders, tioc_send_deadline_reminders,
+        tioc_purge_expired_receipts, ostudy_ads_daily_orders,
+        tcsp_process_scheduled_sponsorships, tlms_ps_maintenance.
+      The offline-payment rewrite flag (tioc_flush_rewrite_rules) was
+      also never cleared and rewrites were not flushed.
+
+    Fix applied:
+      Added tls_deactivate() in tutor-learning-suite.php, registered with
+      register_deactivation_hook(__FILE__). It iterates a new
+      tls_cron_hooks() list (single source of truth for all 7 hooks),
+      calls wp_clear_scheduled_hook() for each, then calls
+      tioc_deactivate() when available (drops the rewrite flag and
+      flushes rewrite rules) or flush_rewrite_rules() otherwise.
+
+    Follow-up recommended:
+      Remove the six dead register_*_hook() calls inside modules/ so
+      nobody assumes they work. When a module adds a new cron hook,
+      add it to tls_cron_hooks() AND uninstall.php (see A2).
+
+
+A2. [FIXED] uninstall.php incomplete
+    Severity: MEDIUM
+
+    Where: uninstall.php
+
+    Problem:
+      a) Only three cron hooks were cleared; the three tioc_* hooks and
+         tls_age_safety_daily_sync were left behind.
+      b) With "delete all data" enabled, the options clean-up removed
+         _transient_tcsp_%, _transient_tioc_%, _transient_tls_% but not
+         their _transient_timeout_% rows, and did not cover tlms_ /
+         ostudy_ transients at all. Those rows accumulate in wp_options
+         (rate-limit buckets, filter-count caches, ad-order limits).
+
+    Fix applied:
+      Cleared all 7 hooks (list duplicated on purpose with a comment,
+      because the main plugin file is not loaded during uninstall).
+      Added matching _transient_timeout_ patterns and tlms/ostudy
+      transient patterns to the delete list.
+
+
+A3. [FIXED] ostudy_ads_order_renew missing the suite rate limiter
+    Severity: LOW-MEDIUM (abuse / e-mail flooding)
+
+    Where: modules/ads/includes/class-ostudy-ads-orders.php, ajax_renew()
+
+    Problem:
+      submit / track / proof all start with
+      tls_rate_limited('ad_order_*', ...) in addition to the module's own
+      self::rate_limited(). ajax_renew() - which inserts a new order row
+      and sends two e-mails - only had the module-level limiter.
+
+    Fix applied:
+      Added tls_rate_limited('ad_order_renew', 10, 600) as the first
+      statement, consistent with the other endpoints.
+
+
+A4. [FIXED] README stale and 6 broken links
+    Severity: LOW (documentation)
+
+    Where: README.md
+
+    Problem:
+      Header and "Plugin version" said 1.3.44 while the plugin is 1.3.48.
+      Links to CHANGELOG-1.3.44.md, UPGRADE-1.3.6.md, UPGRADE-1.3.4.md,
+      PRIVATE-SESSION-MODEL-1.3.6.md, AUDIT-REMEDIATION-1.3.4.md and
+      AGE-SAFETY-1.3.4.md pointed at the repo root, but 1.3.47 moved
+      those files to docs/archive/.
+
+    Fix applied:
+      Header rewritten for 1.3.48, points at CHANGELOG.md and
+      UPGRADE-1.3.33.md; every archived link rewritten to docs/archive/.
+      All links verified to resolve. CHANGELOG.md has an "Unreleased"
+      entry describing A1-A4.
+
+
+----------------------------------------------------------------------
+SECTION B - SECURITY / ROBUSTNESS RECOMMENDATIONS
+----------------------------------------------------------------------
+
+B1. [OPEN] Rate limiter keyed on REMOTE_ADDR and not atomic
+    Where: tutor-learning-suite.php tls_rate_limited();
+           class-ostudy-ads-orders.php rate_limited()
+
+    Problem:
+      - Behind Cloudflare / nginx reverse proxy / a load balancer,
+        REMOTE_ADDR is the proxy IP, so every visitor shares one bucket
+        and legitimate users get 429s once the site has traffic.
+      - get_transient() + set_transient() is a read-then-write; under
+        concurrency two requests can both read N and write N+1, so the
+        cap is soft. Also set_transient() resets the expiry every hit,
+        turning the "fixed window" into a sliding one that never closes
+        while traffic continues.
+
+    Suggested fix:
+      function tls_client_ip() {
+          $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+          $trusted = apply_filters( 'tls_trusted_proxies', array() );
+          if ( $trusted && in_array( $ip, $trusted, true )
+               && ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+              $parts = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] );
+              $ip = trim( end( $parts ) );      // nearest to the proxy
+          }
+          return filter_var( $ip, FILTER_VALIDATE_IP ) ? $ip : 'unknown';
+      }
+      Only trust forwarded headers when the connecting IP is in a
+      configured proxy list. For the counter, when
+      wp_using_ext_object_cache() is true use wp_cache_add() +
+      wp_cache_incr() (atomic); otherwise keep the transient but only
+      set the expiry on the first hit:
+          if ( false === get_transient($key) ) set_transient($key,1,$window);
+          else { $hits = get_transient($key)+1; set_transient($key,$hits, <remaining>); }
+      (or store array('n'=>..,'until'=>ts) and respect 'until').
+
+
+B2. [OPEN] Nonce only enforced for logged-in callers on ad-order endpoints
+    Where: class-ostudy-ads-orders.php ajax_submit / ajax_proof / ajax_renew
+           pattern: if ( is_user_logged_in() && ! check_ajax_referer(...) )
+
+    Assessment:
+      Acceptable: a logged-out visitor has no authenticated session a
+      CSRF could ride on, and the honeypot + elapsed-time + rate limits
+      cover spam. But note that a logged-in user can simply omit the
+      cookie to be treated as a guest, so this check adds no protection
+      beyond the guest checks. Do not rely on it for any future
+      privileged behaviour.
+
+    Suggested hardening (optional):
+      Issue a per-page-load token for guests too (wp_create_nonce works
+      for user 0, keyed by session token = '' ) and always call
+      check_ajax_referer(). This costs nothing and removes the branch.
+
+
+B3. [OPEN] extract() in template loader
+    Where: modules/offline-payment/includes/class-templates.php:173
+
+    Assessment:
+      $vars comes from internal callers, so not exploitable today, but
+      extract() makes it easy for a future caller to shadow $this,
+      $wpdb, $args etc.
+
+    Suggested fix:
+      extract( $vars, EXTR_SKIP ); and reject reserved keys, or pass
+      $vars as a single array to the template.
+
+
+B4. [OPEN] Direct cast of money / numeric POST fields
+    Where: modules/private-sessions/tutor-lms-private-sessions.php
+           lines ~634, 1270-1274, 1698-1781 ( (float)($_POST[...]) )
+
+    Assessment:
+      Casting is safe against injection; these handlers are nonce- and
+      capability-checked. Two small concerns:
+        - (float) accepts "1e10", NAN-ish strings, locale commas become 0.
+        - Some values are bounded (hourly_rate <= 1,000,000) while others
+          (default_price, proposal_price, tryout_price) are only >= 0.
+    Suggested fix:
+      One helper tls_money( $raw, $max = 1000000 ) that normalises
+      decimal comma, rounds to 2 dp and clamps to [0,$max]; use it
+      everywhere a price is read.
+
+
+----------------------------------------------------------------------
+SECTION C - MAINTAINABILITY / PROCESS
+----------------------------------------------------------------------
+
+C1. [OPEN] No automated checks in the repository
+    The 1.3.47 changelog mentions tests ("Tests no longer hard-code the
+    version") and lint, but the repo has no tests/ directory and only
+    modules/offline-payment has phpcs.xml.dist + a GitHub workflow.
+
+    Suggested fix:
+      - Move phpcs.xml.dist and composer.json to the repository root,
+        extend the paths to the whole tree, keep WordPress-Extra +
+        WordPress-Docs rulesets.
+      - Root workflow: php -l on every file for 7.4 and 8.3, phpcs, and
+        a simple test that TLS_VERSION == plugin header Version ==
+        first CHANGELOG heading.
+      - Optionally wp-env + PHPUnit smoke test that activates and
+        deactivates the plugin and asserts wp_next_scheduled() is false
+        for every hook in tls_cron_hooks() (would have caught A1).
+
+
+C2. [OPEN] Version numbers maintained by hand in several places
+    TLS_VERSION constant, plugin header, README, CHANGELOG heading and
+    six module version constants/headers. They already drifted once
+    (README 1.3.44 vs plugin 1.3.48).
+
+    Suggested fix:
+      A bin/release.sh (or composer script) that takes the new version,
+      rewrites the header/constant/README and prepends a changelog
+      stub; plus the CI assertion from C1.
+
+
+C3. [OPEN] Dead register_activation_hook / register_deactivation_hook
+    calls in modules (see A1). Remove them or replace with a comment
+    pointing to tls_activate()/tls_deactivate().
+
+
+C4. [OPEN] Very large, dense files
+    modules/private-sessions/tutor-lms-private-sessions.php: 3,496 lines
+    in one class, many lines of the form
+      $uid=get_current_user_id();$base=max(0,(float)($_POST[...]));...
+    modules/instructor-profile/includes/class-plugin.php: 2,275 lines.
+    includes/class-tls-integration.php: 2,028 lines.
+
+    Suggested fix (incremental, no behaviour change):
+      Split private-sessions into includes/class-tlms-ps-{db,ajax,
+      calendar,emails,dashboard,admin}.php like the other modules; run
+      phpcbf once to expand the compressed statements. This is the
+      highest-value readability change in the repo and will make future
+      security reviews of the booking state machine much cheaper.
+
+
+C5. [OPEN] Translation text domain passed through a variable
+    Pattern $d = 'tutor-learning-suite'; __( '...', $d ) in the ads
+    orders class. It works at runtime but gettext extractors (WP-CLI
+    i18n make-pot, Poedit) cannot see a variable domain, so these
+    strings may be missing from languages/tutor-learning-suite.pot.
+
+    Suggested fix:
+      Replace $d with the literal domain (one sed pass), then regenerate
+      the .pot with `wp i18n make-pot . languages/tutor-learning-suite.pot`
+      and diff the string count.
+
+
+C6. [OPEN] "SHOW COLUMNS" / "ALTER TABLE" run on every load path?
+    Where: class-ostudy-ads-db.php:111-135, class-tls-integration.php:316,
+           class-tls-age-safety.php:893, class-ostudy-ads-orders.php:1038
+
+    Check that each of these is gated by a stored DB-version option and
+    only runs when the version changes (ads uses DB 1.7.0 - looks
+    gated; verify the others). If any runs on every request it is a
+    needless metadata query per page load.
+
+
+----------------------------------------------------------------------
+SECTION D - THINGS CHECKED AND FOUND OK
+----------------------------------------------------------------------
+
+- Syntax: 67/67 files parse (PHP 7.4 grammar).
+- SQL: all non-prepared $wpdb calls interpolate only table names,
+  'SHOW COLUMNS', or absint()-filtered ID lists (tcsp-query.php:188,
+  tcsp-tutors.php:157-164). $field in tcsp-query.php:188 is chosen from
+  a fixed whitelist. No user strings reach SQL unprepared.
+- No eval / unserialize / shell functions. base64_decode usages are
+  strict-mode and feed JSON/encrypted blobs with their own validation.
+- No HTTP_HOST / HTTP_REFERER trust anywhere.
+- Guest AJAX endpoints (slots, month availability, carousels, suggest,
+  ad tracking, ad order submit/track/proof/availability/renew) are all
+  rate limited; ad tracking requires a short-lived signed token.
+- Ad creative uploads: wp_check_filetype_and_ext() + getimagesize() +
+  wp_handle_upload() with an explicit MIME whitelist.
+- Payment receipts: stored outside the web root, served only via
+  serve_payment_proof() behind manage_options + check_admin_referer,
+  with nosniff / no-store headers and extension whitelist; PDF forced
+  to attachment disposition.
+- Order lookup returns one neutral message for "not found" and "wrong
+  contact" (no enumeration).
+- Uninstall keeps data by default; destructive path is opt-in.
+
+
+----------------------------------------------------------------------
+SUGGESTED PRIORITY ORDER FOR THE OPEN ITEMS
+----------------------------------------------------------------------
+ 1. C1  CI: php -l + phpcs + activate/deactivate cron test
+ 2. B1  proxy-aware, atomic rate limiter
+ 3. C3  delete dead module lifecycle hooks
+ 4. C5  literal text domain + regenerate .pot
+ 5. C2  release script / version assertion
+ 6. B3, B4 small hardening helpers
+ 7. C4  split private-sessions module (larger refactor)
+ 8. C6  verify schema checks are version-gated
+
+Before release: run a real activate -> deactivate cycle on staging and
+confirm with `wp cron event list` that none of the seven suite hooks
+remain scheduled.
