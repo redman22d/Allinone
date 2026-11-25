@@ -1,0 +1,1502 @@
+/* Tutor Course Search Pro — filter bar + suggestions */
+
+/*
+ * Prevent the pre-JavaScript filter markup from ever being painted.
+ * The archive is initially rendered in Tutor's native document order and
+ * JavaScript then moves the filter into the sidebar. Without this guard the
+ * browser can briefly paint the old top position before the final layout is
+ * applied, causing a visible vertical flash/jump.
+ */
+.tcsp-filter-bar.tcsp-sidebar-filter {
+	visibility: hidden;
+	opacity: 0;
+}
+
+.tcsp-filter-bar.tcsp-sidebar-filter.tcsp-sidebar-ready {
+	visibility: visible;
+	opacity: 1;
+}
+
+.tcsp-result-count {
+	margin: 0 0 10px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #50575e;
+}
+
+/* ------------------------------------------------------------------
+ * No-flash sidebar layout.
+ *
+ * The filter form is rendered before Tutor's course loop and is moved into
+ * a sidebar by JavaScript for compatibility with Tutor's markup.  The rules
+ * below reproduce that final layout in CSS immediately, so the first paint
+ * is already correct instead of showing the filter at the top and then
+ * jumping it to the side when JS runs.
+ * ------------------------------------------------------------------ */
+@media (min-width: 901px) {
+	[tutor-course-list-container]:has(> .tcsp-filter-bar.tcsp-sidebar-filter),
+	.tutor-pagination-wrapper-replaceable:has(> .tcsp-filter-bar.tcsp-sidebar-filter) {
+		display: grid;
+		grid-template-columns: minmax(220px, 20%) minmax(0, 1fr);
+		align-items: start;
+		gap: 28px;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	[tutor-course-list-container]:has(> .tcsp-filter-bar.tcsp-sidebar-filter) > .tcsp-filter-bar.tcsp-sidebar-filter,
+	.tutor-pagination-wrapper-replaceable:has(> .tcsp-filter-bar.tcsp-sidebar-filter) > .tcsp-filter-bar.tcsp-sidebar-filter {
+		grid-column: 1;
+		grid-row: 1 / span 999;
+		align-self: start;
+		min-width: 0;
+		margin: 0;
+		width: 100%;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 8px;
+		position: sticky;
+		top: 20px;
+	}
+
+	[tutor-course-list-container]:has(> .tcsp-filter-bar.tcsp-sidebar-filter) > :not(.tcsp-filter-bar),
+	.tutor-pagination-wrapper-replaceable:has(> .tcsp-filter-bar.tcsp-sidebar-filter) > :not(.tcsp-filter-bar) {
+		grid-column: 2;
+		min-width: 0;
+	}
+
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-filter-row,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-filter-row-top,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-filter-row-bottom {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: 8px;
+		width: 100%;
+		min-width: 0;
+	}
+
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-wrap,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-input,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-select,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-multiselect,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-multiselect-toggle,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-apply-btn,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-reset-btn {
+		width: 100%;
+		max-width: none;
+		box-sizing: border-box;
+	}
+
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-select,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-multiselect-toggle,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-apply-btn,
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-reset-btn {
+		justify-content: flex-start;
+	}
+
+	.tcsp-filter-bar.tcsp-sidebar-filter .tcsp-reset-btn {
+		justify-content: center;
+	}
+}
+
+/* ------------------------------------------------------------------
+ * Sidebar layout. Applied by tcsp-filters.js, which wraps the filter
+ * form (.tcsp-filter-bar) into .tcsp-sidebar and moves everything else
+ * that renders alongside it (result count, sponsored carousel, the
+ * "Courses" heading, Tutor's own course grid, and pagination) into
+ * .tcsp-results-col. Roughly a 1/5 : 4/5 split above tablet width;
+ * stacks back to a single column on narrower screens.
+ * ------------------------------------------------------------------ */
+.tcsp-layout {
+	display: grid;
+	grid-template-columns: minmax(220px, 20%) minmax(0, 1fr);
+	align-items: start;
+	gap: 28px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.tcsp-sidebar {
+	min-width: 0;
+	box-sizing: border-box;
+	position: sticky;
+	top: 20px;
+}
+
+.tcsp-results-col {
+	min-width: 0;
+	box-sizing: border-box;
+}
+
+.tcsp-sidebar .tcsp-filter-bar {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 8px;
+	margin: 0;
+	width: 100%;
+}
+
+.tcsp-sidebar .tcsp-filter-row,
+.tcsp-sidebar .tcsp-filter-row-top,
+.tcsp-sidebar .tcsp-filter-row-bottom {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 8px;
+	width: 100%;
+}
+
+.tcsp-sidebar .tcsp-search-wrap,
+.tcsp-sidebar .tcsp-search-input,
+.tcsp-sidebar .tcsp-select,
+.tcsp-sidebar .tcsp-multiselect,
+.tcsp-sidebar .tcsp-multiselect-toggle,
+.tcsp-sidebar .tcsp-apply-btn,
+.tcsp-sidebar .tcsp-reset-btn {
+	width: 100%;
+	max-width: none;
+	box-sizing: border-box;
+}
+
+.tcsp-sidebar .tcsp-select,
+.tcsp-sidebar .tcsp-multiselect-toggle,
+.tcsp-sidebar .tcsp-apply-btn,
+.tcsp-sidebar .tcsp-reset-btn {
+	justify-content: flex-start;
+}
+
+.tcsp-sidebar .tcsp-multiselect-panel {
+	left: 0;
+	right: 0;
+	width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+}
+
+.tcsp-sidebar .tcsp-reset-btn {
+	justify-content: center;
+}
+
+@media (max-width: 900px) {
+	.tcsp-layout {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+	.tcsp-sidebar {
+		position: static;
+	}
+	.tcsp-sidebar .tcsp-filter-bar {
+		flex-direction: column;
+	}
+}
+
+.tcsp-filter-bar {
+	display: grid;
+	grid-template-columns: minmax(180px, 360px) auto;
+	grid-template-rows: auto auto;
+	gap: 8px 10px;
+	align-items: flex-start;
+	margin: 0 0 24px;
+	padding: 16px;
+	background: #f7f8fa;
+	border: 1px solid #e3e6ea;
+	border-radius: 10px;
+}
+
+.tcsp-search-wrap {
+	position: relative;
+	min-width: 0;
+	width: 100%;
+}
+
+.tcsp-search-input {
+	width: 100%;
+	max-width: 360px;
+	padding: 8px 11px;
+	border: 1px solid #cdd2d8;
+	border-radius: 8px;
+	font-size: 15px;
+	line-height: 1.4;
+	box-sizing: border-box;
+}
+
+.tcsp-search-input:focus {
+	outline: none;
+	border-color: #3e64de;
+	box-shadow: 0 0 0 3px rgba( 62, 100, 222, 0.15 );
+}
+
+.tcsp-filter-row-top,
+.tcsp-filter-row-bottom {
+	display: flex;
+	align-items: stretch;
+	gap: 7px;
+	min-width: 0;
+}
+
+.tcsp-filter-row-top > *,
+.tcsp-filter-row-bottom > * {
+	min-height: 40px;
+}
+
+.tcsp-filter-controls {
+	grid-column: 1 / -1;
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 7px;
+	align-items: center;
+	min-width: 0;
+	overflow: visible;
+}
+
+.tcsp-select {
+	min-width: 0;
+	height: 40px;
+	min-height: 40px;
+	padding: 0 34px 0 11px;
+	border: 1px solid #cdd2d8;
+	border-radius: 8px;
+	background: #fff;
+	font-size: 14px;
+	line-height: 40px;
+	cursor: pointer;
+	box-sizing: border-box;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tcsp-apply-btn {
+	height: 40px;
+	min-height: 40px;
+	padding: 0 18px;
+	border: none;
+	border-radius: 8px;
+	background: #3e64de;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.15s ease;
+}
+
+.tcsp-apply-btn:hover {
+	background: #2f4fc0;
+}
+
+.tcsp-reset-btn {
+	display: inline-flex;
+	align-items: center;
+	height: 40px;
+	min-height: 40px;
+	box-sizing: border-box;
+	padding: 0 16px;
+	border: 1px solid #cdd2d8;
+	border-radius: 8px;
+	background: #fff;
+	color: #4b5563;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tcsp-reset-btn:hover {
+	background: #f2f3f5;
+	color: #1c2230;
+}
+
+/* Multiselect (category / tag) dropdown */
+.tcsp-multiselect {
+	position: relative;
+}
+
+.tcsp-multiselect-toggle {
+	height: 40px;
+	min-height: 40px;
+	box-sizing: border-box;
+	padding: 0 10px;
+	border: 1px solid #cdd2d8;
+	border-radius: 8px;
+	background: #fff;
+	font-size: 14px;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	line-height: 1;
+	white-space: nowrap;
+}
+
+.tcsp-multiselect-count {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 18px;
+	height: 18px;
+	padding: 0 5px;
+	border-radius: 999px;
+	background: #3e64de;
+	color: #fff;
+	font-size: 11px;
+	font-weight: 700;
+}
+
+.tcsp-multiselect-panel {
+	position: absolute;
+	top: calc( 100% + 6px );
+	left: 0;
+	z-index: 998;
+	min-width: 200px;
+	max-height: 260px;
+	overflow-y: auto;
+	background: #fff;
+	border: 1px solid #e3e6ea;
+	border-radius: 8px;
+	box-shadow: 0 12px 32px rgba( 20, 24, 40, 0.14 );
+	padding: 8px;
+}
+
+.tcsp-municipality-hidden { display:none !important; }
+
+.tcsp-multiselect--disabled .tcsp-multiselect-toggle {
+	opacity: .65;
+	cursor: not-allowed;
+}
+
+.tcsp-municipality-empty {
+	padding: 8px;
+	font-size: 13px;
+	color: #6b7280;
+}
+
+.tcsp-multiselect-option {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 8px;
+	font-size: 14px;
+	cursor: pointer;
+	border-radius: 6px;
+	white-space: nowrap;
+}
+
+.tcsp-multiselect-option--child {
+	padding-left: calc( 8px + ( var(--tcsp-depth, 1) * 14px ) );
+}
+
+.tcsp-term-count {
+	margin-left: auto;
+	min-width: 20px;
+	padding: 1px 6px;
+	border-radius: 999px;
+	background: #eef1f6;
+	color: #687386;
+	font-size: 11px;
+	line-height: 1.4;
+	text-align: center;
+}
+
+.tcsp-multiselect-option:hover {
+	background: #f2f5ff;
+}
+
+.tcsp-multiselect-logic {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px;
+	margin-bottom: 6px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.tcsp-logic-select {
+	min-width: 150px;
+	padding: 6px 8px;
+	border: 1px solid #cdd2d8;
+	border-radius: 6px;
+	background: #fff;
+	font-size: 12px;
+}
+
+.tcsp-multiselect-hint {
+	margin: 0 0 8px;
+	padding: 0 4px;
+	font-size: 12px;
+	color: #6b7280;
+	white-space: normal;
+}
+
+/* Suggestion dropdown */
+.tcsp-suggest-box {
+	position: absolute;
+	top: calc( 100% + 6px );
+	left: 0;
+	right: 0;
+	z-index: 999;
+	background: #fff;
+	border: 1px solid #e3e6ea;
+	border-radius: 10px;
+	box-shadow: 0 12px 32px rgba( 20, 24, 40, 0.14 );
+	overflow: hidden;
+	max-height: 420px;
+	overflow-y: auto;
+}
+
+.tcsp-suggest-item {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	padding: 10px 14px;
+	text-decoration: none;
+	color: #1c2230;
+	border-bottom: 1px solid #f0f2f5;
+}
+
+.tcsp-suggest-item:last-of-type {
+	border-bottom: none;
+}
+
+.tcsp-suggest-item:hover,
+.tcsp-suggest-item.is-active {
+	background: #f2f5ff;
+}
+
+.tcsp-suggest-item.is-promoted {
+	background: linear-gradient( 90deg, rgba( 255, 214, 92, 0.16 ), transparent 60% );
+}
+
+.tcsp-suggest-thumb {
+	width: 46px;
+	height: 46px;
+	border-radius: 6px;
+	object-fit: cover;
+	flex: 0 0 auto;
+	background: #e7eaef;
+}
+
+.tcsp-suggest-thumb--empty {
+	display: inline-block;
+}
+
+.tcsp-suggest-meta {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+}
+
+.tcsp-suggest-title {
+	font-weight: 600;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.tcsp-suggest-sub {
+	font-size: 12px;
+	color: #6b7280;
+	margin-top: 2px;
+}
+
+.tcsp-badge {
+	font-size: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.4px;
+	padding: 2px 6px;
+	border-radius: 4px;
+}
+
+.tcsp-badge--promoted {
+	background: #ffd65c;
+	color: #5a4200;
+}
+
+.tcsp-sponsored-sticker {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 3;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 5px 8px;
+	border-radius: 999px;
+	background: #111827;
+	color: #fff;
+	font-size: 10px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+	box-shadow: 0 2px 8px rgba( 17, 24, 39, .18 );
+}
+
+/* Tutor's standard cards use one of these wrappers around the thumbnail. */
+.tutor-card,
+.tutor-course-card,
+.tutor-course-thumbnail,
+.tutor-course-thumbnail-wrap {
+	position: relative;
+}
+
+.tcsp-sponsored-icon {
+	width: 12px;
+	height: 12px;
+	font-size: 11px;
+	line-height: 12px;
+}
+
+.tcsp-sponsored-sticker--platinum {
+	background: #7c3aed;
+}
+
+.tcsp-sponsored-sticker--gold {
+	background: #b7791f;
+}
+
+.tcsp-sponsored-sticker--featured {
+	background: #2563eb;
+}
+
+.tcsp-suggest-loading,
+.tcsp-suggest-empty {
+	padding: 14px;
+	font-size: 13px;
+	color: #6b7280;
+}
+
+.tcsp-suggest-all {
+	display: block;
+	padding: 11px 14px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: 600;
+	color: #3e64de;
+	text-decoration: none;
+	background: #fafbfe;
+	border-top: 1px solid #f0f2f5;
+}
+
+.tcsp-suggest-all:hover {
+	background: #f2f5ff;
+}
+
+@media ( max-width: 600px ) {
+	.tcsp-filter-row-top,
+.tcsp-filter-row-bottom {
+	display: flex;
+	align-items: stretch;
+	gap: 7px;
+	min-width: 0;
+}
+
+.tcsp-filter-row-top > *,
+.tcsp-filter-row-bottom > * {
+	min-height: 40px;
+}
+
+.tcsp-filter-controls {
+		width: 100%;
+	}
+	.tcsp-select,
+	.tcsp-apply-btn {
+		flex: 1 1 auto;
+	}
+}
+
+/* Dedicated sponsored-course carousel */
+
+.tcsp-tier-card-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+.tcsp-tier-card label { display:block; margin:0 0 10px; font-weight:600; }
+.tcsp-tier-card input[type="text"], .tcsp-tier-card input[type="number"], .tcsp-tier-card textarea { width:100%; box-sizing:border-box; margin-top:5px; }
+.tcsp-tier-card textarea { resize:vertical; min-height:72px; }
+.tcsp-tier-card .description { display:block; margin-top:4px; font-weight:400; }
+.tcsp-tier-card-fields { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+@media (max-width:900px) { .tcsp-tier-card-fields { grid-template-columns:1fr; } }
+
+.tcsp-sponsored-carousel {
+	margin: 0 0 28px;
+	padding: 18px;
+	border: 1px solid #e6e8ec;
+	border-radius: 14px;
+	background: #fff;
+	box-shadow: 0 4px 18px rgba(20,24,40,.05);
+}
+
+.tcsp-sponsored-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 14px;
+}
+
+.tcsp-sponsored-kicker {
+	display: block;
+	margin-bottom: 3px;
+	font-size: 10px;
+	font-weight: 800;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: #7a5b00;
+}
+
+.tcsp-sponsored-header h2 {
+	margin: 0;
+	font-size: 20px;
+	line-height: 1.25;
+}
+
+.tcsp-carousel-controls {
+	display: flex;
+	gap: 6px;
+	flex: 0 0 auto;
+}
+
+.tcsp-carousel-controls button {
+	width: 36px;
+	height: 36px;
+	padding: 0;
+	border: 1px solid #d8dce3;
+	border-radius: 50%;
+	background: #fff;
+	color: #263142;
+	font-size: 24px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.tcsp-carousel-controls button:hover {
+	background: #f5f7fa;
+}
+
+.tcsp-carousel-controls button:disabled {
+	opacity: .35;
+	cursor: default;
+}
+
+.tcsp-sponsored-track {
+	position: relative;
+	display: flex;
+	align-items: stretch;
+	align-items: stretch;
+	gap: 14px;
+	overflow-x: auto;
+	cursor: grab;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: auto;
+	-webkit-overflow-scrolling: touch;
+	scroll-behavior: smooth;
+	padding: 2px 2px 8px;
+	margin: 0 -2px;
+	scrollbar-width: thin;
+}
+
+.tcsp-sponsored-track.is-dragging { cursor: grabbing; }
+.tcsp-sponsored-track::-webkit-scrollbar {
+	height: 7px;
+}
+
+.tcsp-sponsored-card {
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	overflow: hidden;
+	border: 1px solid #e3e7ed;
+	border-radius: 12px;
+	background: #fff;
+	color: inherit;
+	text-decoration: none;
+	flex: 0 0 clamp(210px, 19%, 300px);
+	transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+
+.tcsp-sponsored-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 9px 24px rgba(20,24,40,.10);
+	border-color: #cfd5de;
+}
+
+.tcsp-sponsored-card-media {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: #eef1f5;
+}
+
+.tcsp-sponsored-card-media img,
+.tcsp-sponsored-card-placeholder {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.tcsp-sponsored-card-media img { image-rendering: auto; transform: translateZ(0); backface-visibility: hidden; }
+
+.tcsp-sponsored-card-placeholder {
+	background: linear-gradient(135deg, #eef1f5, #dfe4eb);
+}
+
+.tcsp-sponsored-card-badge {
+	position: absolute;
+	left: 9px;
+	top: 9px;
+	padding: 5px 8px;
+	border-radius: 999px;
+	background: rgba(17,24,39,.92);
+	color: #fff;
+	font-size: 9px;
+	font-weight: 800;
+	letter-spacing: .04em;
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.tcsp-sponsored-card--platinum .tcsp-sponsored-card-badge { background: #7c3aed; }
+.tcsp-sponsored-card--gold .tcsp-sponsored-card-badge { background: #b7791f; }
+.tcsp-sponsored-card--featured .tcsp-sponsored-card-badge { background: #2563eb; }
+
+.tcsp-sponsored-card-body {
+	position: relative;
+	padding: 12px 13px 14px;
+}
+
+.tcsp-sponsored-card-body h3 {
+	margin: 0;
+	font-size: 15px;
+	line-height: 1.35;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.tcsp-sponsored-card-author {
+	margin: 7px 0 0;
+	font-size: 12px;
+	color: #6b7280;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tcsp-sponsored-card-meta {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-top: 9px;
+	font-size: 12px;
+	font-weight: 700;
+	color: #374151;
+}
+
+
+.tcsp-sponsored-wishlist {
+	text-decoration: none !important;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	min-width: 38px;
+	height: 38px;
+	padding: 0 9px;
+	border: 0;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255,255,255,.96);
+	box-shadow: 0 2px 8px rgba(0,0,0,.14);
+	cursor: pointer;
+	z-index: 2;
+}
+.tcsp-sponsored-wishlist:hover { transform: translateY(-1px); }
+.tcsp-sponsored-wishlist.is-active { background: #111827; color: #fff; box-shadow: 0 0 0 2px rgba(17,24,39,.12), 0 3px 10px rgba(0,0,0,.18); }
+.tcsp-sponsored-wishlist.is-saving { transform: scale(.94); }
+.tcsp-sponsored-wishlist.is-error { outline: 2px solid #d63638; }
+.tcsp-sponsored-wishlist:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.tcsp-sponsored-card-details { display:flex; flex-wrap:wrap; gap:8px 14px; margin-top:10px; font-size:12px; color:#596273; }
+.tcsp-sponsored-detail { display:inline-flex; align-items:center; gap:5px; min-width:0; }
+.tcsp-sponsored-card-body h3 a { color:inherit; text-decoration:none; }
+.tcsp-sponsored-card-body h3 a:hover { text-decoration:underline; }
+
+
+/* v3.5.2: keep Tutor's ordering/relevance control visually aligned with the
+ * top of the results column; do not let theme margins recreate the old gap. */
+.tcsp-results-col > .tcsp-result-count { margin: 0 0 4px !important; }
+.tcsp-results-col > .tcsp-normal-results-heading { margin: 0 0 6px !important; }
+.tcsp-results-col .tutor-course-list-header,
+.tcsp-results-col .tutor-course-listing-header,
+.tcsp-results-col .tutor-course-ordering,
+.tcsp-results-col .tutor-course-sort,
+.tcsp-results-col .tutor-course-list-header-wrapper { margin-top: 0 !important; }
+.tcsp-results-col .tcsp-sponsored-carousel { margin-top: 14px; }
+
+.tcsp-normal-results-heading {
+	margin: 0 0 14px;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1.25;
+}
+
+@media (max-width: 900px) {
+	.tcsp-sponsored-track {
+		flex-basis: 45%;
+	}
+}
+
+@media (max-width: 600px) {
+	
+.tcsp-tier-card-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+.tcsp-tier-card label { display:block; margin:0 0 10px; font-weight:600; }
+.tcsp-tier-card input[type="text"], .tcsp-tier-card input[type="number"], .tcsp-tier-card textarea { width:100%; box-sizing:border-box; margin-top:5px; }
+.tcsp-tier-card textarea { resize:vertical; min-height:72px; }
+.tcsp-tier-card .description { display:block; margin-top:4px; font-weight:400; }
+.tcsp-tier-card-fields { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+@media (max-width:900px) { .tcsp-tier-card-fields { grid-template-columns:1fr; } }
+
+.tcsp-sponsored-carousel {
+		padding: 14px;
+		margin-bottom: 22px;
+	}
+	.tcsp-sponsored-header h2 {
+		font-size: 18px;
+	}
+	.tcsp-sponsored-track {
+		flex-basis: 82%;
+		gap: 11px;
+	}
+	.tcsp-carousel-controls button {
+		width: 32px;
+		height: 32px;
+		font-size: 21px;
+	}
+}
+
+
+/* Compact sponsored cards + verification label */
+.tcsp-sponsored-card-author a { color: inherit; text-decoration: none; }
+.tcsp-sponsored-card-author a:hover { text-decoration: underline; }
+.tcsp-sponsored-card-details a { color: inherit; text-decoration: none; }
+.tcsp-sponsored-card-details a:hover { text-decoration: underline; }
+.tcsp-sponsored-card-price { margin-top: 9px; font-size: 14px; line-height: 1.25; display:flex; align-items:baseline; gap:6px; flex-wrap:wrap; }
+.tcsp-sponsored-card-price strong { font-size: 15px; }
+.tcsp-sponsored-card-price del { color:#8a93a1; font-size:12px; }
+.tcsp-discount { font-size:10px; font-weight:800; padding:2px 5px; border-radius:999px; background:#eef7ef; color:#26723b; }
+.tcsp-verified-sticker { display:inline-flex; align-items:center; justify-content:center; margin-left:4px; padding:2px 7px; border-radius:5px; background:#1677ff; color:#fff; font-size:10px; font-weight:700; line-height:1.2; white-space:nowrap; vertical-align:middle; max-width:100%; box-sizing:border-box; }
+@media (min-width: 1100px) { .tcsp-sponsored-card { flex-basis: clamp(210px, 19%, 290px); } }
+
+/* Two-row compact search/filter layout */
+@media (max-width: 600px) { .tcsp-filter-bar { display:flex; flex-direction:column; gap:8px; } .tcsp-search-wrap,.tcsp-search-input,.tcsp-filter-row-top,
+.tcsp-filter-row-bottom {
+	display: flex;
+	align-items: stretch;
+	gap: 7px;
+	min-width: 0;
+}
+
+.tcsp-filter-row-top > *,
+.tcsp-filter-row-bottom > * {
+	min-height: 40px;
+}
+
+.tcsp-filter-controls { width:100%; max-width:none; } .tcsp-filter-row-top,
+.tcsp-filter-row-bottom {
+	display: flex;
+	align-items: stretch;
+	gap: 7px;
+	min-width: 0;
+}
+
+.tcsp-filter-row-top > *,
+.tcsp-filter-row-bottom > * {
+	min-height: 40px;
+}
+
+.tcsp-filter-controls { flex-wrap:wrap; overflow:visible; } .tcsp-filter-bar > .tcsp-filter-controls > .tcsp-sort { position:static; } }
+
+/* v3.3.6: explicit two-row ordering: search/sort/category/tag/rating first; profile/location/price/level second. */
+.tcsp-filter-bar {
+	grid-template-columns: 1fr;
+	grid-template-rows: auto auto;
+	gap: 7px;
+	padding: 10px 12px;
+}
+.tcsp-filter-row {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	min-width: 0;
+	width: 100%;
+}
+.tcsp-filter-row-top { flex-wrap: nowrap; }
+.tcsp-filter-row-bottom { flex-wrap: wrap; }
+.tcsp-filter-row-top .tcsp-search-wrap {
+	flex: 0 1 240px;
+	max-width: 240px;
+}
+.tcsp-filter-row-top .tcsp-search-input {
+	max-width: 240px;
+}
+.tcsp-filter-row-top .tcsp-sort { flex: 0 0 auto; }
+.tcsp-filter-row-top .tcsp-multiselect,
+.tcsp-filter-row-bottom .tcsp-multiselect,
+.tcsp-filter-row .tcsp-select { flex: 0 0 auto; }
+.tcsp-filter-row-bottom .tcsp-apply-btn,
+.tcsp-filter-row-bottom .tcsp-reset-btn { flex: 0 0 auto; }
+
+/* Compact verified sticker for regular Tutor course cards. */
+.tcsp-verified-sticker {
+	display: inline-flex;
+	width: max-content;
+	max-width: max-content;
+	min-width: 0;
+	padding: 1px 5px;
+	margin-left: 0 !important;
+	margin-right: auto;
+	border-radius: 4px;
+	font-size: 9px;
+	line-height: 1.15;
+	font-weight: 700;
+	letter-spacing: -0.05px;
+	white-space: nowrap;
+	vertical-align: middle;
+}
+
+@media (min-width: 601px) {
+	.tcsp-filter-bar > .tcsp-filter-row { grid-column: 1; }
+	.tcsp-filter-bar > .tcsp-filter-row-top > .tcsp-search-wrap { position: relative; }
+	.tcsp-filter-bar > .tcsp-filter-row-bottom { padding-top: 0; }
+}
+
+@media (max-width: 900px) and (min-width: 601px) {
+	.tcsp-filter-row-top { flex-wrap: wrap; }
+	.tcsp-filter-row-top .tcsp-search-wrap { flex-basis: 210px; max-width: 210px; }
+	.tcsp-filter-row-top .tcsp-search-input { max-width: 210px; }
+}
+
+@media (max-width: 600px) {
+	.tcsp-filter-bar { display: flex; flex-direction: column; gap: 7px; }
+	.tcsp-filter-row { width: 100%; }
+	.tcsp-filter-row-top,
+	.tcsp-filter-row-bottom { flex-wrap: wrap; }
+	.tcsp-filter-row-top .tcsp-search-wrap,
+	.tcsp-filter-row-top .tcsp-search-input { width: 100%; max-width: none; flex-basis: 100%; }
+}
+
+/* v3.3.7: wider search + dense masonry-like filter packing */
+@media (min-width: 901px) {
+	.tcsp-filter-row {
+		gap: 5px;
+		justify-content: flex-start;
+		align-items: stretch;
+	}
+
+	.tcsp-filter-row-top {
+		display: grid;
+		grid-template-columns: minmax(320px, 1fr) auto auto auto auto;
+		gap: 5px;
+		align-items: stretch;
+	}
+
+	.tcsp-filter-row-top .tcsp-search-wrap,
+	.tcsp-filter-row-top .tcsp-search-input {
+		width: 100%;
+		max-width: none;
+	}
+
+	.tcsp-filter-row-top .tcsp-multiselect,
+	.tcsp-filter-row-top .tcsp-select,
+	.tcsp-filter-row-bottom .tcsp-multiselect,
+	.tcsp-filter-row-bottom .tcsp-select,
+	.tcsp-filter-row-bottom .tcsp-apply-btn,
+	.tcsp-filter-row-bottom .tcsp-reset-btn {
+		margin: 0;
+	}
+
+	.tcsp-filter-row-bottom {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(132px, max-content));
+		justify-content: start;
+		gap: 5px;
+		align-items: stretch;
+	}
+
+	.tcsp-filter-row-bottom > * {
+		min-width: 0;
+		max-width: 100%;
+	}
+
+	.tcsp-filter-row-bottom .tcsp-multiselect {
+		width: max-content;
+		max-width: 100%;
+	}
+}
+
+/* Slightly larger, still compact verification label on regular course cards. */
+.tcsp-verified-sticker {
+		font-size: 10.5px;
+		padding: 2px 6px;
+		border-radius: 4px;
+		line-height: 1.2;
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+	.tcsp-filter-row-top {
+		grid-template-columns: minmax(280px, 1fr) auto auto auto auto;
+	}
+}
+
+
+/* v3.4.0: consistent desktop filter rhythm and content-sized instructor/student controls */
+@media (min-width: 901px) {
+	.tcsp-filter-row-top,
+	.tcsp-filter-row-bottom {
+		column-gap: 8px;
+		row-gap: 8px;
+	}
+	.tcsp-filter-row-top {
+		grid-template-columns: minmax(360px, 1fr) max-content max-content max-content max-content;
+	}
+	.tcsp-filter-row-bottom {
+		grid-template-columns: repeat(auto-fit, max-content);
+		gap: 8px;
+	}
+	.tcsp-filter-row-bottom .tcsp-verified-filter,
+	.tcsp-filter-row-bottom .tcsp-students-filter {
+		width: max-content;
+		min-width: 0;
+	}
+}
+
+.tcsp-verified-filter,
+.tcsp-students-filter {
+	width: max-content;
+	min-width: max-content;
+}
+
+@media (max-width: 900px) {
+	.tcsp-verified-filter,
+	.tcsp-students-filter {
+		min-width: 0;
+		flex: 0 0 auto;
+	}
+}
+
+/* v3.5.3: hard override for the real sidebar layout.
+ * Later responsive/compact rules in this stylesheet were overriding the
+ * earlier sidebar rules, leaving a large vertical hole between search,
+ * Relevance and the remaining filters. In the sidebar every filter row is
+ * one compact vertical stack, with no inherited margins/padding. */
+@media (min-width: 901px) {
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter {
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: stretch !important;
+		gap: 6px !important;
+		margin: 0 !important;
+		padding: 10px !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+	}
+
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter > .tcsp-filter-row,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter > .tcsp-filter-row-top,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter > .tcsp-filter-row-bottom {
+		display: flex !important;
+		flex-direction: column !important;
+		flex-wrap: nowrap !important;
+		align-items: stretch !important;
+		gap: 6px !important;
+		width: 100% !important;
+		min-width: 0 !important;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter > .tcsp-filter-row + .tcsp-filter-row {
+		margin-top: 0 !important;
+	}
+
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-wrap,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-input,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-select,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-multiselect,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-multiselect-toggle,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-apply-btn,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-reset-btn {
+		width: 100% !important;
+		max-width: none !important;
+		min-width: 0 !important;
+		margin: 0 !important;
+		box-sizing: border-box !important;
+	}
+
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-wrap {
+		flex: 0 0 auto !important;
+	}
+
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-input {
+		display: block !important;
+	}
+
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-filter-controls {
+		display: flex !important;
+		flex-direction: column !important;
+		flex-wrap: nowrap !important;
+		align-items: stretch !important;
+		gap: 6px !important;
+		width: 100% !important;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-filter-controls > * {
+		width: 100% !important;
+		max-width: none !important;
+		margin: 0 !important;
+	}
+
+	/* Tutor/theme styles sometimes add a block margin to selects/fields. */
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter select,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter input,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter button,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-multiselect {
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
+	}
+}
+
+
+.tcsp-course-format-subfilter{display:none;min-width:0}.tcsp-course-format-subfilter.is-visible{display:block}.tcsp-filter-row-top .tcsp-course-format-subfilter{min-height:40px}
+
+.tcsp-format-sticker{position:absolute;bottom:10px;right:10px;z-index:20;display:inline-flex;align-items:center;gap:5px;max-width:calc(100% - 20px);padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.96);color:#1f2937;font-size:10px;font-weight:800;line-height:1.1;box-shadow:0 2px 9px rgba(15,23,42,.14);white-space:nowrap;pointer-events:none}.tcsp-format-sticker--carousel{position:absolute;bottom:10px;right:10px;margin:0;box-shadow:0 2px 9px rgba(15,23,42,.14);background:rgba(255,255,255,.96)}.tcsp-format-type,.tcsp-format-delivery{display:inline-flex;align-items:center;gap:4px}.tcsp-format-separator{opacity:.5}.tcsp-format-dot{width:7px;height:7px;border-radius:50%;background:#dc2626;display:inline-block;box-shadow:0 0 0 2px rgba(220,38,38,.12)}.tcsp-format-hybrid-mark{font-size:11px;line-height:1}.tcsp-format-type-icon,.tcsp-format-delivery>span{font-size:12px;line-height:1}
+
+/* Keep the normal-card format sticker anchored to the image wrapper, not the full card. */
+.tutor-course-card .tcsp-format-sticker,
+.tutor-course-thumbnail .tcsp-format-sticker,
+.tutor-course-thumbnail-wrap .tcsp-format-sticker { bottom:10px; right:10px; }
+
+/* Standard Tutor course-card format sticker: anchored to the image wrapper. */
+.tutor-course-thumbnail { position: relative; }
+.tutor-course-thumbnail .tcsp-format-sticker--normal { bottom: 10px; right: 10px; top: auto; left: auto; z-index: 25; }
+
+
+/* ================================================================
+ * Tutor directory only — v4.1.0
+ * Everything below is scoped to .tcsp-tutor-page so course cards and
+ * course sponsored carousel styles remain exactly as in v3.9.1.
+ * ================================================================ */
+
+/* Tutor directory only: keep the WordPress/theme page title out of the tutor search canvas. */
+body.tcsp-tutor-directory .entry-header,
+body.tcsp-tutor-directory .page-header,
+body.tcsp-tutor-directory .elementor-widget-theme-page-title,
+body.tcsp-tutor-directory .elementor-page-title { display:none !important; }
+.tcsp-tutor-page .tcsp-tutor-municipality-hidden { display:none !important; }
+.tcsp-tutor-page{width:100%;}
+.tcsp-tutor-layout{display:block;position:relative;width:100%;}
+.tcsp-tutor-results{width:100%;min-width:0;position:relative;z-index:1;}
+.tcsp-tutor-results-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 12px;} .tcsp-tutor-result-count{margin:0 0 0 8px;font-size:14px;font-weight:500;color:#64748b;}
+.tcsp-tutor-filter-toggle{display:inline-flex;align-items:center;gap:7px;border:1px solid #dfe3e8;border-radius:10px;background:#fff;padding:9px 13px;cursor:pointer;font-weight:600;font-size:14px;line-height:1.2;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.tcsp-tutor-sidebar{position:fixed;top:0;bottom:0;left:0;width:min(380px,92vw);height:100dvh;box-sizing:border-box;background:#fff;z-index:100001;overflow-y:auto;overscroll-behavior:contain;padding:0 16px 20px;box-shadow:10px 0 30px rgba(15,23,42,.16);transform:translateX(-105%);transition:transform .24s ease;visibility:hidden;}
+.tcsp-tutor-sidebar.is-open{transform:translateX(0);visibility:visible;}
+.tcsp-tutor-drawer-head{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 0 12px;margin-bottom:10px;background:#fff;z-index:2;border-bottom:1px solid #edf0f3;font-size:16px;}
+.tcsp-tutor-drawer-close{width:36px;height:36px;border:0;border-radius:8px;background:#f3f4f6;cursor:pointer;font-size:24px;line-height:1;}
+.tcsp-tutor-drawer-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.42);z-index:100000;}
+.tcsp-tutor-drawer-backdrop:not([hidden]){display:block;}
+html.tcsp-tutor-drawer-open,body.tcsp-tutor-drawer-open{overflow:hidden;}
+.tcsp-tutor-searchbar{display:flex;flex-direction:column;align-items:stretch;gap:6px;margin:0;padding:0;border:0;background:transparent;box-shadow:none;position:relative;z-index:50;overflow:visible;}
+.tcsp-tutor-searchbar .tcsp-searchbox{width:100%;min-width:0;max-width:none;box-sizing:border-box;flex:0 0 auto;}
+.tcsp-tutor-searchbar .tcsp-searchbox input{display:block;width:100%;box-sizing:border-box;min-height:44px;}
+.tcsp-tutor-searchbar .tcsp-select,.tcsp-tutor-searchbar .tcsp-apply-btn,.tcsp-tutor-searchbar .tcsp-reset-btn{width:100%;min-width:0;max-width:none;box-sizing:border-box;margin:0;}
+.tcsp-tutor-filter-groups{display:flex;flex-direction:column;align-items:stretch;gap:6px;width:100%;margin:0;padding:0;position:relative;z-index:60;overflow:visible;}
+.tcsp-tutor-choice{position:relative;z-index:61;width:100%;min-width:0;}
+.tcsp-tutor-choice.is-open{z-index:999999;}
+.tcsp-tutor-choice .tcsp-multiselect-toggle{width:100%;box-sizing:border-box;justify-content:space-between;}
+.tcsp-tutor-choice .tcsp-tutor-multi-panel{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:1000000;display:none;width:100%;box-sizing:border-box;max-height:300px;overflow-y:auto;overflow-x:hidden;background:#fff !important;color:#1f2937 !important;opacity:1 !important;border:1px solid #e3e6ea;box-shadow:0 12px 32px rgba(20,24,40,.14);isolation:isolate;}
+.tcsp-tutor-choice .tcsp-tutor-multi-panel[style*="display: block"]{display:block;background:#fff !important;color:#1f2937 !important;}
+.tcsp-tutor-choice .tcsp-multiselect-option{display:flex;align-items:center;gap:7px;padding:6px 8px;cursor:pointer;color:#1f2937 !important;background:#fff !important;}
+.tcsp-tutor-choice .tcsp-multiselect-option:hover{background:#f2f5ff !important;}
+.tcsp-tutor-choice .tcsp-multiselect-option input{flex:0 0 auto;}
+.tcsp-tutor-choice .tcsp-multiselect-option span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.tcsp-tutor-municipality-disabled .tcsp-multiselect-toggle{opacity:.7;}
+.tcsp-tutor-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:start;}
+.tcsp-tutor-card{position:relative;display:flex;flex-direction:column;align-self:start;height:auto;min-height:0;box-sizing:border-box;overflow:hidden;gap:0;padding:12px;border:1px solid #e7e7e7;border-radius:14px;background:#fff;box-shadow:0 3px 14px rgba(0,0,0,.04);min-width:0;}
+.tcsp-tutor-card--sponsored{border-color:#ead7a7;padding-top:48px;}
+.tcsp-tutor-card-top{display:flex;gap:10px;align-items:center;min-width:0;}
+.tcsp-tutor-card-avatar{flex:0 0 56px;width:56px;height:56px;border-radius:50%;overflow:hidden;background:#f3f4f6;display:flex;align-items:center;justify-content:center;text-decoration:none;}
+.tcsp-tutor-card-avatar img{width:100%;height:100%;object-fit:cover;}
+.tcsp-tutor-avatar-placeholder{font-size:24px;font-weight:700;color:#6b7280;}
+.tcsp-tutor-card-heading{min-width:0;flex:1;}
+.tcsp-tutor-card h3{margin:0 0 3px;font-size:17px;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.tcsp-tutor-card h3 a{color:inherit;text-decoration:none;}
+.tcsp-tutor-rating{display:flex;gap:6px;align-items:center;margin:0;font-size:13px;}
+.tcsp-tutor-rating strong{color:#b7791f;}
+.tcsp-tutor-rating span{color:#667085;}
+.tcsp-tutor-line{display:flex;gap:6px;align-items:flex-start;margin:5px 0;font-size:12px;line-height:1.35;color:#5c6573;min-width:0;}
+.tcsp-tutor-line>span:last-child{min-width:0;overflow:hidden;text-overflow:ellipsis;}
+.tcsp-tutor-bio-wrap{margin:7px 0 5px;}
+.tcsp-tutor-bio{position:relative;margin:0;font-size:12.5px;line-height:1.4;color:#596579;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;max-height:4.2em;min-height:0;}
+.tcsp-tutor-bio .tcsp-tutor-show-more{position:absolute;right:0;bottom:0;margin:0;padding:0 0 0 7px;background:linear-gradient(to right,rgba(255,255,255,0),#fff 28%,#fff 100%);font-size:11.5px;font-weight:700;line-height:1.4;text-decoration:none;white-space:nowrap;}
+.tcsp-tutor-bio .tcsp-tutor-show-more:focus-visible{outline:2px solid currentColor;outline-offset:1px;}
+.tcsp-tutor-job{margin:5px 0;}
+.tcsp-tutor-job strong,.tcsp-tutor-education strong,.tcsp-tutor-experience strong{font-weight:700;}
+.tcsp-tutor-education{margin:6px 0 5px;padding-top:6px;border-top:1px solid #eee;min-width:0;}
+.tcsp-tutor-section-label{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:#7a8492;margin-bottom:3px;font-weight:700;}
+.tcsp-tutor-education-row{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;row-gap:1px;margin-bottom:4px;font-size:11.5px;line-height:1.25;min-width:0;}
+.tcsp-tutor-education-row strong{grid-column:1 / -1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tcsp-tutor-education-row span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#5f6b7a;}
+.tcsp-tutor-education-row time{justify-self:end;white-space:nowrap;color:#7a8492;}
+.tcsp-tutor-more{font-size:10.5px;color:#7a8492;}
+.tcsp-tutor-categories{display:flex;align-items:center;flex-wrap:wrap;gap:4px 5px;margin:5px 0;font-size:10.5px;line-height:1.25;}
+.tcsp-tutor-category-label{font-weight:700;color:#596579;flex:0 0 100%;}
+.tcsp-tutor-categories a{padding:2px 6px;border-radius:999px;background:#f3f6f9;text-decoration:none;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis;}
+.tcsp-tutor-category-more{color:#667085;font-weight:600;}
+.tcsp-tutor-experience{margin:5px 0;}
+.tcsp-tutor-tags{display:flex;flex-wrap:wrap;gap:5px;margin:5px 0;max-height:27px;overflow:hidden;}
+.tcsp-tutor-tags span{font-size:10.5px;padding:3px 7px;background:#f4f6f8;border-radius:999px;white-space:nowrap;}
+.tcsp-tutor-stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;padding-top:6px;border-top:1px solid #eee;font-size:11px;color:#667085;}
+.tcsp-tutor-sponsored-carousel{margin:12px 0 20px;}
+.tcsp-tutor-sponsored-carousel .tcsp-sponsored-track{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(280px,32%);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 10px;}
+.tcsp-tutor-sponsored-carousel .tcsp-tutor-card{scroll-snap-align:start;align-self:start;height:auto;}
+.tcsp-tutor-sponsored-badge{position:absolute;top:9px;left:12px;right:12px;z-index:3;display:block;box-sizing:border-box;padding:5px 9px;border-radius:7px;border:1px solid transparent;font-size:11px;font-weight:800;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;}
+.tcsp-tutor-card--platinum .tcsp-tutor-sponsored-badge{background:#7c3aed;color:#fff;border-color:#6d28d9;}
+.tcsp-tutor-card--gold .tcsp-tutor-sponsored-badge{background:#b7791f;color:#fff;border-color:#956514;}
+.tcsp-tutor-card--featured .tcsp-tutor-sponsored-badge{background:#2563eb;color:#fff;border-color:#1d4ed8;}
+.tcsp-tutor-verified-sticker{display:inline-flex;align-items:center;gap:3px;margin-left:6px;padding:3px 6px;border-radius:999px;background:#eaf5ff;color:#1671c5;border:1px solid #cbe5fb;font-size:10px;line-height:1;vertical-align:middle;white-space:nowrap;}
+.tcsp-tutor-verified-sticker span{font-weight:700;}
+.tcsp-tutor-card .tcsp-verified-sticker{display:inline-flex;align-items:center;gap:3px;margin-left:6px;padding:3px 6px;border-radius:999px;background:#eaf5ff;color:#1671c5;border:1px solid #cbe5fb;font-size:10px;line-height:1;vertical-align:middle;white-space:nowrap;}
+.tcsp-tutor-card .tcsp-verified-sticker span{font-weight:700;}
+.tcsp-tutor-pagination{margin-top:22px;}
+@media (max-width:1024px){.tcsp-tutor-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.tcsp-tutor-sponsored-carousel .tcsp-sponsored-track{grid-auto-columns:minmax(280px,47%);}}
+@media (max-width:640px){.tcsp-tutor-grid{grid-template-columns:1fr;gap:14px;}.tcsp-tutor-card{padding:11px;}.tcsp-tutor-card--sponsored{padding-top:46px;}.tcsp-tutor-filter-toggle{width:100%;justify-content:center;}.tcsp-tutor-sidebar{width:min(360px,94vw);padding-left:14px;padding-right:14px;}.tcsp-tutor-sponsored-carousel .tcsp-sponsored-track{grid-auto-columns:88%;}}
+
+
+/* 4.2.25 — helper copy fills the old search-to-filter void without adding noise. */
+.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-sidebar-description{display:block!important;margin:0 0 2px!important;padding:0!important;color:#6b7890;font-size:12px;line-height:1.45;font-weight:400}
+
+
+/* 4.2.26 — stable compact sidebar search group.
+ * Keep the helper copy attached to the search input and prevent inherited
+ * row-child min-heights/margins from creating a blank block before filters. */
+@media (min-width: 901px) {
+    .tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter > .tcsp-filter-row-top {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        gap: 6px !important;
+        min-height: 0 !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-group {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 3px !important;
+        width: 100% !important;
+        min-height: 0 !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-sidebar-description {
+        display: block !important;
+        min-height: 0 !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        line-height: 1.4 !important;
+    }
+    .tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter > .tcsp-filter-row-top > * {
+        min-height: 0 !important;
+    }
+    .tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-wrap,
+    .tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-input {
+        flex: 0 0 auto !important;
+        height: auto !important;
+    }
+    .tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-input {
+        min-height: 42px !important;
+    }
+}
+
+
+.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-group {
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:3px !important;
+    width:100% !important;
+    min-height:0 !important;
+    height:auto !important;
+    margin:0 !important;
+    padding:0 !important;
+}
+.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-sidebar-description {
+    display:block !important;
+    min-height:0 !important;
+    height:auto !important;
+    margin:0 !important;
+    padding:0 !important;
+    line-height:1.4 !important;
+}
+.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-wrap {
+    min-height:0 !important;
+    height:auto !important;
+    margin:0 !important;
+    padding:0 !important;
+}
+
+
+/* 4.2.27 — eliminate inherited vertical margins/heights in the archive sidebar. */
+@media (min-width: 901px) {
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter {
+		justify-content: flex-start !important;
+		row-gap: 6px !important;
+	}
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter > .tcsp-filter-row-top,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter > .tcsp-filter-row-bottom {
+		flex: 0 0 auto !important;
+		justify-content: flex-start !important;
+		align-content: flex-start !important;
+		row-gap: 6px !important;
+		column-gap: 0 !important;
+		min-height: 0 !important;
+		height: auto !important;
+	}
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter > .tcsp-filter-row-top > *,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter > .tcsp-filter-row-bottom > * {
+		flex: 0 0 auto !important;
+		min-height: 0 !important;
+		height: auto !important;
+		margin-block: 0 !important;
+		align-self: stretch !important;
+	}
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-course-format-subfilter {
+		min-height: 0 !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-group,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-search-wrap,
+	.tcsp-sidebar .tcsp-filter-bar.tcsp-sidebar-filter .tcsp-sidebar-description {
+		flex: 0 0 auto !important;
+		min-height: 0 !important;
+		height: auto !important;
+		margin-block: 0 !important;
+	}
+}
+
+/* ==========================================================================
+   Sponsored look — 4.2.29 refresh (matches the ad badge and sponsorship pages)
+   ========================================================================== */
+.tcsp-sponsored-sticker,
+.tcsp-sponsored-card-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 5px 10px 5px 8px;
+	border: 1px solid rgba(255, 255, 255, .22);
+	border-radius: 999px;
+	background: rgba(15, 23, 42, .62);
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+	color: #fff;
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .07em;
+	line-height: 1;
+	text-transform: uppercase;
+	box-shadow: 0 4px 14px rgba(15, 23, 42, .25);
+}
+.tcsp-sponsored-sticker::before,
+.tcsp-sponsored-card-badge::before {
+	content: "";
+	flex: none;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: var(--tcsp-tier, #fbbf24);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--tcsp-tier, #fbbf24) 30%, transparent);
+}
+.tcsp-sponsored-sticker--platinum, .tcsp-sponsored-card--platinum .tcsp-sponsored-card-badge { --tcsp-tier: #a78bfa; background: rgba(76, 29, 149, .78); }
+.tcsp-sponsored-sticker--gold, .tcsp-sponsored-card--gold .tcsp-sponsored-card-badge { --tcsp-tier: #fbbf24; background: rgba(120, 77, 8, .8); }
+.tcsp-sponsored-sticker--featured, .tcsp-sponsored-card--featured .tcsp-sponsored-card-badge { --tcsp-tier: #60a5fa; background: rgba(30, 64, 175, .8); }
+
+/* Tutor cards: same frosted pill instead of a full-width bar */
+.tcsp-tutor-sponsored-badge {
+	left: 12px;
+	right: auto;
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 5px 11px 5px 9px;
+	border: 1px solid rgba(255, 255, 255, .22);
+	border-radius: 999px;
+	background: rgba(15, 23, 42, .62);
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+	box-shadow: 0 4px 14px rgba(15, 23, 42, .25);
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .07em;
+	text-transform: uppercase;
+}
+.tcsp-tutor-card--platinum .tcsp-tutor-sponsored-badge { background: rgba(76, 29, 149, .78); border-color: rgba(255, 255, 255, .22); }
+.tcsp-tutor-card--gold .tcsp-tutor-sponsored-badge { background: rgba(120, 77, 8, .8); border-color: rgba(255, 255, 255, .22); }
+.tcsp-tutor-card--featured .tcsp-tutor-sponsored-badge { background: rgba(30, 64, 175, .8); border-color: rgba(255, 255, 255, .22); }
+
+/* Carousel container and cards */
+.tcsp-sponsored-carousel {
+	padding: 20px;
+	border: 1px solid #e7e9f3;
+	border-radius: 22px;
+	background: linear-gradient(180deg, #fbfbff 0%, #fff 60%);
+	box-shadow: 0 1px 2px rgba(15, 23, 42, .04), 0 18px 40px -26px rgba(15, 23, 42, .35);
+}
+.tcsp-sponsored-kicker {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 3px 10px;
+	border-radius: 999px;
+	background: #fef3c7;
+	color: #92400e;
+	letter-spacing: .08em;
+}
+.tcsp-sponsored-kicker::before { content: "★"; font-size: 10px; }
+.tcsp-sponsored-header h2 { font-size: 22px; letter-spacing: -.01em; }
+.tcsp-sponsored-card {
+	border: 1px solid #e7e9f3;
+	border-radius: 18px;
+	box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+	transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.tcsp-sponsored-card:hover {
+	transform: translateY(-3px);
+	border-color: #d4d8ee;
+	box-shadow: 0 18px 36px -18px rgba(15, 23, 42, .4);
+}
+.tcsp-sponsored-card--platinum { border-block-start: 3px solid #8b5cf6; }
+.tcsp-sponsored-card--gold { border-block-start: 3px solid #d99a1e; }
+.tcsp-sponsored-card--featured { border-block-start: 3px solid #3b82f6; }
+.tcsp-sponsored-card-media { border-radius: 0; }
+.tcsp-sponsored-card-media img { transition: transform .4s ease; }
+.tcsp-sponsored-card:hover .tcsp-sponsored-card-media img { transform: scale(1.04) translateZ(0); }
+.tcsp-sponsored-card-body h3 { font-size: 15px; letter-spacing: -.005em; }
+
+@media (prefers-reduced-motion: reduce) {
+	.tcsp-sponsored-card, .tcsp-sponsored-card-media img { transition: none; }
+	.tcsp-sponsored-card:hover, .tcsp-sponsored-card:hover .tcsp-sponsored-card-media img { transform: none; }
+}

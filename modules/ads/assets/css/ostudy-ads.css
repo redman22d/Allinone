@@ -1,0 +1,77 @@
+/* OStudy Ads 1.6 — modern ad units (banner, sidebar, popup, custom HTML) */
+.ostudy-ads-staging{display:none!important}
+
+.ostudy-ad{--ostudy-radius:16px;--ostudy-shadow:0 1px 2px rgba(15,23,42,.06),0 10px 28px -12px rgba(15,23,42,.28);
+  box-sizing:border-box;max-width:100%;position:relative;z-index:10;margin:20px auto;text-align:center;contain:layout style;
+  border-radius:var(--ostudy-radius);box-shadow:var(--ostudy-shadow);background:#fff;
+  transition:transform .25s ease,box-shadow .25s ease}
+.ostudy-ad:not(.is-mounted){display:none!important}
+.ostudy-ad img{max-width:100%;display:block;margin:0 auto;box-sizing:border-box;border-radius:inherit;object-fit:var(--ostudy-fit,cover);object-position:var(--ostudy-pos,50% 50%)}
+.ostudy-ad picture{display:block;max-width:100%}
+.ostudy-ad a{display:block;color:inherit;text-decoration:none}
+@media(hover:hover){
+  .ostudy-ad:not(.ostudy-ad-popup):hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(15,23,42,.08),0 18px 40px -14px rgba(15,23,42,.38)}
+}
+
+.ostudy-ad--banner,.ostudy-ad--sidebar,.ostudy-ad--html{overflow:hidden}
+.ostudy-ad--banner{width:min(1200px,100%)}
+.ostudy-ad--zone-home_top,.ostudy-ad--zone-course_search_top,.ostudy-ad--zone-tutor_search_top,.ostudy-ad--zone-instructor_profile_top,.ostudy-ad--zone-course_page_top{width:min(1200px,100%);overflow:hidden;clear:both}
+.ostudy-ad--sidebar{width:300px;max-width:100%}
+.ostudy-ad--zone-dashboard_sidebar,.ostudy-ad--zone-focus_mode_side{width:300px;max-width:100%;margin:16px 0}
+.ostudy-ad--zone-dashboard_sidebar{position:relative;inset:auto}
+.ostudy-ad--zone-focus_mode_side{position:relative;inset:auto;background:#fff}
+.ostudy-ad--zone-focus_mode_top{width:min(970px,100%);margin:16px auto}
+.ostudy-ad--zone-focus_mode_top img{max-height:160px}
+
+/* "Ad" transparency badge — frosted pill, purely decorative */
+.ostudy-ad__badge{position:absolute;inset-block-start:10px;inset-inline-start:10px;z-index:6;display:inline-flex;align-items:center;gap:5px;padding:3px 10px 3px 8px;
+  background:rgba(15,23,42,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:999px;
+  font:600 10.5px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Arabic",sans-serif;letter-spacing:.06em;text-transform:uppercase;pointer-events:none;user-select:none}
+.ostudy-ad__badge::before{content:"";width:5px;height:5px;border-radius:50%;background:#fbbf24}
+
+/* "Advertise here" link — revealed on hover/focus so it never competes with the creative */
+.ostudy-ad .ostudy-ad__advertise{position:absolute;inset-block-end:10px;inset-inline-end:10px;z-index:7;display:inline-flex;align-items:center;gap:4px;padding:4px 11px;
+  background:rgba(255,255,255,.92);color:#0f172a;border-radius:999px;box-shadow:0 2px 10px rgba(15,23,42,.2);
+  font:600 11px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Arabic",sans-serif;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s}
+.ostudy-ad:hover .ostudy-ad__advertise,.ostudy-ad:focus-within .ostudy-ad__advertise{opacity:1;transform:none}
+@media(hover:none){.ostudy-ad .ostudy-ad__advertise{display:none}}
+
+/* Popup */
+.ostudy-ad-popup{position:fixed!important;inset:0;display:none!important;align-items:center;justify-content:center;margin:0!important;padding:16px;z-index:99999;
+  background:transparent;box-shadow:none;border-radius:0;transform:none!important;contain:none;overflow:visible}
+.ostudy-ad-popup.is-open{display:flex!important}
+.ostudy-ad-popup__backdrop{position:absolute;inset:0;background:rgba(10,14,30,.58);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:ostudy-fade .3s ease both}
+.ostudy-ad-popup__dialog{position:relative;z-index:2;max-width:min(900px,95vw);max-height:90vh;padding:0;background:#fff;border-radius:22px;overflow:hidden;
+  box-shadow:0 30px 80px -12px rgba(2,6,23,.55),0 0 0 1px rgba(255,255,255,.08);animation:ostudy-pop .38s cubic-bezier(.2,.9,.3,1.15) both}
+.ostudy-ad-popup__dialog img{max-width:100%;max-height:80vh;border-radius:0;object-fit:var(--ostudy-fit,contain);object-position:var(--ostudy-pos,50% 50%)}
+.ostudy-ad-popup__close{position:absolute;inset-block-start:12px;inset-inline-end:12px;z-index:8;display:grid;place-items:center;width:36px;height:36px;padding:0;border:0;border-radius:999px;
+  background:rgba(255,255,255,.92);color:#0f172a;font:400 24px/1 system-ui,sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(2,6,23,.28);transition:transform .15s,background .15s}
+.ostudy-ad-popup__close:hover{transform:scale(1.08);background:#fff}
+.ostudy-ad-popup__close:focus-visible{outline:2px solid #4f46e5;outline-offset:2px}
+.ostudy-ad-popup__close[disabled]{opacity:.8;cursor:not-allowed;pointer-events:none;width:auto;min-width:36px;padding:0 12px;font-size:13px;font-weight:600;background:rgba(15,23,42,.7);color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.ostudy-ad-popup__dialog .ostudy-ad__badge{inset-block-start:14px;inset-inline-start:14px}
+@keyframes ostudy-fade{from{opacity:0}to{opacity:1}}
+@keyframes ostudy-pop{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
+
+@media(min-width:1025px){.ostudy-ad--zone-focus_mode_side{position:sticky;top:100px}}
+@media(max-width:767px){
+  .ostudy-ad{--ostudy-radius:12px;margin:14px auto}
+  .ostudy-ad--zone-dashboard_sidebar,.ostudy-ad--zone-focus_mode_side{width:min(336px,100%);margin:16px auto}
+  .ostudy-ad--zone-focus_mode_side{display:none}
+  .ostudy-ad--zone-focus_mode_top{width:100%}
+  .ostudy-ad-popup__dialog{max-width:96vw;border-radius:18px}
+  .ostudy-ad-popup__dialog img{max-height:75vh}
+}
+
+/* Tutor 4.x public instructor profile: the empty sidebar column hosts the side ad. */
+.tutor-user-public-profile .tutor-user-profile-sidebar .ostudy-ad--zone-instructor_profile_side{width:248px;max-width:100%;margin:0 auto 24px;box-sizing:border-box;float:none;position:relative;inset:auto;clear:none}
+.tutor-user-public-profile .tutor-user-profile-sidebar .ostudy-ad--zone-instructor_profile_side img{width:248px;max-width:100%;height:auto;display:block;object-fit:var(--ostudy-fit,cover);object-position:var(--ostudy-pos,50% 50%)}
+.tutor-user-public-profile .ostudy-ad--profile-top{width:100%;max-width:100%;margin:0 0 32px;clear:both}
+.tutor-user-public-profile .ostudy-ad--profile-top img{width:100%;height:auto;display:block}
+@media(max-width:991px){.tutor-user-public-profile .tutor-user-profile-sidebar .ostudy-ad--zone-instructor_profile_side{display:none!important}}
+.ostudy-ad--zone-instructor_profile_side{box-sizing:border-box}
+.ostudy-ads-tutor-course-top{width:100%;box-sizing:border-box;margin-bottom:24px}
+
+@media(prefers-reduced-motion:reduce){
+  .ostudy-ad,.ostudy-ad-popup__dialog,.ostudy-ad-popup__backdrop,.ostudy-ad .ostudy-ad__advertise{animation:none!important;transition:none!important}
+}

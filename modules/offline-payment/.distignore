@@ -1,0 +1,10 @@
+.github
+.git
+.gitignore
+.distignore
+composer.json
+composer.lock
+phpcs.xml.dist
+vendor
+node_modules
+*.zip

@@ -1,0 +1,2045 @@
+# Copyright (C) 2026 Your Name
+# This file is distributed under the GPL-2.0-or-later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tutor LMS Instructor Offline Payment 1.6.9\n"
+"Report-Msgid-Bugs-To: https://example.com/tutor-learning-suite\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-13T17:08:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: xgettext 0.21\n"
+"X-Domain: tutor-learning-suite\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/class-admin.php:58 includes/class-admin.php:59
+#: includes/class-dashboard.php:191 templates/admin/order-overview.php:49
+#: templates/dashboard/offline-payments.php:64
+msgid "Offline Payments"
+msgstr ""
+
+#: includes/class-admin.php:92 templates/admin/order-overview.php:52
+msgid "Settings"
+msgstr ""
+
+#. translators: %s: instructor name
+#: includes/class-admin.php:122 templates/dashboard/my-offline-payments.php:125
+#, php-format
+msgid "Paid to %s"
+msgstr ""
+
+#. translators: %s: transaction reference given by the student
+#: includes/class-admin.php:134
+#, php-format
+msgid "Ref: %s"
+msgstr ""
+
+#: includes/class-admin.php:145 templates/admin/order-overview.php:201
+msgid "View receipt"
+msgstr ""
+
+#: includes/class-admin.php:150 includes/class-dashboard.php:325
+msgid "Confirm payment"
+msgstr ""
+
+#: includes/class-admin.php:151 templates/admin/order-overview.php:246
+#: templates/dashboard/offline-payments.php:355
+msgid "Reject"
+msgstr ""
+
+#: includes/class-admin.php:169 templates/admin/order-overview.php:226
+msgid ""
+"Confirm that this payment reached the instructor? The student will be "
+"enrolled straight away."
+msgstr ""
+
+#: includes/class-admin.php:170 templates/admin/order-overview.php:240
+msgid ""
+"Reject this payment? The student will be notified and will not be enrolled."
+msgstr ""
+
+#: includes/class-admin.php:196 includes/class-uploads.php:311
+msgid "Missing order."
+msgstr ""
+
+#: includes/class-admin.php:242 includes/class-ajax.php:311
+msgid "Payment rejected. The student has been notified."
+msgstr ""
+
+#: includes/class-admin.php:243 includes/class-ajax.php:284
+msgid "Payment confirmed. The student has been enrolled."
+msgstr ""
+
+#: includes/class-admin.php:256
+msgid "You are not allowed to view this page."
+msgstr ""
+
+#: includes/class-ajax.php:58 includes/class-ajax.php:524
+msgid "Please log in and try again."
+msgstr ""
+
+#: includes/class-ajax.php:111
+msgid "Payment method saved."
+msgstr ""
+
+#: includes/class-ajax.php:128
+msgid "That payment method could not be found."
+msgstr ""
+
+#: includes/class-ajax.php:133
+msgid "Payment method removed."
+msgstr ""
+
+#: includes/class-ajax.php:150 includes/class-ajax.php:493
+msgid "Note saved."
+msgstr ""
+
+#: includes/class-ajax.php:195
+msgid "Contact details saved. Students will see them at checkout."
+msgstr ""
+
+#: includes/class-ajax.php:216
+msgid ""
+"Your Tutor LMS profile has no contact email, phone, WhatsApp, or supported "
+"social profile to import."
+msgstr ""
+
+#: includes/class-ajax.php:257
+msgid "Imported from your Tutor LMS profile."
+msgstr ""
+
+#: includes/class-ajax.php:332
+msgid "This order can no longer accept a receipt."
+msgstr ""
+
+#: includes/class-ajax.php:348
+msgid "Add a transaction reference or attach a receipt before sending."
+msgstr ""
+
+#: includes/class-ajax.php:355
+msgid "Attach a new receipt before resubmitting this rejected payment."
+msgstr ""
+
+#: includes/class-ajax.php:384
+msgid "The student resubmitted payment details after a rejection."
+msgstr ""
+
+#: includes/class-ajax.php:385
+msgid "The student sent additional payment details after checkout."
+msgstr ""
+
+#: includes/class-ajax.php:400
+msgid "Sent. The course author has been notified to check your payment."
+msgstr ""
+
+#: includes/class-ajax.php:424 includes/class-dashboard.php:328
+msgid "Select at least one payment first."
+msgstr ""
+
+#: includes/class-ajax.php:428
+msgid "Add a reason before rejecting."
+msgstr ""
+
+#: includes/class-ajax.php:448
+msgid "None of the selected payments could be updated."
+msgstr ""
+
+#. translators: %d: number of orders confirmed
+#: includes/class-ajax.php:453
+#, php-format
+msgid "%d payment confirmed."
+msgid_plural "%d payments confirmed."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of orders rejected
+#: includes/class-ajax.php:455
+#, php-format
+msgid "%d payment rejected."
+msgid_plural "%d payments rejected."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d: number of orders that could not be updated
+#: includes/class-ajax.php:460
+#, php-format
+msgid "%d could not be updated."
+msgid_plural "%d could not be updated."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-ajax.php:486
+msgid "You cannot manage this order."
+msgstr ""
+
+#: includes/class-ajax.php:510
+msgid "Preference saved."
+msgstr ""
+
+#: includes/class-ajax.php:543
+msgid "Only instructors can manage payment details."
+msgstr ""
+
+#: includes/class-ajax.php:558
+msgid "You are not allowed to upload files."
+msgstr ""
+
+#: includes/class-ajax.php:564
+msgid "The image could not be uploaded."
+msgstr ""
+
+#. translators: %s: maximum file size
+#: includes/class-ajax.php:572
+#, php-format
+msgid "That image is too large. The maximum is %s."
+msgstr ""
+
+#: includes/class-ajax.php:581
+msgid "Please upload an image file."
+msgstr ""
+
+#: includes/class-checkout.php:154
+msgid ""
+"That coupon is a fixed-amount discount and cannot be split between several "
+"instructors. Please check out one instructor at a time to use it."
+msgstr ""
+
+#: includes/class-checkout.php:279
+msgid "Your session expired. Please review your order and submit it again."
+msgstr ""
+
+#: includes/class-checkout.php:286
+msgid "Please log in before placing an order."
+msgstr ""
+
+#: includes/class-checkout.php:293
+msgid "Your cart is empty."
+msgstr ""
+
+#. translators: %s: instructor name
+#: includes/class-checkout.php:332
+#, php-format
+msgid ""
+"%s has not published any payment details yet, so this course cannot be "
+"ordered right now."
+msgstr ""
+
+#. translators: %s: instructor name
+#: includes/class-checkout.php:345
+#, php-format
+msgid "Choose how you paid %s."
+msgstr ""
+
+#. translators: %s: instructor name
+#: includes/class-checkout.php:357
+#, php-format
+msgid "Enter the transaction reference for your payment to %s."
+msgstr ""
+
+#. translators: %s: instructor name
+#: includes/class-checkout.php:378
+#, php-format
+msgid "Attach a receipt for your payment to %s."
+msgstr ""
+
+#: includes/class-checkout.php:387 includes/class-checkout.php:388
+msgid "Offline payment"
+msgstr ""
+
+#: includes/class-checkout.php:423
+msgid "Your order could not be placed. Please try again."
+msgstr ""
+
+#: includes/class-checkout.php:449
+msgid ""
+"Your orders have been submitted. Each instructor will confirm their payment "
+"and you will be enrolled as soon as they do."
+msgstr ""
+
+#: includes/class-checkout.php:450
+#: templates/dashboard/my-offline-payments.php:61
+msgid ""
+"Your order has been submitted. You will be enrolled as soon as your "
+"instructor confirms the payment."
+msgstr ""
+
+#: includes/class-checkout.php:487
+msgid "No items found for purchase."
+msgstr ""
+
+#: includes/class-checkout.php:512 includes/class-checkout.php:516
+msgid "Your order could not be created. Please try again."
+msgstr ""
+
+#: includes/class-checkout.php:708
+msgid "Payment status"
+msgstr ""
+
+#: includes/class-contact.php:169 includes/class-methods.php:355
+msgid "Invalid user."
+msgstr ""
+
+#: includes/class-contact.php:176
+msgid "Enter a valid email address."
+msgstr ""
+
+#: includes/class-contact.php:211
+msgid ""
+"Enter a real phone number, for example 0555 12 34 56 or +213 555 12 34 56."
+msgstr ""
+
+#: includes/class-dashboard.php:112
+msgid ""
+"That export link has expired. Please reload the payments page and try again."
+msgstr ""
+
+#. translators: %d: number of payments awaiting confirmation
+#: includes/class-dashboard.php:188
+#, php-format
+msgid "Offline Payments (%d)"
+msgstr ""
+
+#: includes/class-dashboard.php:198
+#: templates/dashboard/offline-payment-setup.php:36
+msgid "Payment Details"
+msgstr ""
+
+#: includes/class-dashboard.php:222
+#: templates/dashboard/my-offline-payments.php:49
+msgid "My Payments"
+msgstr ""
+
+#. translators: %s: maximum file size, already formatted
+#: includes/class-dashboard.php:294 includes/class-uploads.php:146
+#, php-format
+msgid "That file is too large. The maximum is %s."
+msgstr ""
+
+#. translators: %s: comma separated list of extensions
+#: includes/class-dashboard.php:295 includes/class-uploads.php:161
+#, php-format
+msgid "That file type is not accepted. Allowed types: %s."
+msgstr ""
+
+#: includes/class-dashboard.php:296
+msgid ""
+"Submit your offline payment details? In Algeria, pay the instructor directly "
+"using the selected method (DZD), then wait for their confirmation before "
+"enrolment."
+msgstr ""
+
+#: includes/class-dashboard.php:297
+msgid "Confirm payment submission"
+msgstr ""
+
+#: includes/class-dashboard.php:298
+msgid "Yes, submit"
+msgstr ""
+
+#: includes/class-dashboard.php:299 includes/class-dashboard.php:330
+#: includes/class-dashboard.php:333
+#: templates/dashboard/offline-payments.php:350
+#: templates/dashboard/offline-payments.php:385
+msgid "Cancel"
+msgstr ""
+
+#: includes/class-dashboard.php:300 templates/checkout.php:413
+msgid "Email instructor"
+msgstr ""
+
+#: includes/class-dashboard.php:301
+msgid "Choose how you want to send the payment message."
+msgstr ""
+
+#: includes/class-dashboard.php:302
+msgid "Open email app"
+msgstr ""
+
+#: includes/class-dashboard.php:303
+msgid "Open Gmail"
+msgstr ""
+
+#: includes/class-dashboard.php:304
+msgid "Open Outlook"
+msgstr ""
+
+#: includes/class-dashboard.php:305
+msgid "Copy email"
+msgstr ""
+
+#: includes/class-dashboard.php:306
+msgid "Copy message"
+msgstr ""
+
+#: includes/class-dashboard.php:307
+msgid "Copied"
+msgstr ""
+
+#: includes/class-dashboard.php:322
+msgid "Remove this payment method? Students will no longer see it at checkout."
+msgstr ""
+
+#: includes/class-dashboard.php:323
+msgid ""
+"Confirm that you received this payment? The student will be enrolled "
+"straight away."
+msgstr ""
+
+#: includes/class-dashboard.php:324
+msgid "Remove payment method"
+msgstr ""
+
+#: includes/class-dashboard.php:326
+msgid ""
+"Confirm that you received all of the selected payments? Each student will be "
+"enrolled straight away."
+msgstr ""
+
+#: includes/class-dashboard.php:327
+msgid "Confirm selected payments"
+msgstr ""
+
+#: includes/class-dashboard.php:329
+msgid "Yes, continue"
+msgstr ""
+
+#: includes/class-dashboard.php:331 includes/class-dashboard.php:334
+#: templates/dashboard/offline-payments.php:347
+msgid "Reject payment"
+msgstr ""
+
+#: includes/class-dashboard.php:332
+#: templates/dashboard/offline-payments.php:342
+msgid ""
+"Explain what the student needs to correct. This required message is visible "
+"to the student."
+msgstr ""
+
+#: includes/class-dashboard.php:335
+msgid "Saving…"
+msgstr ""
+
+#: includes/class-dashboard.php:336
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#. translators: %d: order ID
+#: includes/class-emails.php:64
+#, php-format
+msgid "New offline payment to confirm (order #%d)"
+msgstr ""
+
+#. translators: %s: instructor first name or display name
+#. translators: %s: student first name or display name
+#: includes/class-emails.php:71 includes/class-emails.php:166
+#: includes/class-emails.php:236 includes/class-emails.php:313
+#, php-format
+msgid "Hi %s,"
+msgstr ""
+
+#. translators: 1: student name, 2: formatted amount
+#: includes/class-emails.php:77
+#, php-format
+msgid "%1$s says they have paid you %2$s for:"
+msgstr ""
+
+#. translators: %s: payment method title
+#: includes/class-emails.php:92
+#, php-format
+msgid "Payment method: %s"
+msgstr ""
+
+#. translators: %s: transaction reference
+#: includes/class-emails.php:100
+#, php-format
+msgid "Reference: %s"
+msgstr ""
+
+#. translators: %s: student note
+#: includes/class-emails.php:108
+#, php-format
+msgid "Student note: %s"
+msgstr ""
+
+#: includes/class-emails.php:114
+msgid ""
+"The student is not enrolled yet. Check that the money reached you, then "
+"confirm or reject the payment here:"
+msgstr ""
+
+#: includes/class-emails.php:170
+msgid "Your payment has been confirmed and you are now enrolled in:"
+msgstr ""
+
+#. translators: %s: note from the instructor
+#: includes/class-emails.php:181
+#, php-format
+msgid "Note from your instructor: %s"
+msgstr ""
+
+#: includes/class-emails.php:187
+msgid "Start learning from your dashboard:"
+msgstr ""
+
+#. translators: %d: order ID
+#: includes/class-emails.php:195
+#, php-format
+msgid "Your payment is confirmed (order #%d)"
+msgstr ""
+
+#. translators: 1: order ID, 2: instructor name
+#: includes/class-emails.php:242
+#, php-format
+msgid ""
+"Order #%1$d could not be confirmed by %2$s, so you have not been enrolled."
+msgstr ""
+
+#. translators: %s: rejection reason
+#: includes/class-emails.php:252
+#, php-format
+msgid "Reason given: %s"
+msgstr ""
+
+#: includes/class-emails.php:258
+msgid ""
+"If you believe this is a mistake, reply to this email or contact your "
+"instructor. You can review the order here:"
+msgstr ""
+
+#. translators: %d: order ID
+#: includes/class-emails.php:266
+#, php-format
+msgid "Your payment could not be confirmed (order #%d)"
+msgstr ""
+
+#. translators: 1: order ID, 2: instructor name
+#: includes/class-emails.php:319
+#, php-format
+msgid ""
+"This is a reminder that order #%1$d with %2$s is still waiting on your "
+"payment."
+msgstr ""
+
+#. translators: %s: deadline date and time
+#: includes/class-emails.php:333
+#, php-format
+msgid ""
+"If this is not confirmed by %s, the order will be automatically cancelled "
+"and you will need to check out again."
+msgstr ""
+
+#: includes/class-emails.php:339
+msgid ""
+"Already paid? Make sure you have sent your reference or receipt so it can be "
+"confirmed:"
+msgstr ""
+
+#. translators: %d: order ID
+#: includes/class-emails.php:347
+#, php-format
+msgid "Reminder: your payment window is closing (order #%d)"
+msgstr ""
+
+#: includes/class-emails.php:410
+msgid "A student"
+msgstr ""
+
+#: includes/class-methods.php:64
+msgid "BaridiMob / CCP"
+msgstr ""
+
+#: includes/class-methods.php:65
+msgid "Bank transfer"
+msgstr ""
+
+#: includes/class-methods.php:66
+msgid "Yassir Pay"
+msgstr ""
+
+#: includes/class-methods.php:67
+msgid "Phone Cash"
+msgstr ""
+
+#: includes/class-methods.php:68
+msgid "Cash"
+msgstr ""
+
+#: includes/class-methods.php:69
+msgid "Other / legacy instructions"
+msgstr ""
+
+#: includes/class-methods.php:219 includes/class-methods.php:224
+#: includes/class-methods.php:232 includes/class-methods.php:236
+#: templates/dashboard/partials/method-form.php:107
+#: templates/dashboard/partials/method-form.php:118
+msgid "Account holder"
+msgstr ""
+
+#: includes/class-methods.php:220
+#: templates/dashboard/partials/method-form.php:109
+msgid "CCP number"
+msgstr ""
+
+#: includes/class-methods.php:221
+msgid "CCP key"
+msgstr ""
+
+#: includes/class-methods.php:225
+msgid "Bank"
+msgstr ""
+
+#: includes/class-methods.php:226
+#: templates/dashboard/partials/method-form.php:122
+msgid "RIB"
+msgstr ""
+
+#: includes/class-methods.php:227
+#: templates/dashboard/partials/method-form.php:124
+msgid "IBAN"
+msgstr ""
+
+#: includes/class-methods.php:228
+msgid "Branch"
+msgstr ""
+
+#: includes/class-methods.php:231
+#: templates/dashboard/partials/method-form.php:132
+msgid "Yassir Pay number"
+msgstr ""
+
+#: includes/class-methods.php:235
+#: templates/dashboard/partials/method-form.php:141
+msgid "Phone Cash number"
+msgstr ""
+
+#: includes/class-methods.php:239
+msgid "Where to pay"
+msgstr ""
+
+#: includes/class-methods.php:240
+msgid "Ask for"
+msgstr ""
+
+#: includes/class-methods.php:243
+msgid "Payment details"
+msgstr ""
+
+#: includes/class-methods.php:360
+msgid "Give the payment method a name, for example \"Bank transfer\"."
+msgstr ""
+
+#. translators: %d: maximum number of methods
+#: includes/class-methods.php:414
+#, php-format
+msgid "You can publish at most %d payment methods."
+msgstr ""
+
+#: includes/class-methods.php:557
+msgid ""
+"Enter a CCP number or payment instructions. Your phone number is set once "
+"under \"How students can reach you\"."
+msgstr ""
+
+#: includes/class-methods.php:564
+msgid ""
+"Enter the phone number linked to your Yassir Pay account, or payment "
+"instructions."
+msgstr ""
+
+#: includes/class-methods.php:571
+msgid "Enter your Phone Cash number, or payment instructions."
+msgstr ""
+
+#: includes/class-methods.php:578
+msgid "Enter a RIB, IBAN, or bank-transfer instructions."
+msgstr ""
+
+#: includes/class-methods.php:585
+msgid "Enter where the student can pay cash or add payment instructions."
+msgstr ""
+
+#: includes/class-methods.php:592
+msgid "Enter the payment details for this method."
+msgstr ""
+
+#: includes/class-orders.php:93 includes/class-orders.php:98
+msgid "Offline payment deadline expired."
+msgstr ""
+
+#: includes/class-orders.php:97
+msgid "Payment deadline expired. This order is no longer active."
+msgstr ""
+
+#: includes/class-orders.php:386
+msgid "Payment submitted for review."
+msgstr ""
+
+#. translators: %s: payment method title
+#: includes/class-orders.php:400
+#, php-format
+msgid ""
+"Offline payment submitted by the student (%s). Awaiting the course author's "
+"confirmation."
+msgstr ""
+
+#: includes/class-orders.php:401
+msgid "offline payment"
+msgstr ""
+
+#: includes/class-orders.php:575
+msgid "Payment details resubmitted and returned to review."
+msgstr ""
+
+#: includes/class-orders.php:601 includes/class-orders.php:669
+msgid "That order no longer exists."
+msgstr ""
+
+#: includes/class-orders.php:605 includes/class-orders.php:673
+msgid "That order was not placed through the offline checkout."
+msgstr ""
+
+#: includes/class-orders.php:609 includes/class-orders.php:677
+msgid "You are not allowed to act on this order."
+msgstr ""
+
+#: includes/class-orders.php:613
+msgid "That order is already marked as paid."
+msgstr ""
+
+#. translators: %s: display name of the approver
+#: includes/class-orders.php:622
+#, php-format
+msgid "Offline payment confirmed by %s."
+msgstr ""
+
+#: includes/class-orders.php:627 includes/class-orders.php:714
+msgid "The order could not be updated. Please try again."
+msgstr ""
+
+#: includes/class-orders.php:632
+msgid "Payment confirmed and enrolment completed."
+msgstr ""
+
+#: includes/class-orders.php:681
+msgid "That order has already been rejected."
+msgstr ""
+
+#: includes/class-orders.php:686
+msgid "A rejection reason is required and will be shown to the student."
+msgstr ""
+
+#. translators: 1: display name of the reviewer, 2: reason
+#: includes/class-orders.php:692
+#, php-format
+msgid "Offline payment rejected by %1$s. Reason: %2$s"
+msgstr ""
+
+#. translators: %s: display name of the reviewer
+#: includes/class-orders.php:698
+#, php-format
+msgid "Offline payment rejected by %s."
+msgstr ""
+
+#. translators: %s: rejection reason
+#: includes/class-orders.php:726
+#, php-format
+msgid "Payment rejected. Reason: %s"
+msgstr ""
+
+#: includes/class-orders.php:729
+msgid ""
+"Payment rejected. You can correct the details and resubmit it for review."
+msgstr ""
+
+#: includes/class-orders.php:955
+#: templates/dashboard/my-offline-payments.php:144
+#: templates/dashboard/offline-payments.php:222
+msgid "(deleted course)"
+msgstr ""
+
+#: includes/class-orders.php:966 includes/class-orders.php:968
+#: templates/admin/order-overview.php:155
+#: templates/dashboard/offline-payments.php:200
+msgid "Deleted user"
+msgstr ""
+
+#: includes/class-orders.php:1207 includes/class-orders.php:1208
+#: templates/admin/order-overview.php:37
+#: templates/dashboard/offline-payments.php:55
+#: templates/dashboard/offline-payments.php:82
+msgid "Awaiting confirmation"
+msgstr ""
+
+#: includes/class-orders.php:1209 templates/admin/order-overview.php:38
+#: templates/dashboard/offline-payments.php:56
+msgid "Confirmed"
+msgstr ""
+
+#: includes/class-orders.php:1210 templates/admin/order-overview.php:39
+#: templates/dashboard/offline-payments.php:57
+msgid "Rejected"
+msgstr ""
+
+#: includes/class-orders.php:1211 templates/admin/order-overview.php:40
+msgid "Refunded"
+msgstr ""
+
+#: includes/class-orders.php:1212
+msgid "Partially refunded"
+msgstr ""
+
+#: includes/class-orders.php:1251
+msgid "Offline payment to instructor"
+msgstr ""
+
+#: includes/class-orders.php:1327
+msgid "the course author"
+msgstr ""
+
+#: includes/class-requirements.php:35
+msgid ""
+"Tutor LMS is not active. Activate Tutor LMS to use Instructor Offline "
+"Payment."
+msgstr ""
+
+#. translators: 1: required version, 2: installed version
+#: includes/class-requirements.php:43
+#, php-format
+msgid ""
+"Instructor Offline Payment needs Tutor LMS %1$s or newer. You are running "
+"%2$s."
+msgstr ""
+
+#: includes/class-requirements.php:51
+msgid ""
+"The Tutor LMS ecommerce engine could not be found. Instructor Offline "
+"Payment cannot run."
+msgstr ""
+
+#. translators: %s: link to Tutor monetization settings
+#: includes/class-requirements.php:58
+#, php-format
+msgid ""
+"Instructor Offline Payment only works with Tutor LMS native monetisation. "
+"Set %s to \"Native\"."
+msgstr ""
+
+#: includes/class-requirements.php:59
+msgid "Tutor LMS &rarr; Settings &rarr; Monetization"
+msgstr ""
+
+#: includes/class-requirements.php:80
+msgid "Instructor Offline Payment:"
+msgstr ""
+
+#: includes/class-settings.php:161 includes/class-settings.php:229
+msgid "Instructor Offline Payment"
+msgstr ""
+
+#: includes/class-settings.php:162
+msgid "Offline Payment"
+msgstr ""
+
+#: includes/class-settings.php:180
+msgid "You are not allowed to change these settings."
+msgstr ""
+
+#: includes/class-settings.php:232
+msgid "Settings saved."
+msgstr ""
+
+#: includes/class-settings.php:236
+msgid ""
+"Students pay each course author directly using the payment details that "
+"author publishes on their own dashboard. Orders are created as unpaid and "
+"only the course author (or an administrator) can mark them paid, which is "
+"what enrols the student."
+msgstr ""
+
+#: includes/class-settings.php:242
+msgid "Checkout"
+msgstr ""
+
+#: includes/class-settings.php:245
+msgid "Replace default checkout"
+msgstr ""
+
+#: includes/class-settings.php:249
+msgid "Use the per-instructor offline checkout"
+msgstr ""
+
+#: includes/class-settings.php:251
+msgid ""
+"Turn this off to restore the stock Tutor LMS checkout without deactivating "
+"the plugin. Existing offline orders stay manageable."
+msgstr ""
+
+#: includes/class-settings.php:255
+msgid "Online gateways"
+msgstr ""
+
+#: includes/class-settings.php:259
+msgid "Also offer the site's active online gateways"
+msgstr ""
+
+#: includes/class-settings.php:261
+msgid ""
+"When enabled, students may pay online instead. Online payments go to the "
+"site owner's gateway account and use the stock Tutor flow (one combined "
+"order), not the per-instructor split."
+msgstr ""
+
+#: includes/class-settings.php:265
+msgid "Courses without payment details"
+msgstr ""
+
+#: includes/class-settings.php:269
+msgid "Block checkout when an author has published no active payment method"
+msgstr ""
+
+#: includes/class-settings.php:271
+msgid ""
+"Recommended. Otherwise students can submit an order that nobody has told "
+"them how to pay."
+msgstr ""
+
+#: includes/class-settings.php:275
+msgid "Checkout notice"
+msgstr ""
+
+#: includes/class-settings.php:278
+msgid "Shown at the top of the checkout page. Basic HTML allowed."
+msgstr ""
+
+#: includes/class-settings.php:283
+msgid "Proof of payment"
+msgstr ""
+
+#: includes/class-settings.php:286
+msgid "Payment reference"
+msgstr ""
+
+#: includes/class-settings.php:290
+msgid "Ask the student for a transaction reference"
+msgstr ""
+
+#: includes/class-settings.php:295
+msgid "Receipt upload"
+msgstr ""
+
+#: includes/class-settings.php:299
+msgid "Require a receipt file before the order can be submitted"
+msgstr ""
+
+#: includes/class-settings.php:301
+msgid ""
+"The upload field is always available; this only controls whether it is "
+"mandatory."
+msgstr ""
+
+#: includes/class-settings.php:305
+msgid "Maximum file size"
+msgstr ""
+
+#: includes/class-settings.php:308
+msgid "MB"
+msgstr ""
+
+#. translators: %s: server upload limit
+#: includes/class-settings.php:313
+#, php-format
+msgid "Your server currently accepts up to %s per upload."
+msgstr ""
+
+#: includes/class-settings.php:321
+msgid "Allowed file types"
+msgstr ""
+
+#: includes/class-settings.php:324
+msgid ""
+"Comma separated extensions. Receipts are stored outside the media library "
+"and are only served to the student, the course author and administrators."
+msgstr ""
+
+#: includes/class-settings.php:328
+msgid "Receipt link expiration"
+msgstr ""
+
+#: includes/class-settings.php:331
+msgid "minutes"
+msgstr ""
+
+#: includes/class-settings.php:332
+msgid ""
+"Signed receipt links expire after this period. Users must still be logged in "
+"and authorised for the order."
+msgstr ""
+
+#: includes/class-settings.php:337
+msgid "Payment deadline"
+msgstr ""
+
+#: includes/class-settings.php:340
+msgid "Cancel unpaid orders after"
+msgstr ""
+
+#: includes/class-settings.php:343 includes/class-settings.php:359
+msgid "days"
+msgstr ""
+
+#: includes/class-settings.php:344
+msgid ""
+"An order still unpaid after this many days is automatically cancelled. Set "
+"to 0 to disable the deadline."
+msgstr ""
+
+#: includes/class-settings.php:348
+msgid "Send a reminder"
+msgstr ""
+
+#: includes/class-settings.php:351
+msgid "hours before the deadline"
+msgstr ""
+
+#: includes/class-settings.php:352
+msgid ""
+"The student gets one reminder email per order once its deadline falls inside "
+"this window. Set to 0 to disable reminders. Uses the \"Email the student\" "
+"setting below."
+msgstr ""
+
+#: includes/class-settings.php:356
+msgid "Delete old receipts after"
+msgstr ""
+
+#: includes/class-settings.php:360
+msgid ""
+"Receipt files uploaded for orders that were rejected or auto-expired this "
+"long ago are deleted from the server to limit how long financial documents "
+"are kept. Confirmed (paid) orders are never affected. Set to 0 to keep "
+"receipts indefinitely."
+msgstr ""
+
+#: includes/class-settings.php:365
+msgid "Approval and notifications"
+msgstr ""
+
+#: includes/class-settings.php:368
+msgid "Administrator approval"
+msgstr ""
+
+#: includes/class-settings.php:372
+msgid "Administrators may approve or reject any offline order"
+msgstr ""
+
+#: includes/class-settings.php:374
+msgid ""
+"Course authors can always act on their own orders. Uncheck this to make "
+"approval strictly the author's job."
+msgstr ""
+
+#: includes/class-settings.php:378
+msgid "Emails"
+msgstr ""
+
+#: includes/class-settings.php:382
+msgid "Email the course author when a payment is submitted"
+msgstr ""
+
+#: includes/class-settings.php:386
+msgid "Email the student when their payment is approved or rejected"
+msgstr ""
+
+#: includes/class-settings.php:392
+msgid "Earnings ledger"
+msgstr ""
+
+#: includes/class-settings.php:395
+msgid "How to record earnings"
+msgstr ""
+
+#: includes/class-settings.php:399
+msgid "Use the normal Tutor commission split"
+msgstr ""
+
+#: includes/class-settings.php:403
+msgid "Credit the full amount to the course author (0% admin)"
+msgstr ""
+
+#: includes/class-settings.php:406
+msgid ""
+"The author physically holds the money, so the default commission split will "
+"show the site as owing them their share. Choosing the second option keeps "
+"the ledger consistent with reality, but stops recording an admin commission "
+"you would have to collect from the author separately."
+msgstr ""
+
+#: includes/class-settings.php:412
+msgid "Save settings"
+msgstr ""
+
+#: includes/class-uploads.php:129
+msgid "No file was received."
+msgstr ""
+
+#: includes/class-uploads.php:137
+msgid "The file could not be verified as an upload."
+msgstr ""
+
+#: includes/class-uploads.php:170 includes/class-uploads.php:174
+msgid "The file contents do not match its extension."
+msgstr ""
+
+#: includes/class-uploads.php:178 includes/class-uploads.php:185
+msgid ""
+"The receipt folder could not be created. Contact the site administrator."
+msgstr ""
+
+#: includes/class-uploads.php:193
+msgid "The file could not be saved. Please try again."
+msgstr ""
+
+#: includes/class-uploads.php:326
+msgid ""
+"That receipt link has expired or is invalid. Please reload the payments page "
+"and try again."
+msgstr ""
+
+#: includes/class-uploads.php:352
+msgid "You are not allowed to view this receipt."
+msgstr ""
+
+#: includes/class-uploads.php:362
+msgid "No receipt is attached to this order."
+msgstr ""
+
+#: includes/class-uploads.php:367
+msgid "The receipt file is missing from the server."
+msgstr ""
+
+#. translators: %s: server upload limit
+#: includes/class-uploads.php:411
+#, php-format
+msgid "That file exceeds the server upload limit of %s."
+msgstr ""
+
+#: includes/class-uploads.php:415
+msgid "The upload was interrupted. Please try again."
+msgstr ""
+
+#: includes/class-uploads.php:417
+msgid "No file was selected."
+msgstr ""
+
+#: includes/class-uploads.php:420
+msgid "The server could not write the file. Contact the site administrator."
+msgstr ""
+
+#: includes/class-uploads.php:422
+msgid "The file could not be uploaded."
+msgstr ""
+
+#: includes/helpers.php:81
+msgid "Unknown instructor"
+msgstr ""
+
+#: templates/admin/order-overview.php:41
+#: templates/dashboard/offline-payments.php:58
+msgid "All"
+msgstr ""
+
+#: templates/admin/order-overview.php:58
+msgid ""
+"Orders placed through the offline checkout. Each course author normally "
+"confirms their own payments from their dashboard; you can step in here when "
+"they cannot."
+msgstr ""
+
+#: templates/admin/order-overview.php:64
+msgid ""
+"Administrator confirmation is switched off in the settings, so this page is "
+"read-only. Only the course author can settle their own payments."
+msgstr ""
+
+#: templates/admin/order-overview.php:88
+msgid "Search offline orders"
+msgstr ""
+
+#: templates/admin/order-overview.php:91
+#: templates/dashboard/offline-payments.php:130
+msgid "Search"
+msgstr ""
+
+#: templates/admin/order-overview.php:98
+msgid "Order"
+msgstr ""
+
+#: templates/admin/order-overview.php:99
+msgid "Student"
+msgstr ""
+
+#: templates/admin/order-overview.php:100
+msgid "Items"
+msgstr ""
+
+#: templates/admin/order-overview.php:101
+msgid "Paid to"
+msgstr ""
+
+#: templates/admin/order-overview.php:102
+msgid "Amount"
+msgstr ""
+
+#: templates/admin/order-overview.php:103
+msgid "Payment"
+msgstr ""
+
+#: templates/admin/order-overview.php:104
+msgid "Status"
+msgstr ""
+
+#: templates/admin/order-overview.php:111
+msgid "No offline orders match this filter."
+msgstr ""
+
+#: templates/admin/order-overview.php:170
+msgid "(deleted)"
+msgstr ""
+
+#: templates/admin/order-overview.php:183
+msgid "Unknown"
+msgstr ""
+
+#: templates/admin/order-overview.php:232
+msgid "Confirm"
+msgstr ""
+
+#. translators: %s: number of orders
+#: templates/admin/order-overview.php:265
+#, php-format
+msgid "%s item"
+msgid_plural "%s items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/checkout.php:41
+msgid "Place order"
+msgstr ""
+
+#: templates/checkout.php:42
+msgid "Submit payment for confirmation"
+msgstr ""
+
+#: templates/checkout.php:86
+msgid "There is nothing to check out. Your cart is empty."
+msgstr ""
+
+#: templates/checkout.php:89 templates/dashboard/my-offline-payments.php:80
+msgid "Browse courses"
+msgstr ""
+
+#: templates/checkout.php:126
+msgid "Order Details"
+msgstr ""
+
+#. translators: %s: instructor name
+#: templates/checkout.php:137
+#, php-format
+msgid "Sold by %s"
+msgstr ""
+
+#: templates/checkout.php:198
+msgid "Payable to this instructor"
+msgstr ""
+
+#: templates/checkout.php:207
+msgid "Subtotal"
+msgstr ""
+
+#: templates/checkout.php:213
+msgid "Sale discount"
+msgstr ""
+
+#: templates/checkout.php:220
+msgid "Have a coupon?"
+msgstr ""
+
+#: templates/checkout.php:222
+msgid "Click here"
+msgstr ""
+
+#: templates/checkout.php:226
+msgid "Add coupon code"
+msgstr ""
+
+#: templates/checkout.php:228
+msgid "Apply"
+msgstr ""
+
+#: templates/checkout.php:238
+msgid "Remove coupon"
+msgstr ""
+
+#: templates/checkout.php:248
+msgid "Tax"
+msgstr ""
+
+#: templates/checkout.php:256
+msgid "Grand Total"
+msgstr ""
+
+#. translators: %s: tax amount
+#: templates/checkout.php:268
+#, php-format
+msgid "(Incl. Tax %s)"
+msgstr ""
+
+#: templates/checkout.php:287
+msgid ""
+"An account is required, because your instructor needs somewhere to enrol you "
+"once they confirm your payment."
+msgstr ""
+
+#: templates/checkout.php:290
+msgid "Already have an account?"
+msgstr ""
+
+#: templates/checkout.php:292
+msgid "Login"
+msgstr ""
+
+#: templates/checkout.php:298
+msgid "Billing Address"
+msgstr ""
+
+#: templates/checkout.php:311
+msgid "How you paid each instructor"
+msgstr ""
+
+#: templates/checkout.php:312
+msgid "How you paid"
+msgstr ""
+
+#: templates/checkout.php:321
+msgid ""
+"Each instructor collects payment for their own courses, so this cart will be "
+"submitted as one order per instructor. Pay each of them using their details "
+"below, then tell us what you did."
+msgstr ""
+
+#: templates/checkout.php:322
+msgid ""
+"Pay your instructor using the details below, then tell us what you did. You "
+"will be enrolled as soon as they confirm the payment."
+msgstr ""
+
+#. translators: 1: instructor name, 2: course titles, 3: amount, 4: site name
+#: templates/checkout.php:335
+#, php-format
+msgid ""
+"Hello %1$s, I am buying %2$s (%3$s) on %4$s and I am paying you directly."
+msgstr ""
+
+#: templates/checkout.php:350
+#, php-format
+msgid "Payment for %s"
+msgstr ""
+
+#: templates/checkout.php:370
+msgid "Chat with instructor"
+msgstr ""
+
+#: templates/checkout.php:370
+msgid "Question about my course payment"
+msgstr ""
+
+#: templates/checkout.php:370
+msgid "Hello, I have a question about paying for my course."
+msgstr ""
+
+#. translators: %s: formatted amount
+#: templates/checkout.php:384
+#, php-format
+msgid "Amount to pay: %s"
+msgstr ""
+
+#: templates/checkout.php:395
+msgid "Contact instructor"
+msgstr ""
+
+#. translators: %s: instructor name
+#: templates/checkout.php:400
+#, php-format
+msgid "Need help? Reach %s before you pay."
+msgstr ""
+
+#: templates/checkout.php:415
+msgid "Email"
+msgstr ""
+
+#: templates/checkout.php:419
+msgid "Call instructor"
+msgstr ""
+
+#: templates/checkout.php:421
+msgid "Phone"
+msgstr ""
+
+#: templates/checkout.php:425
+msgid "Message instructor on WhatsApp"
+msgstr ""
+
+#: templates/checkout.php:427 templates/dashboard/my-offline-payments.php:278
+msgid "WhatsApp"
+msgstr ""
+
+#: templates/checkout.php:444
+msgid "Message / open"
+msgstr ""
+
+#. translators: %s: instructor name
+#: templates/checkout.php:462
+#, php-format
+msgid ""
+"%s has not published any payment details yet. Please contact them, or remove "
+"their course from your cart."
+msgstr ""
+
+#: templates/checkout.php:523
+msgid "Transaction reference"
+msgstr ""
+
+#: templates/checkout.php:530
+msgid "Receipt number, transfer ID, last 4 digits…"
+msgstr ""
+
+#: templates/checkout.php:533
+msgid "Anything that lets your instructor find the payment."
+msgstr ""
+
+#: templates/checkout.php:543 templates/dashboard/my-offline-payments.php:307
+#: templates/dashboard/offline-payments.php:254
+msgid "Receipt"
+msgstr ""
+
+#: templates/checkout.php:544
+msgid "Receipt (optional)"
+msgstr ""
+
+#. translators: 1: allowed file extensions, 2: maximum file size
+#: templates/checkout.php:559
+#, php-format
+msgid ""
+"Allowed: %1$s. Up to %2$s. Only you, this instructor and the site "
+"administrator can open it."
+msgstr ""
+
+#: templates/checkout.php:569
+msgid "Message to the instructor (optional)"
+msgstr ""
+
+#: templates/checkout.php:576
+msgid "Paid on Tuesday from my brother's account…"
+msgstr ""
+
+#: templates/checkout.php:587
+msgid ""
+"Prefer to pay online instead? Online payments are handled by the site and "
+"confirm instantly."
+msgstr ""
+
+#: templates/checkout.php:590
+msgid "Pay online"
+msgstr ""
+
+#: templates/checkout.php:597
+msgid "Nothing to pay. Submit the order and you will be enrolled right away."
+msgstr ""
+
+#: templates/checkout.php:621
+msgid "I agree with the website's"
+msgstr ""
+
+#: templates/checkout.php:622
+msgid "Terms of Use"
+msgstr ""
+
+#: templates/checkout.php:624
+msgid "and"
+msgstr ""
+
+#: templates/checkout.php:625
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/checkout.php:650
+msgid ""
+"One or more instructors in this cart have not published payment details, so "
+"the order cannot be submitted yet."
+msgstr ""
+
+#: templates/checkout.php:660
+msgid ""
+"Submitting does not enrol you immediately. Your instructor confirms the "
+"payment first, and you can follow the status from your dashboard."
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:51
+msgid ""
+"Payments you have sent directly to a course author. Each author confirms "
+"their own payments, and you are enrolled the moment they do."
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:78
+msgid "You have not submitted any offline payments yet."
+msgstr ""
+
+#. translators: %s: order number
+#: templates/dashboard/my-offline-payments.php:116
+#: templates/dashboard/offline-payments.php:194
+#, php-format
+msgid "Order #%s"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:152
+msgid "Payment method"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:157
+msgid "Your reference"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:162
+#: templates/dashboard/offline-payments.php:240
+msgid "Submitted"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:176
+msgid "Your receipt"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:184
+#: templates/dashboard/offline-payments.php:262
+msgid "View"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:188
+#: templates/dashboard/offline-payments.php:266
+msgid "Download"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:193
+#: templates/dashboard/offline-payments.php:271
+msgid "Pay by"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:209
+msgid ""
+"Waiting for the course author to confirm they received your payment. If you "
+"have not sent it yet, the details are below."
+msgstr ""
+
+#. translators: %s: human-readable time remaining, e.g. "5 hours"
+#: templates/dashboard/my-offline-payments.php:216
+#, php-format
+msgid ""
+"This order is automatically cancelled in %s if it is not confirmed by then."
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:222
+msgid ""
+"This order has passed its payment deadline and may be cancelled shortly."
+msgstr ""
+
+#. translators: %s: order number
+#: templates/dashboard/my-offline-payments.php:263
+#, php-format
+msgid "Hello, about my order #%s: I am paying you offline for my enrolment."
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:270
+msgid "Need help paying?"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:289
+msgid "Send or update your payment proof:"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:294
+#: templates/dashboard/offline-payments.php:235
+msgid "Reference"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:321
+msgid "Send"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:330
+msgid "This payment was not accepted."
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:334
+msgid ""
+"No reason was given. Contact the course author if you believe this is a "
+"mistake."
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:340
+msgid "Correct and resubmit payment"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:342
+msgid ""
+"Attach a new receipt to return this payment to review. Your previous receipt "
+"will be replaced."
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:345
+msgid "Updated reference"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:349
+msgid "New receipt"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:351
+msgid "A new receipt is required for resubmission."
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:355
+msgid "Resubmit for review"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:363
+msgid "Payment history"
+msgstr ""
+
+#: templates/dashboard/my-offline-payments.php:380
+msgid "Payment confirmed. You are enrolled — start learning whenever you like."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:38
+msgid ""
+"Students pay you directly. Whatever you publish here is what they see at "
+"checkout, so include everything they need to send you the money and "
+"everything you need to recognise the payment afterwards."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:49
+msgid ""
+"You have no active payment method, so your paid courses cannot currently be "
+"bought. Add one below and switch it on."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:50
+msgid ""
+"You have no active payment method, so students will not be told how to pay "
+"you. Add one below and switch it on."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:57
+msgid "How students can reach you"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:59
+msgid ""
+"Shown at checkout with every payment method, so a student who is halfway "
+"through paying you can ask a question instead of abandoning the order. Set "
+"once here, not per method."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:64
+msgid ""
+"These numbers were imported from your Tutor LMS profile. Save them to "
+"confirm, or change them first."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:70
+msgid "Contact email"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:74
+msgid "Show an email button at checkout"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:79
+msgid "Phone number"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:80
+#: templates/dashboard/partials/method-form.php:133
+#: templates/dashboard/partials/method-form.php:142
+msgid "0555 12 34 56"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:83
+msgid "Show my phone number at checkout"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:88
+msgid "WhatsApp number"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:89
+msgid "Same as above unless you use another number"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:92
+msgid "Show a WhatsApp button at checkout"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:95
+msgid ""
+"Leave empty to reuse your phone number. The button opens WhatsApp with the "
+"course and the amount already written, so you know what the student is "
+"paying for."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:100
+msgid "Social contact options"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:101
+msgid ""
+"Choose which social accounts students can use to message you before paying. "
+"Only social networks with a direct messaging option are shown here."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:120
+#, php-format
+msgid "Show %s at checkout"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:127
+msgid "Save contact details"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:134
+msgid "Import from my Tutor LMS profile"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:141
+msgid "Your payment methods"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:144
+msgid "Nothing published yet."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:158
+msgid "Shown at checkout"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:159
+msgid "Hidden"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:186
+msgid "Edit"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:192
+msgid "Remove"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:215
+msgid "Add a payment method"
+msgstr ""
+
+#. translators: %d: maximum number of payment methods
+#: templates/dashboard/offline-payment-setup.php:222
+#, php-format
+msgid ""
+"You have reached the limit of %d payment methods. Remove one to add another."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:241
+msgid "General note"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:243
+msgid ""
+"Shown once above your payment methods at checkout, whichever method the "
+"student picks. Good for opening hours, a phone number, or how long "
+"confirmation usually takes."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:248
+msgid "Note to students"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:249
+msgid "I confirm payments every evening. WhatsApp me on … if it is urgent."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:252
+#: templates/dashboard/offline-payments.php:312
+msgid "Save note"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:258
+msgid "Notifications"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:260
+msgid ""
+"New payments always appear on your \"Offline Payments\" dashboard whether or "
+"not you get an email."
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:266
+msgid "Do not email me when a student submits a new payment"
+msgstr ""
+
+#: templates/dashboard/offline-payment-setup.php:269
+msgid "Save preference"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:66
+msgid ""
+"Payments students say they made to you. Check your own account first, then "
+"confirm — confirming enrols the student immediately."
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:72
+msgid ""
+"You have not published any payment details yet, so students cannot pay you."
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:74
+msgid "Add them now"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:86
+msgid "Pending amount"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:90
+msgid "Confirmed this month"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:96
+msgid "h"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:100
+msgid "Avg. time to decide (30d)"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:125
+msgid "Order number, student name or email"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:126
+msgid "From date"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:127
+msgid "Submitted from"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:128
+msgid "To date"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:129
+msgid "Submitted to"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:139
+msgid "Export CSV"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:147
+msgid "Nothing here."
+msgstr ""
+
+#. translators: %s: order number
+#: templates/dashboard/offline-payments.php:180
+#, php-format
+msgid "Select order #%s"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:230
+msgid "Paid via"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:287
+msgid "Student says:"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:294
+msgid "Rejection reason:"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:302
+msgid "Edit note to self"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:302
+msgid "+ Note to self (private)"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:309
+msgid "Private note, only visible to you and site administrators"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:311
+msgid "Only visible to you and administrators — the student never sees this."
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:322
+msgid "I received this payment"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:325
+msgid "+ Add a note (optional)"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:328
+msgid "Note to include in the confirmation email"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:329
+msgid "Sent to the student along with their confirmation email."
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:339
+#: templates/dashboard/offline-payments.php:377
+msgid "Reason for rejection"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:366
+msgid "Select payments above to act on several at once."
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:370
+msgid "Approve selected"
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:380
+msgid ""
+"Sent to every selected student — keep it generic or use this for orders that "
+"share the same problem."
+msgstr ""
+
+#: templates/dashboard/offline-payments.php:384
+#: templates/dashboard/offline-payments.php:389
+msgid "Reject selected"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:65
+msgid "Students see this badge automatically. No image to upload."
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:76
+msgid "Name"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:84
+msgid "BaridiMob, Bank transfer, Yassir Pay, Cash in person…"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:87
+msgid "What the student sees as the option label."
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:92
+msgid "Payment type"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:101
+msgid ""
+"The type decides which fields the student sees, and which badge is shown "
+"next to the option."
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:108
+msgid "Name exactly as it appears on the account"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:111
+msgid "CCP key (optional)"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:113
+msgid ""
+"Your BaridiMob phone number is no longer set per method. Students see the "
+"phone and WhatsApp numbers from \"How students can reach you\" on every "
+"method."
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:120
+msgid "Bank name (optional)"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:126
+msgid "Branch (optional)"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:134
+#: templates/dashboard/partials/method-form.php:143
+msgid "Account holder (optional)"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:136
+msgid ""
+"The phone number linked to your Yassir Pay wallet. It can be different from "
+"your contact number."
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:149
+msgid "Cash payment location"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:151
+msgid "Ask for (optional)"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:156
+msgid "Other payment details"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:163
+msgid "Instructions (optional)"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:170
+msgid "Put your full name in the transfer reference, then send me the receipt."
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:172
+msgid ""
+"Anything the fields above do not cover. The typed fields are enough on their "
+"own."
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:179
+msgid "Image (optional)"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:187
+msgid "Remove this image"
+msgstr ""
+
+#. translators: %s: maximum file size
+#: templates/dashboard/partials/method-form.php:202
+#, php-format
+msgid ""
+"A QR code or a photo of your payment details. Up to %s. This image is public."
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:212
+msgid "Show this method at checkout"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:221
+msgid "Save changes"
+msgstr ""
+
+#: templates/dashboard/partials/method-form.php:222
+msgid "Add payment method"
+msgstr ""

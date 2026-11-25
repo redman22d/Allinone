@@ -1,0 +1,275 @@
+<?php
+/**
+ * Instructor dashboard: publish your own payment details.
+ *
+ * Loaded by Tutor as `dashboard/offline-payment-setup`.
+ * Override by copying to
+ * `<theme>/tutor-offline-payment/dashboard/offline-payment-setup.php`.
+ *
+ * @package TutorInstructorOfflinePayment
+ */
+
+use TutorInstructorOfflinePayment\Contact;
+use TutorInstructorOfflinePayment\Methods;
+use TutorInstructorOfflinePayment\Settings;
+
+defined( 'ABSPATH' ) || exit;
+
+$tioc_user_id = get_current_user_id();
+$tioc_methods = Methods::get( $tioc_user_id );
+$tioc_note    = Methods::get_note( $tioc_user_id );
+$tioc_active  = 0;
+
+foreach ( $tioc_methods as $tioc_method ) {
+	$tioc_active += $tioc_method['is_active'] ? 1 : 0;
+}
+
+$tioc_can_add    = count( $tioc_methods ) < Methods::MAX_METHODS;
+$tioc_contact    = Contact::get( $tioc_user_id );
+$tioc_imported   = Contact::imported( $tioc_user_id );
+$tioc_configured = Contact::is_configured( $tioc_user_id );
+$tioc_can_import = ! $tioc_configured && ( $tioc_imported['email'] || $tioc_imported['phone'] || $tioc_imported['whatsapp'] || $tioc_imported['facebook'] || $tioc_imported['instagram'] || $tioc_imported['telegram'] || $tioc_imported['tiktok'] || $tioc_imported['x'] || $tioc_imported['linkedin'] || $tioc_imported['youtube'] || $tioc_imported['website'] || $tioc_imported['github'] );
+?>
+<div class="tioc-dash tioc-dash-setup">
+
+	<?php $tioc_page_tab = \TutorInstructorOfflinePayment\Dashboard::PAGE_SETUP; include __DIR__ . '/_page-tabs.php'; ?>
+
+	<div class="tioc-dash-head">
+		<h3 class="tioc-dash-title"><?php esc_html_e( 'Payment Details', 'tutor-learning-suite' ); ?></h3>
+		<p class="tioc-dash-subtitle">
+			<?php esc_html_e( 'Students pay you directly. Whatever you publish here is what they see at checkout, so include everything they need to send you the money and everything you need to recognise the payment afterwards.', 'tutor-learning-suite' ); ?>
+		</p>
+	</div>
+
+	<div class="tioc-notice-slot" role="status" aria-live="polite"></div>
+
+	<?php if ( ! $tioc_active ) : ?>
+		<div class="tioc-alert tioc-alert-warning">
+			<?php
+			echo esc_html(
+				Settings::get( 'block_unconfigured', 1 )
+					? __( 'You have no active payment method, so your paid courses cannot currently be bought. Add one below and switch it on.', 'tutor-learning-suite' )
+					: __( 'You have no active payment method, so students will not be told how to pay you. Add one below and switch it on.', 'tutor-learning-suite' )
+			);
+			?>
+		</div>
+	<?php endif; ?>
+
+	<section class="tioc-card">
+		<h4 class="tioc-card-title"><?php esc_html_e( 'How students can reach you', 'tutor-learning-suite' ); ?></h4>
+		<p class="tioc-muted">
+			<?php esc_html_e( 'Shown at checkout with every payment method, so a student who is halfway through paying you can ask a question instead of abandoning the order. Set once here, not per method.', 'tutor-learning-suite' ); ?>
+		</p>
+
+		<?php if ( ! $tioc_configured && ( $tioc_contact['phone'] || $tioc_contact['whatsapp'] ) ) : ?>
+			<p class="tioc-help">
+				<?php esc_html_e( 'These numbers were imported from your Tutor LMS profile. Save them to confirm, or change them first.', 'tutor-learning-suite' ); ?>
+			</p>
+		<?php endif; ?>
+
+		<form class="tioc-form" data-tioc-action="tioc_save_contact">
+			<div class="tioc-field">
+				<label class="tioc-label" for="tioc-contact-email"><?php esc_html_e( 'Contact email', 'tutor-learning-suite' ); ?></label>
+				<input class="tioc-input" type="email" id="tioc-contact-email" name="email" value="<?php echo esc_attr( $tioc_contact['email'] ); ?>" placeholder="<?php echo esc_attr( wp_get_current_user()->user_email ); ?>" maxlength="190">
+				<label class="tioc-checkbox">
+					<input type="checkbox" name="show_email" value="1" <?php checked( ! empty( $tioc_contact['show_email'] ) ); ?>>
+					<?php esc_html_e( 'Show an email button at checkout', 'tutor-learning-suite' ); ?>
+				</label>
+			</div>
+
+			<div class="tioc-field">
+				<label class="tioc-label" for="tioc-contact-phone"><?php esc_html_e( 'Phone number', 'tutor-learning-suite' ); ?></label>
+				<input class="tioc-input" type="tel" id="tioc-contact-phone" name="phone" value="<?php echo esc_attr( $tioc_contact['phone'] ); ?>" placeholder="<?php esc_attr_e( '0555 12 34 56', 'tutor-learning-suite' ); ?>" maxlength="32">
+				<label class="tioc-checkbox">
+					<input type="checkbox" name="show_phone" value="1" <?php checked( (bool) $tioc_contact['show_phone'] ); ?>>
+					<?php esc_html_e( 'Show my phone number at checkout', 'tutor-learning-suite' ); ?>
+				</label>
+			</div>
+
+			<div class="tioc-field">
+				<label class="tioc-label" for="tioc-contact-whatsapp"><?php esc_html_e( 'WhatsApp number', 'tutor-learning-suite' ); ?></label>
+				<input class="tioc-input" type="tel" id="tioc-contact-whatsapp" name="whatsapp" value="<?php echo esc_attr( $tioc_contact['whatsapp'] ); ?>" placeholder="<?php esc_attr_e( 'Same as above unless you use another number', 'tutor-learning-suite' ); ?>" maxlength="32">
+				<label class="tioc-checkbox">
+					<input type="checkbox" name="show_whatsapp" value="1" <?php checked( (bool) $tioc_contact['show_whatsapp'] ); ?>>
+					<?php esc_html_e( 'Show a WhatsApp button at checkout', 'tutor-learning-suite' ); ?>
+				</label>
+				<p class="tioc-help">
+					<?php esc_html_e( 'Leave empty to reuse your phone number. The button opens WhatsApp with the course and the amount already written, so you know what the student is paying for.', 'tutor-learning-suite' ); ?>
+				</p>
+			</div>
+
+			<div class="tioc-field tioc-social-settings">
+				<label class="tioc-label"><?php esc_html_e( 'Social contact options', 'tutor-learning-suite' ); ?></label>
+				<p class="tioc-help"><?php esc_html_e( 'Choose which social accounts students can use to message you before paying. Only social networks with a direct messaging option are shown here.', 'tutor-learning-suite' ); ?></p>
+				<div class="tioc-social-grid">
+					<?php
+					$tioc_dm_socials = array(
+						'facebook'  => 'Facebook',
+						'instagram' => 'Instagram',
+						'telegram'  => 'Telegram',
+						'tiktok'    => 'TikTok',
+						'x'         => 'X / Twitter',
+						'linkedin'  => 'LinkedIn',
+					);
+					foreach ( $tioc_dm_socials as $tioc_key => $tioc_label ) :
+						$tioc_show_key = 'show_' . $tioc_key;
+						$tioc_value    = isset( $tioc_contact[ $tioc_key ] ) ? $tioc_contact[ $tioc_key ] : '';
+						$tioc_type     = 'whatsapp' === $tioc_key ? 'tel' : 'url';
+					?>
+						<div class="tioc-social-setting">
+							<label class="tioc-label" for="tioc-contact-<?php echo esc_attr( $tioc_key ); ?>"><?php echo esc_html( $tioc_label ); ?></label>
+							<input class="tioc-input" type="<?php echo esc_attr( $tioc_type ); ?>" id="tioc-contact-<?php echo esc_attr( $tioc_key ); ?>" name="<?php echo esc_attr( $tioc_key ); ?>" value="<?php echo esc_attr( $tioc_value ); ?>" placeholder="<?php echo esc_attr( $tioc_label . ( 'whatsapp' === $tioc_key ? ' number' : ' URL' ) ); ?>">
+							<label class="tioc-checkbox"><input type="checkbox" name="<?php echo esc_attr( $tioc_show_key ); ?>" value="1" <?php checked( ! empty( $tioc_contact[ $tioc_show_key ] ) ); ?>> <?php printf( esc_html__( 'Show %s at checkout', 'tutor-learning-suite' ), esc_html( $tioc_label ) ); ?></label>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+
+			<div class="tioc-form-actions">
+				<button type="submit" class="tioc-btn tioc-btn-primary"><?php esc_html_e( 'Save contact details', 'tutor-learning-suite' ); ?></button>
+			</div>
+		</form>
+
+		<?php if ( $tioc_can_import ) : ?>
+			<form class="tioc-inline-form tioc-mt-8" data-tioc-action="tioc_import_contact">
+				<button type="submit" class="tioc-btn tioc-btn-ghost">
+					<?php esc_html_e( 'Import from my Tutor LMS profile', 'tutor-learning-suite' ); ?>
+				</button>
+			</form>
+		<?php endif; ?>
+	</section>
+
+	<section class="tioc-card">
+		<h4 class="tioc-card-title"><?php esc_html_e( 'Your payment methods', 'tutor-learning-suite' ); ?></h4>
+
+		<?php if ( empty( $tioc_methods ) ) : ?>
+			<p class="tioc-muted"><?php esc_html_e( 'Nothing published yet.', 'tutor-learning-suite' ); ?></p>
+		<?php else : ?>
+			<ul class="tioc-method-list">
+				<?php foreach ( $tioc_methods as $tioc_method ) : ?>
+					<?php $tioc_edit_id = 'tioc-edit-' . $tioc_method['id']; ?>
+					<li class="tioc-method-row">
+						<div class="tioc-method-row-main">
+							<div class="tioc-method-row-title">
+								<?php echo esc_html( $tioc_method['title'] ); ?>
+								<span class="tioc-badge is-type"><?php echo esc_html( Methods::type_label( $tioc_method['profile_type'] ) ); ?></span>
+								<span class="tioc-badge <?php echo esc_attr( $tioc_method['is_active'] ? 'is-paid' : 'is-pending' ); ?>">
+									<?php
+									echo esc_html(
+										$tioc_method['is_active']
+											? __( 'Shown at checkout', 'tutor-learning-suite' )
+											: __( 'Hidden', 'tutor-learning-suite' )
+									);
+									?>
+								</span>
+							</div>
+							<?php $tioc_details = Methods::public_details( $tioc_method ); ?>
+							<?php if ( $tioc_details ) : ?>
+								<ul class="tioc-method-detail-list">
+									<?php foreach ( $tioc_details as $tioc_detail ) : ?>
+										<li>
+											<span class="tioc-method-detail-label"><?php echo esc_html( $tioc_detail['label'] ); ?></span>
+											<span class="tioc-method-detail-value <?php echo $tioc_detail['copy'] ? 'is-code' : ''; ?>"><?php echo esc_html( $tioc_detail['value'] ); ?></span>
+										</li>
+									<?php endforeach; ?>
+								</ul>
+							<?php endif; ?>
+							<div class="tioc-method-row-body">
+								<?php echo wp_kses_post( wpautop( $tioc_method['instructions'] ) ); ?>
+							</div>
+							<?php $tioc_thumb = Methods::image_url( $tioc_method, 'thumbnail' ); ?>
+							<?php if ( $tioc_thumb ) : ?>
+								<img class="tioc-method-row-thumb" src="<?php echo esc_url( $tioc_thumb ); ?>" alt="">
+							<?php endif; ?>
+						</div>
+
+						<div class="tioc-method-row-actions">
+							<button type="button" class="tioc-btn tioc-btn-ghost" data-tioc-toggle="<?php echo esc_attr( $tioc_edit_id ); ?>">
+								<?php esc_html_e( 'Edit', 'tutor-learning-suite' ); ?>
+							</button>
+
+							<form class="tioc-inline-form" data-tioc-action="tioc_delete_method" data-tioc-confirm="delete">
+								<input type="hidden" name="method_id" value="<?php echo esc_attr( $tioc_method['id'] ); ?>">
+								<button type="submit" class="tioc-btn tioc-btn-danger-ghost">
+									<?php esc_html_e( 'Remove', 'tutor-learning-suite' ); ?>
+								</button>
+							</form>
+						</div>
+
+						<div class="tioc-collapse" id="<?php echo esc_attr( $tioc_edit_id ); ?>" hidden>
+							<?php
+							\TutorInstructorOfflinePayment\Templates::render(
+								'dashboard/partials/method-form',
+								array(
+									'method' => $tioc_method,
+									'prefix' => $tioc_method['id'],
+								)
+							);
+							?>
+						</div>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+	</section>
+
+	<section class="tioc-card">
+		<h4 class="tioc-card-title"><?php esc_html_e( 'Add a payment method', 'tutor-learning-suite' ); ?></h4>
+
+		<?php if ( ! $tioc_can_add ) : ?>
+			<p class="tioc-muted">
+				<?php
+				printf(
+					/* translators: %d: maximum number of payment methods */
+					esc_html__( 'You have reached the limit of %d payment methods. Remove one to add another.', 'tutor-learning-suite' ),
+					absint( Methods::MAX_METHODS )
+				);
+				?>
+			</p>
+		<?php else : ?>
+			<?php
+			\TutorInstructorOfflinePayment\Templates::render(
+				'dashboard/partials/method-form',
+				array(
+					'method' => null,
+					'prefix' => 'new',
+				)
+			);
+			?>
+		<?php endif; ?>
+	</section>
+
+	<section class="tioc-card">
+		<h4 class="tioc-card-title"><?php esc_html_e( 'General note', 'tutor-learning-suite' ); ?></h4>
+		<p class="tioc-muted">
+			<?php esc_html_e( 'Shown once above your payment methods at checkout, whichever method the student picks. Good for opening hours, a phone number, or how long confirmation usually takes.', 'tutor-learning-suite' ); ?>
+		</p>
+
+		<form class="tioc-form" data-tioc-action="tioc_save_note">
+			<div class="tioc-field">
+				<label class="tioc-label" for="tioc-note-field"><?php esc_html_e( 'Note to students', 'tutor-learning-suite' ); ?></label>
+				<textarea class="tioc-input" id="tioc-note-field" name="note" rows="4" placeholder="<?php esc_attr_e( 'I confirm payments every evening. WhatsApp me on … if it is urgent.', 'tutor-learning-suite' ); ?>"><?php echo esc_textarea( $tioc_note ); ?></textarea>
+			</div>
+			<div class="tioc-form-actions">
+				<button type="submit" class="tioc-btn tioc-btn-primary"><?php esc_html_e( 'Save note', 'tutor-learning-suite' ); ?></button>
+			</div>
+		</form>
+	</section>
+
+	<section class="tioc-card">
+		<h4 class="tioc-card-title"><?php esc_html_e( 'Notifications', 'tutor-learning-suite' ); ?></h4>
+		<p class="tioc-muted">
+			<?php esc_html_e( 'New payments always appear on your "Offline Payments" dashboard whether or not you get an email.', 'tutor-learning-suite' ); ?>
+		</p>
+
+		<form class="tioc-form" data-tioc-action="tioc_save_email_pref">
+			<label class="tioc-checkbox-row">
+				<input type="checkbox" name="mute_new_payment_email" value="1" <?php checked( (bool) get_user_meta( $tioc_user_id, 'tioc_mute_new_payment_email', true ) ); ?>>
+				<?php esc_html_e( 'Do not email me when a student submits a new payment', 'tutor-learning-suite' ); ?>
+			</label>
+			<div class="tioc-form-actions">
+				<button type="submit" class="tioc-btn tioc-btn-primary"><?php esc_html_e( 'Save preference', 'tutor-learning-suite' ); ?></button>
+			</div>
+		</form>
+	</section>
+</div>

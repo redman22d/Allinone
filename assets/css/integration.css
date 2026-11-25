@@ -1,0 +1,309 @@
+/* UStudy presentation layer. Does not depend on a particular WordPress theme. */
+.tls-lms-profile,.tls-lms-catalog{width:min(1180px,calc(100% - 32px));margin:clamp(24px,4vw,56px) auto;color:var(--tutor-body-color,#20283a)}
+.tls-lms-profile-hero{display:grid;grid-template-columns:120px minmax(0,1fr) auto;align-items:center;gap:24px;padding:clamp(22px,4vw,40px);border:1px solid #e7eaf1;border-radius:22px;background:#fff;box-shadow:0 12px 38px rgba(29,43,76,.07)}
+.tls-lms-profile-avatar img{width:112px;height:112px;border-radius:50%;object-fit:cover}.tls-lms-eyebrow{font-size:12px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;color:#66728a}.tls-lms-profile-main h1{margin:4px 0 8px;font-size:clamp(26px,4vw,38px);line-height:1.15}.tls-lms-location{color:#6b7485}.tls-lms-bio{max-width:760px;line-height:1.7}.tls-verified{display:inline-flex;align-items:center;gap:4px;margin-left:6px;padding:4px 9px;border-radius:99px;background:#e9f8ef;color:#147846;font-size:12px;font-weight:700;vertical-align:middle}.tls-lms-profile-stats{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0;color:#536078;font-size:13px}.tls-lms-contact{display:inline-block;margin-top:4px;color:#465fe0}.tls-lms-button,.tls-lms-link{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:0;border-radius:10px;background:#4f46e5;color:#fff!important;text-decoration:none;font-weight:700;cursor:pointer}.tls-lms-button-muted{background:#eef0f6;color:#30394d!important}.tls-lms-button-danger{background:#fff0f1;color:#a52c36!important}.tls-lms-section{margin:28px 0;padding:clamp(18px,3vw,28px);border:1px solid #e8ebf1;border-radius:18px;background:#fff}.tls-lms-section h2{margin:0 0 18px;font-size:22px}.tls-lms-chip-list{display:flex;flex-wrap:wrap;gap:9px;padding:0;list-style:none}.tls-lms-chip-list li,.tls-lms-course-badges span{padding:7px 11px;border-radius:99px;background:#f1f3f9;color:#4b556a;font-size:13px}.tls-lms-catalog-header{margin-bottom:22px}.tls-lms-catalog-header h1{margin:5px 0;font-size:clamp(28px,4vw,42px)}.tls-lms-catalog-header p{color:#69758a}.tls-lms-filter-panel{margin:20px 0 28px;padding:18px;border:1px solid #e7eaf1;border-radius:16px;background:#fff}.tls-lms-course-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.tls-lms-course-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid #e7eaf1;border-radius:18px;background:#fff;box-shadow:0 8px 26px rgba(29,43,76,.055);transition:transform .18s ease,box-shadow .18s ease}.tls-lms-course-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(29,43,76,.10)}.tls-lms-course-thumb{display:block;aspect-ratio:16/9;background:#eef1f7}.tls-lms-course-thumb img{width:100%;height:100%;object-fit:cover}.tls-lms-course-placeholder{display:grid;width:100%;height:100%;place-items:center;color:#75809a;font-size:20px;font-weight:700}.tls-lms-course-body{display:flex;flex:1;flex-direction:column;padding:17px}.tls-lms-course-badges{display:flex;flex-wrap:wrap;gap:6px}.tls-lms-course-body h2{margin:12px 0 7px;font-size:18px;line-height:1.35}.tls-lms-course-body h2 a{color:inherit;text-decoration:none}.tls-lms-course-excerpt{margin:0 0 12px;color:#68748a;font-size:14px;line-height:1.5}.tls-lms-course-author{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:6px 0 10px}.tls-lms-course-author>a{display:inline-flex;align-items:center;gap:8px;color:#364055;text-decoration:none;font-size:13px;font-weight:650}.tls-lms-course-author img{width:30px;height:30px;border-radius:50%}.tls-lms-course-author .tls-verified{margin:0}.tls-lms-course-categories{margin-bottom:8px;color:#66728a;font-size:12px}.tls-lms-course-meta{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:auto;padding:10px 0;color:#68748a;font-size:12px}.tls-lms-course-body footer{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:13px;border-top:1px solid #edf0f4}.tls-lms-course-body footer strong{font-size:17px;color:#20283a}.tls-lms-link{min-height:36px;padding:7px 11px;font-size:13px}.tls-lms-pagination{margin:26px 0}.tls-lms-empty,.tls-lms-panel{padding:22px;border:1px solid #e7eaf1;border-radius:16px;background:#fff}.tls-lms-panel{max-width:1000px;margin:20px auto;padding:clamp(20px,3vw,32px)}.tls-lms-panel h1{margin-top:0}.tls-lms-panel h2{margin:25px 0 12px}.tls-lms-form{display:grid;gap:14px;max-width:680px}.tls-lms-form label{display:grid;gap:6px;font-weight:650}.tls-lms-form input:not([type=checkbox]),.tls-lms-form select{width:100%;min-height:44px;padding:9px 11px;border:1px solid #dce1eb;border-radius:9px;background:#fff}.tls-lms-check{display:flex!important;align-items:flex-start;gap:9px;font-weight:500!important}.tls-lms-check input{margin-top:4px}.tls-lms-family-list{display:grid;gap:10px}.tls-lms-family-list article{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:14px;border:1px solid #e9ecf2;border-radius:12px}.tls-lms-family-list article>div{display:grid;gap:4px}.tls-lms-family-list article span,.tls-lms-family-list article small,.tls-lms-muted{color:#6c778b;font-size:13px}.tls-lms-success,.tls-lms-warning{margin:12px 0;padding:12px 14px;border-radius:10px;background:#edf8f1;color:#17643c}.tls-lms-warning{background:#fff6e8;color:#83520b}.tls-lms-inline-form{display:inline-flex}.tls-month-calendar{max-width:780px;padding:18px;border:1px solid #e6eaf2;border-radius:18px;background:#fff}.tls-calendar-controls{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}.tls-calendar-controls label{display:grid;gap:5px;min-width:150px;font-weight:650;font-size:13px}.tls-calendar-controls select{min-height:40px;padding:8px;border:1px solid #dce1eb;border-radius:8px;background:#fff}.tls-calendar-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.tls-calendar-heading button{width:36px;height:36px;border:1px solid #e1e5ee;border-radius:9px;background:#fff;font-size:22px;cursor:pointer}.tls-calendar-weekdays,.tls-calendar-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}.tls-calendar-weekdays span{text-align:center;color:#7a8498;font-size:12px;font-weight:700}.tls-calendar-day{min-height:42px;border:1px solid transparent;border-radius:9px;background:#f4f5f9;color:#39445b}.tls-calendar-day.is-outside{visibility:hidden}.tls-calendar-day:disabled{opacity:.38;cursor:not-allowed}.tls-calendar-day.has-availability{border-color:#dce2ff;background:#f0f2ff;color:#3d45a5;font-weight:750;cursor:pointer}.tls-calendar-day.is-today{outline:2px solid #9ba5ef}.tls-calendar-day.is-selected{background:#4f46e5;color:#fff}.tls-calendar-times{margin-top:17px}.tls-calendar-status{min-height:20px;color:#637087;font-size:13px}.tls-calendar-status.is-error{color:#b42332}.tls-calendar-slots{display:flex;flex-wrap:wrap;gap:8px}.tls-calendar-slot{padding:9px 12px;border:1px solid #d7ddf5;border-radius:9px;background:#f7f8ff;color:#303c7b;font-weight:700;cursor:pointer}.tls-calendar-slot.is-selected{background:#4f46e5;border-color:#4f46e5;color:#fff}@media(max-width:900px){.tls-lms-course-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tls-lms-profile-hero{grid-template-columns:96px minmax(0,1fr)}.tls-lms-profile-avatar img{width:90px;height:90px}.tls-lms-profile-cta{grid-column:1/-1}}@media(max-width:580px){.tls-lms-course-grid{grid-template-columns:1fr}.tls-lms-profile-hero{grid-template-columns:1fr;text-align:center}.tls-lms-profile-avatar{margin:auto}.tls-lms-profile-stats{justify-content:center}.tls-lms-family-list article{align-items:flex-start;flex-direction:column}.tls-lms-inline-form{width:100%}.tls-lms-inline-form .tls-lms-button{width:100%}.tls-calendar-controls{display:grid;grid-template-columns:1fr 1fr}.tls-calendar-day{min-height:38px;padding:0}}
+
+
+/* Family progress cards and dashboard forms. */
+.tls-lms-invitation,.tls-lms-family-progress{margin:16px 0;padding:16px 18px;border:1px solid #e6eaf2;border-radius:14px;background:#fbfcff}
+.tls-lms-invitation{border-color:#cbd5ff;background:#f7f8ff}
+.tls-lms-family-progress h3{margin:0 0 10px;font-size:16px}
+.tls-lms-family-progress ul{margin:0;padding-left:20px}
+.tls-lms-family-progress li{margin:7px 0;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.tls-lms-family-progress li span{color:#69758a;font-size:12px}
+.tls-lms-form input[type=date]{max-width:100%;min-height:44px;padding:9px 11px;border:1px solid #dce1eb;border-radius:9px;background:#fff}
+.tls-lms-form button:focus-visible,.tls-lms-button:focus-visible,.tls-calendar-day:focus-visible,.tls-calendar-slot:focus-visible{outline:3px solid rgba(79,70,229,.28);outline-offset:2px}
+@media(max-width:580px){.tls-lms-family-progress li{display:block}.tls-lms-family-progress li span{display:block;margin-top:3px}}
+
+
+/* 1.3.2 — full-width blue tutor profile with details under the name/bio. */
+.tls-lms-profile-hero{display:block;position:relative;overflow:hidden;padding:clamp(22px,3.4vw,42px);border:0;color:#fff;background:linear-gradient(125deg,#1d3477,#4665c9);box-shadow:0 18px 46px rgba(22,43,102,.2)}
+.tls-lms-profile-top{display:grid;grid-template-columns:124px minmax(0,1fr) auto;align-items:center;gap:clamp(16px,2.4vw,30px)}
+.tls-lms-profile-avatar img{width:116px;height:116px;border:4px solid rgba(255,255,255,.95);box-shadow:0 6px 22px rgba(8,18,55,.28)}
+.tls-lms-profile-main{min-width:0}.tls-lms-profile-main h1{margin:4px 0 2px;color:#fff;font-size:clamp(27px,3.8vw,42px);line-height:1.12}.tls-lms-profile-hero .tls-lms-eyebrow{color:rgba(255,255,255,.72)}
+.tls-lms-profile-title{margin:3px 0 10px;color:rgba(255,255,255,.86);font-weight:600}
+.tls-lms-profile-hero .tls-verified{background:#dcfce8;color:#11643a}
+.tls-lms-contact-icons{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 10px}
+.tls-lms-contact-icon{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:1px solid rgba(255,255,255,.3);border-radius:11px;background:rgba(255,255,255,.13);color:#fff!important;text-decoration:none;transition:background .15s ease,transform .15s ease}
+.tls-lms-contact-icon:hover,.tls-lms-contact-icon:focus-visible{background:rgba(255,255,255,.28);color:#fff!important;transform:translateY(-1px)}
+.tls-lms-contact-icon i{font-size:18px;line-height:1}.tls-lms-contact-icon>span:not(.screen-reader-text){font-size:13px;font-weight:800}
+.tls-lms-profile-details{display:flex;flex-wrap:wrap;gap:8px 18px;margin:10px 0;color:rgba(255,255,255,.93);font-size:13px}
+.tls-lms-profile-details>span{display:inline-flex;align-items:flex-start;gap:7px}.tls-lms-profile-details i{margin-top:2px;font-size:15px;opacity:.88}
+.tls-lms-profile-hero .tls-lms-bio{max-width:920px;margin:12px 0 0;color:rgba(255,255,255,.92);line-height:1.7}.tls-lms-profile-hero .tls-lms-bio p:last-child{margin-bottom:0}
+.tls-lms-profile-stats{gap:clamp(16px,3vw,34px);margin:16px 0 0;color:#fff}.tls-lms-profile-stats li{min-width:74px}.tls-lms-profile-stats strong{font-size:21px;color:#fff}.tls-lms-profile-stats span{color:rgba(255,255,255,.75);font-size:12px}
+.tls-lms-profile-cta{align-self:center}.tls-lms-profile-cta .tls-lms-button{white-space:nowrap;background:#fff;color:#263e8d!important;box-shadow:0 6px 18px rgba(8,18,55,.16)}
+.tls-lms-profile-credentials{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.22)}
+.tls-lms-profile-records{min-width:0;padding:16px;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:rgba(255,255,255,.09)}
+.tls-lms-profile-records h3{margin:0 0 12px;color:#fff;font-size:16px}
+.tls-lms-profile-record-list{display:grid;gap:10px}
+.tls-lms-profile-record{display:grid;grid-template-columns:26px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px 0;border-top:1px solid rgba(255,255,255,.13)}
+.tls-lms-profile-record:first-child{border-top:0;padding-top:0}.tls-lms-profile-record:last-child{padding-bottom:0}
+.tls-lms-record-mark{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.15);color:#fff}
+.tls-lms-profile-record>div{display:grid;gap:2px;min-width:0}.tls-lms-profile-record strong{color:#fff;font-size:13px}.tls-lms-profile-record span:not(.tls-lms-record-mark){color:rgba(255,255,255,.72);font-size:12px}.tls-lms-profile-record small{color:rgba(255,255,255,.75);font-size:11px;text-align:end}
+
+/* Richer course cards; the existing TCSP filter bar and query are untouched. */
+.tls-lms-course-thumb{position:relative;overflow:hidden}.tls-lms-course-thumb img{display:block;transition:transform .25s ease}.tls-lms-course-card:hover .tls-lms-course-thumb img{transform:scale(1.035)}
+.tls-lms-course-badges{position:absolute;inset-block-start:12px;inset-inline-start:12px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 24px)}
+.tls-lms-course-badges span{background:rgba(255,255,255,.94);color:#34415f;padding:6px 9px;border-radius:999px;font-size:11px;font-weight:750;box-shadow:0 2px 9px rgba(10,20,50,.12)}
+.tls-lms-course-badges span.is-primary{background:#344fc0;color:#fff}
+.tls-lms-course-categories{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}.tls-lms-course-categories span{padding:4px 8px;border-radius:7px;background:#eef2ff;color:#354baf;font-size:11px;font-weight:750}
+.tls-lms-course-body h2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.7em}
+.tls-lms-course-author{margin:8px 0 9px}.tls-lms-course-author>a{gap:9px}.tls-lms-course-author img{width:34px;height:34px;border-radius:50%;object-fit:cover}
+.tls-lms-course-meta{display:flex;flex-wrap:wrap;gap:7px 13px;margin:7px 0 8px;padding:10px 0;border-top:1px solid #edf0f5;border-bottom:1px solid #edf0f5;color:#66728a;font-size:12px}
+.tls-lms-course-meta>span{display:inline-flex;align-items:center;gap:5px}.tls-lms-course-meta i{font-size:13px}.tls-lms-course-rating{color:#a86400;font-weight:750}.tls-lms-course-rating small{color:#818ba0;font-weight:500}
+.tls-lms-course-tags{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 10px}.tls-lms-course-tags span{padding:4px 7px;border-radius:7px;background:#f3f5f9;color:#657087;font-size:11px}
+.tls-lms-course-body footer{margin-top:auto}.tls-lms-course-body footer strong{font-size:18px}
+@media(max-width:900px){.tls-lms-profile-top{grid-template-columns:96px minmax(0,1fr)}.tls-lms-profile-avatar img{width:92px;height:92px}.tls-lms-profile-cta{grid-column:2;justify-self:start}.tls-lms-profile-credentials{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.tls-lms-profile-hero{text-align:start}.tls-lms-profile-top{grid-template-columns:1fr;text-align:center}.tls-lms-profile-avatar{margin:0 auto}.tls-lms-contact-icons,.tls-lms-profile-details{justify-content:center}.tls-lms-profile-stats{justify-content:center}.tls-lms-profile-cta{grid-column:1;justify-self:stretch}.tls-lms-profile-cta .tls-lms-button{width:100%}.tls-lms-profile-credentials{grid-template-columns:1fr}.tls-lms-profile-record{grid-template-columns:26px minmax(0,1fr)}.tls-lms-profile-record small{grid-column:2;text-align:start}}
+
+.tls-lms-profile-subjects{margin-top:16px;padding-top:15px;border-top:1px solid rgba(255,255,255,.2)}.tls-lms-profile-subjects h3{margin:0 0 10px;color:#fff;font-size:15px}.tls-lms-profile-subject-chips{display:flex;flex-wrap:wrap;gap:7px}.tls-lms-profile-subject-chips span{padding:6px 10px;border:1px solid rgba(255,255,255,.23);border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font-size:12px;font-weight:650}
+
+
+/* 1.3.3 — compact tutor page: content and sticky booking column. */
+.tls-lms-profile-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);gap:24px;align-items:start;width:100%;max-width:1440px;margin:0 auto}
+.tls-lms-profile-content{min-width:0}.tls-lms-profile-sidebar{min-width:0}
+.tls-lms-profile-hero{border-radius:20px;padding:clamp(20px,2.5vw,32px)}
+.tls-lms-profile-top{grid-template-columns:104px minmax(0,1fr);align-items:start;gap:20px}
+.tls-lms-profile-avatar img{width:96px;height:96px}
+.tls-lms-profile-main h1{font-size:clamp(25px,3vw,36px)}
+.tls-lms-profile-main .tls-lms-bio{max-width:none;font-size:15px;line-height:1.6}
+.tls-lms-contact-icons{gap:7px;margin:10px 0 8px}
+.tls-lms-contact-icon{width:36px;height:36px;flex:none}
+.tls-lms-contact-icon .tls-lms-contact-glyph{display:inline-flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:14px;line-height:1;font-weight:800}
+.tls-lms-contact-icons .tls-lms-contact-glyph{display:inline-flex!important;visibility:visible!important;opacity:1!important}.tls-lms-contact-icons .tls-lms-contact-svg{display:block!important;visibility:visible!important;opacity:1!important;width:17px;height:17px;flex:none}
+.tls-lms-profile-stats{margin-top:14px}
+.tls-lms-profile-drawer{margin-top:12px;border:1px solid #dfe5f1;border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 4px 16px rgba(23,39,78,.045)}
+.tls-lms-profile-drawer>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 17px;cursor:pointer;list-style:none;color:#24365e}
+.tls-lms-profile-drawer>summary::-webkit-details-marker{display:none}
+.tls-lms-profile-drawer>summary>span:first-child{display:grid;gap:3px;min-width:0}
+.tls-lms-profile-drawer>summary strong{font-size:14px}.tls-lms-profile-drawer>summary small{color:#758099;font-size:12px}
+.tls-lms-drawer-chevron{display:grid;place-items:center;width:28px;height:28px;flex:none;border-radius:8px;background:#f0f3fb;color:#4158a9;font-size:19px;transition:transform .16s ease}
+.tls-lms-profile-drawer[open] .tls-lms-drawer-chevron{transform:rotate(180deg)}
+.tls-lms-profile-drawer-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:0 17px 16px;border-top:1px solid #eef1f6}
+.tls-lms-drawer-detail{min-width:0;padding-top:13px}.tls-lms-drawer-detail strong{display:block;margin-bottom:5px;color:#34415e;font-size:12px}.tls-lms-drawer-detail p{margin:0;color:#64718a;font-size:13px;line-height:1.55;overflow-wrap:anywhere}
+.tls-lms-drawer-detail .tls-lms-profile-subject-chips span{border-color:#dce4ff;background:#f1f4ff;color:#3b50a5}
+.tls-lms-profile-credentials{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0;padding:14px 17px 17px;border-top:1px solid #eef1f6}
+.tls-lms-profile-records{padding:13px;border-color:#e5eaf3;background:#f9faff}
+.tls-lms-profile-records h3{color:#27395f}.tls-lms-profile-record{border-color:#e9edf5}.tls-lms-profile-record strong{color:#27395f}.tls-lms-profile-record span:not(.tls-lms-record-mark),.tls-lms-profile-record small{color:#6a7690}.tls-lms-record-mark{background:#e8edff;color:#3f56af}
+.tls-lms-booking-sidebar{position:sticky;top:22px;max-height:calc(100vh - 44px);overflow:auto;padding:18px;border:1px solid #e0e6f1;border-radius:18px;background:#fff;box-shadow:0 12px 35px rgba(27,45,90,.09)}
+.tls-lms-booking-sidebar-head{margin-bottom:13px}.tls-lms-booking-sidebar-head>span{display:inline-block;margin-bottom:5px;color:#5369bf;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}.tls-lms-booking-sidebar-head h2{margin:0 0 5px;color:#1d2d51;font-size:21px}.tls-lms-booking-sidebar-head p{margin:0;color:#707b91;font-size:12px;line-height:1.5}
+.tls-lms-booking-sidebar .tls-month-calendar{margin:13px 0 15px;padding:12px;border:1px solid #e8ecf4;border-radius:13px;background:#fafbff}
+.tls-lms-booking-sidebar .tls-calendar-controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tls-lms-booking-sidebar .tls-calendar-controls label{min-width:0;font-size:11px}.tls-lms-booking-sidebar .tls-calendar-controls select{width:100%;max-width:100%;min-height:38px;margin-top:4px;font-size:12px}
+.tls-lms-booking-sidebar .tls-calendar-day{min-height:32px;font-size:12px}.tls-lms-booking-sidebar .tls-calendar-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.tls-lms-booking-sidebar .tls-calendar-slot{padding:7px 5px;font-size:11px}
+.tls-lms-booking-sidebar .tlms-ps-booking{margin:0}.tls-lms-booking-sidebar .tlms-ps-booking-card{margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.tls-lms-booking-sidebar .tlms-ps-booking-title{display:none}.tls-lms-booking-sidebar .tlms-ps-process{display:none}.tls-lms-booking-sidebar .tlms-ps-request-intro{margin:0 0 12px;padding:10px;border-radius:10px;background:#f2f5ff}
+.tls-lms-booking-sidebar .tlms-ps-request-intro p{font-size:12px;line-height:1.45}
+.tls-lms-booking-sidebar .tlms-ps-grid,.tls-lms-booking-sidebar .tlms-ps-grid-2{display:grid;grid-template-columns:1fr;gap:10px}
+.tls-lms-booking-sidebar .tlms-ps-grid>label{min-width:0;font-size:12px}
+.tls-lms-booking-sidebar .tlms-ps-grid input,.tls-lms-booking-sidebar .tlms-ps-grid select,.tls-lms-booking-sidebar .tlms-ps-grid textarea,.tls-lms-booking-sidebar .tlms-ps-goal textarea,.tls-lms-booking-sidebar .tlms-ps-additional-info textarea{width:100%;max-width:100%;min-height:40px;box-sizing:border-box;font-size:13px}
+.tls-lms-booking-sidebar .tlms-ps-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.tls-lms-booking-sidebar .tlms-ps-choice-card{min-width:0;padding:9px;font-size:12px}
+.tls-lms-booking-sidebar .tlms-ps-choice-section{margin:12px 0}.tls-lms-booking-sidebar .tlms-ps-goal,.tls-lms-booking-sidebar .tlms-ps-additional-info{display:grid;gap:5px;margin:11px 0;font-size:12px}
+.tls-lms-booking-sidebar .tlms-ps-policy-box{margin:12px 0;padding:11px;font-size:11px}.tls-lms-booking-sidebar .tlms-ps-policy-box details{margin:7px 0}
+.tls-lms-booking-sidebar .tlms-ps-send-request-btn{width:100%;min-height:44px}.tls-lms-booking-sidebar .tlms-ps-request-notice{font-size:11px}
+.tls-lms-profile-courses{margin-top:22px}
+@media(max-width:1080px){.tls-lms-profile-layout{grid-template-columns:minmax(0,1fr) 320px;gap:16px}.tls-lms-booking-sidebar{padding:14px}}
+@media(max-width:900px){.tls-lms-profile-layout{grid-template-columns:1fr}.tls-lms-booking-sidebar{position:static;max-height:none}.tls-lms-profile-sidebar{order:2}.tls-lms-profile-content{order:1}}
+@media(max-width:600px){.tls-lms-profile-top{grid-template-columns:72px minmax(0,1fr);gap:13px;text-align:start}.tls-lms-profile-avatar img{width:68px;height:68px}.tls-lms-profile-main h1{font-size:24px}.tls-lms-profile-credentials,.tls-lms-profile-drawer-body{grid-template-columns:1fr}.tls-lms-profile-stats{justify-content:flex-start}.tls-lms-booking-sidebar{padding:13px}.tls-lms-booking-sidebar .tlms-ps-choice-grid{grid-template-columns:1fr 1fr}}
+
+.tls-lms-contact-icon::before{content:none!important;display:none!important}.tls-lms-contact-icon .screen-reader-text{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* 1.3.3 follow-up: tutor-local calendar and compact booking disclosures. */
+.tls-calendar-zone{margin:8px 0 4px;color:#69758e;font-size:11px;line-height:1.4}.tls-calendar-zone strong{color:#394a72;font-weight:750}
+.tlms-ps-booking-sidebar .tlms-ps-process{display:block;margin:8px 0 12px;padding:9px 11px;border:1px solid #e6eaf2;border-radius:10px;background:#fafbfe}
+.tls-lms-booking-sidebar .tlms-ps-process{display:block!important}
+.tls-lms-booking-sidebar .tlms-ps-process-title{display:flex;align-items:center;gap:7px;margin:0;cursor:pointer;list-style:none}
+.tls-lms-booking-sidebar .tlms-ps-process-title::-webkit-details-marker{display:none}
+.tls-lms-booking-sidebar .tlms-ps-process-title strong{font-size:12px;color:#364565}
+.tls-lms-booking-sidebar .tlms-ps-process-title span{margin-left:auto;font-size:10px;color:#7c879d}
+.tls-lms-booking-sidebar .tlms-ps-process-steps{grid-template-columns:1fr;gap:6px;margin-top:10px}
+.tls-lms-booking-sidebar .tlms-ps-process-steps>div{padding:8px;background:#fff}
+.tls-lms-booking-sidebar .tlms-ps-process-steps span{font-size:11px}
+.tls-lms-booking-sidebar .tlms-ps-request-extra{margin:10px 0;border:1px solid #e7ebf3;border-radius:10px;background:#fafbfe}
+.tls-lms-booking-sidebar .tlms-ps-request-extra>summary{padding:10px 12px;cursor:pointer;font-size:12px;font-weight:750;color:#40527e;list-style:none}
+.tls-lms-booking-sidebar .tlms-ps-request-extra>summary::-webkit-details-marker{display:none}
+.tls-lms-booking-sidebar .tlms-ps-request-extra-fields{display:grid;gap:10px;padding:0 11px 11px;border-top:1px solid #e9edf4}
+.tls-lms-booking-sidebar .tlms-ps-policy-box details:not([open]){padding:6px 0}
+.tls-lms-booking-sidebar .tlms-ps-policy-box details>summary{cursor:pointer;font-weight:700;color:#40527e}
+@media(max-width:900px){.tls-lms-booking-sidebar .tlms-ps-process-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.tls-lms-booking-sidebar .tlms-ps-process-steps{grid-template-columns:1fr}}
+
+/* Make contact pictograms independent of theme/Tutor icon-font availability. */
+.tls-lms-contact-icons .tls-lms-contact-icon[class*="tutor-icon-brand-"],
+.tls-lms-contact-icons .tls-lms-contact-icon[class*="tutor-icon-line-"]{background:rgba(255,255,255,.13)!important;-webkit-mask-image:none!important;mask-image:none!important;-webkit-mask:none!important;mask:none!important}
+.tls-lms-contact-icons .tls-lms-contact-icon .tls-lms-contact-glyph{display:inline-flex!important;align-items:center;justify-content:center;min-width:18px;min-height:18px;font-size:17px;line-height:1;font-weight:800;letter-spacing:-.03em}
+
+/* 1.3.6 calendar summary replaces the duplicate read-only date/time field in booking forms. */
+.tls-calendar-picked-slot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;padding:10px 12px;border:1px solid #bfdbfe;border-radius:10px;background:#eff6ff;color:#1e3a8a;font-size:13px}
+.tls-calendar-picked-slot[hidden]{display:none!important}
+.tls-calendar-picked-slot span{font-weight:700;color:#475569}
+.tls-calendar-picked-slot strong{font-weight:700;text-align:right}
+
+/* 1.3.6: all schedule choices live together inside the availability calendar. */
+.tls-month-calendar .tls-calendar-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:end}
+.tls-month-calendar .tls-calendar-controls label{display:grid;gap:5px;min-width:0;font-size:12px;font-weight:700;color:#475569}
+.tls-month-calendar .tls-calendar-controls select{width:100%;min-height:40px;padding:7px 10px;border:1px solid #d7deea;border-radius:9px;background:#fff;font:inherit;color:#1f2937}
+@media(max-width:560px){.tls-month-calendar .tls-calendar-controls{grid-template-columns:1fr 1fr}.tls-month-calendar .tls-calendar-controls label:last-child{grid-column:1/-1}}
+
+/* Booking preference notice: a selected calendar slot is not held until tutor confirmation. */
+.tls-calendar-request-note{margin:4px 0 12px;color:#64748b;font-size:12px;line-height:1.45}
+
+/* 1.3.7 — public tutor page is a centred card, not edge to edge. */
+.tls-lms-profile-layout{width:min(1180px,calc(100% - 32px));max-width:1180px;margin:clamp(20px,3vw,44px) auto}
+.tls-lms-profile-layout .tls-lms-profile-hero{border-radius:22px}
+@media(max-width:900px){.tls-lms-profile-layout{width:calc(100% - 24px)}}
+
+/* 1.3.7 — catalog search bar, result count and fallback form. */
+.tls-lms-filter-panel{margin:0 0 20px}
+.tls-lms-result-count{margin:0 0 12px;color:#66728a;font-size:14px}
+.tls-lms-search{display:flex;flex-wrap:wrap;gap:10px;padding:14px;border:1px solid #e3e8f1;border-radius:16px;background:#fff;box-shadow:0 8px 24px rgba(26,39,68,.05)}
+.tls-lms-search label{flex:0 1 190px;min-width:150px;margin:0}.tls-lms-search .tls-lms-search-main{flex:1 1 280px}
+.tls-lms-search input,.tls-lms-search select{width:100%;min-height:46px;padding:9px 12px;border:1px solid #d9dfeb;border-radius:10px;background:#fff}
+.tls-lms-search .tls-lms-button{min-height:46px;padding:0 22px;border:0;border-radius:10px;background:#3e63dd;color:#fff;font-weight:700;cursor:pointer}
+.tls-lms-pagination ul{display:flex;flex-wrap:wrap;gap:6px;margin:20px 0 0;padding:0;list-style:none}
+.tls-lms-pagination .page-numbers{display:inline-block;padding:8px 13px;border:1px solid #e3e8f1;border-radius:9px;color:#34415f;text-decoration:none}
+.tls-lms-pagination .page-numbers.current{background:#3e63dd;border-color:#3e63dd;color:#fff}
+
+/* 1.3.8 — catalog: filters as a left sidebar, always visible (the TCSP script only unhides its bar inside Tutor's own wrapper). */
+.tls-lms-catalog-body{display:grid;grid-template-columns:minmax(270px,320px) minmax(0,1fr);gap:28px;align-items:start}
+.tls-lms-catalog-body.is-plain{grid-template-columns:minmax(0,1fr)}
+.tls-lms-filter-side{position:sticky;top:20px;min-width:0}
+.tls-lms-filter-panel{margin:0;padding:16px;border:1px solid #e3e8f1;border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(26,39,68,.05)}
+.tls-lms-catalog .tcsp-filter-bar.tcsp-sidebar-filter{visibility:visible!important;opacity:1!important;display:flex;flex-direction:column;gap:8px;width:100%;margin:0}
+.tls-lms-catalog .tcsp-filter-bar .tcsp-filter-row{display:flex;flex-direction:column;align-items:stretch;gap:8px;width:100%;min-width:0}
+.tls-lms-catalog .tcsp-filter-bar select,.tls-lms-catalog .tcsp-filter-bar input[type=search]{width:100%;max-width:100%}
+.tls-lms-filter-panel .tls-lms-search{flex-direction:column;padding:0;border:0;box-shadow:none}.tls-lms-filter-panel .tls-lms-search label{flex:1 1 auto;min-width:0}
+.tls-lms-results{min-width:0}
+.tls-lms-course-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))}
+@media(max-width:900px){.tls-lms-catalog-body{grid-template-columns:1fr}.tls-lms-filter-side{position:static}}
+
+/* 1.3.8 — suite course card (type/format badges, tutor + verified tick, rating, tags, price). */
+.tls-course-card{position:relative;display:flex;flex-direction:column;height:100%;overflow:hidden;border:1px solid #e5e9f0;border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(26,39,68,.06);transition:box-shadow .2s,transform .2s}
+.tls-course-card:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(26,39,68,.12)}
+.tls-course-image{position:relative;display:block;aspect-ratio:16/9;background:#f0f3f8;overflow:hidden}
+.tls-course-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .25s}.tls-course-card:hover .tls-course-image img{transform:scale(1.03)}
+.tls-course-noimg{display:block;width:100%;height:100%;background:linear-gradient(135deg,#e8edff,#f6f8ff)}
+.tls-course-badges{position:absolute;inset-block-start:10px;inset-inline-start:10px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 20px)}
+.tls-chip{padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.95);color:#24324c;font-size:12px;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.12)}.tls-chip-type{background:#3e63dd;color:#fff}
+.tls-course-copy{display:flex;flex-direction:column;flex:1;padding:14px 16px 16px}
+.tls-course-copy .tls-eyebrow{margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#68748a}
+.tls-course-copy h3{margin:0 0 8px;font-size:17px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.tls-course-copy h3 a{color:inherit;text-decoration:none}
+.tls-course-tutor{display:flex;align-items:center;gap:6px;margin:0 0 8px;font-size:14px;color:#46526b}.tls-course-tutor a{display:inline-flex;align-items:center;gap:7px;color:inherit;text-decoration:none;font-weight:600}
+.tls-mini-avatar{width:24px;height:24px;border-radius:50%;object-fit:cover}
+.tls-verified-ico{display:inline-flex;vertical-align:middle}
+.tls-course-meta{display:flex;flex-wrap:wrap;gap:3px 12px;margin:0 0 10px;padding:0;list-style:none;color:#68748a;font-size:13px}.tls-course-meta .tls-rate{color:#b36b00;font-weight:700}.tls-course-meta small{color:#8a94a8;font-weight:600}
+.tls-tags{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}.tls-tag{padding:3px 8px;border-radius:6px;background:#f0f3f8;color:#46526b;font-size:12px;font-weight:600}
+.tls-course-copy footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:12px;border-top:1px solid #edf0f5}
+.tls-course-copy footer .tls-price{font-size:18px;font-weight:800}.tls-course-copy footer a{color:#3e63dd;font-weight:700;text-decoration:none}
+
+/* 1.3.9 — sponsored carousel sits above the results, full width of the results column. */
+.tls-lms-results .tcsp-sponsored-carousel{margin:0 0 24px;max-width:100%}
+
+/* 1.3.10 — icon-only badges and icon+number stats with hover/focus tooltips; sponsored sticker top-right. */
+.tls-course-card .tcsp-sponsored-sticker{inset-inline-start:auto;inset-inline-end:10px;left:auto;right:10px;top:10px}
+.tls-chip-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;padding:0;position:relative}
+.tls-ico{display:block;flex:none}
+.tls-course-meta .tls-stat{position:relative;display:inline-flex;align-items:center;gap:5px;cursor:help;outline:0}
+[data-tip]{position:relative}
+[data-tip]::after{content:attr(data-tip);position:absolute;z-index:10;inset-block-end:calc(100% + 8px);inset-inline-start:0;max-width:220px;width:max-content;padding:6px 9px;border-radius:8px;background:#1b2437;color:#fff;font-size:12px;font-weight:600;line-height:1.35;letter-spacing:0;text-transform:none;white-space:normal;pointer-events:none;opacity:0;transform:translateY(3px);transition:opacity .15s,transform .15s}
+.tls-course-badges [data-tip]::after{inset-block-end:auto;inset-block-start:calc(100% + 8px)}
+[data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;transform:none}
+.tls-chip-icon:focus-visible,.tls-stat:focus-visible{outline:2px solid #3e63dd;outline-offset:2px;border-radius:6px}
+
+/* 1.3.11 — every course type, format and level has its own icon and colour. */
+.tls-chip-icon{color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.tls-chip--prerecorded{background:#6d5ae6}.tls-chip--direct{background:#e5484d}.tls-chip--hybrid{background:#0f9fb0}
+.tls-chip--group{background:#f08c00}.tls-chip--one_to_one{background:#2f9e5f}
+.tls-chip--beginner{background:#3aa655}.tls-chip--intermediate{background:#e08a00}.tls-chip--expert{background:#c2255c}.tls-chip--all_levels{background:#4c6ef5}
+
+
+/* 1.3.13 — clearer public tutor credentials, compact social icons and readable stats. */
+.tls-lms-profile-stats li{display:inline-flex;align-items:baseline;gap:6px;min-width:0;white-space:nowrap}
+.tls-lms-profile-stats li strong,.tls-lms-profile-stats li span{display:inline-block;line-height:1.35}
+.tls-lms-contact-icons{gap:8px}
+.tls-lms-contact-icons .tls-lms-contact-icon{display:inline-flex!important;align-items:center;justify-content:center;width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;padding:0!important;border-radius:9px!important}
+.tls-lms-contact-icons .tls-lms-contact-icon .tls-lms-contact-glyph{display:inline-flex!important;align-items:center;justify-content:center;width:16px;height:16px;min-width:16px;min-height:16px;font-size:0!important;line-height:1}
+.tls-lms-contact-svg{display:block;width:16px;height:16px;flex:none}
+.tls-lms-profile-credentials-section{margin:22px 0 26px;padding:20px;border:1px solid #e4e9f2;border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(26,39,68,.05)}
+.tls-lms-profile-credentials-heading{margin:0 0 16px}
+.tls-lms-profile-credentials-heading h2{margin:0 0 4px;color:#263653;font-size:20px;line-height:1.25}
+.tls-lms-profile-credentials-heading p{margin:0;color:#718096;font-size:13px;line-height:1.5}
+.tls-lms-profile-credentials{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0;padding:0;border:0}
+.tls-lms-profile-records{min-width:0;padding:16px;border:1px solid #e7ebf2;border-radius:14px;background:#f8faff}
+.tls-lms-profile-records h3{display:flex;align-items:center;gap:9px;margin:0 0 12px;color:#2b3b5a;font-size:15px;line-height:1.3}
+.tls-lms-record-heading-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;flex:none;border-radius:9px;background:#e8edff;color:#4059b0}
+.tls-lms-profile-record-list{display:grid;gap:9px}
+.tls-lms-profile-record{display:grid;grid-template-columns:34px minmax(0,1fr);align-items:start;gap:10px;padding:10px;border:1px solid #e8edf5;border-radius:11px;background:#fff}
+.tls-lms-profile-record:first-child,.tls-lms-profile-record:last-child{padding:10px;border:1px solid #e8edf5}
+.tls-lms-record-mark{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9px;background:#eef2ff;color:#5368b7}
+.tls-lms-record-copy{display:grid;gap:3px;min-width:0}
+.tls-lms-profile-record .tls-lms-record-copy strong{color:#283854;font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+.tls-lms-profile-record .tls-lms-record-copy span{color:#64748b;font-size:12px;line-height:1.4;overflow-wrap:anywhere}
+.tls-lms-profile-record .tls-lms-record-copy small{color:#7b879b;font-size:11px;line-height:1.4;text-align:start;overflow-wrap:anywhere}
+.tls-lms-profile-pagination{margin:22px 0 8px}
+.tls-lms-profile-pagination ul.page-numbers{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:7px;margin:0;padding:0;list-style:none}
+.tls-lms-profile-pagination .page-numbers{display:inline-flex;align-items:center;justify-content:center;min-width:36px;min-height:36px;padding:7px 11px;border:1px solid #e2e8f0;border-radius:9px;background:#fff;color:#354563;font-size:13px;font-weight:650;text-decoration:none}
+.tls-lms-profile-pagination .page-numbers.current{border-color:#3e63dd;background:#3e63dd;color:#fff}
+.tls-lms-profile-pagination a.page-numbers:hover{border-color:#9aacee;color:#314fae}
+@media(max-width:700px){.tls-lms-profile-credentials-section{padding:15px}.tls-lms-profile-credentials{grid-template-columns:1fr}.tls-lms-contact-icons .tls-lms-contact-icon{width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important}}
+
+
+/* 1.3.14 — credentials share the blue profile header and open like Teaching Details. */
+.tls-lms-profile-drawer--credentials{margin-top:12px;border-color:rgba(255,255,255,.28);background:#fff}
+.tls-lms-profile-drawer--credentials .tls-lms-profile-drawer-body--credentials{display:block;padding:14px 17px 16px;border-top:1px solid #eef1f6}
+.tls-lms-profile-drawer--credentials .tls-lms-profile-credentials{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0;padding:0;border:0}
+.tls-lms-profile-drawer--credentials .tls-lms-profile-records{padding:13px;border-color:#e5eaf3;background:#f9faff}
+.tls-lms-profile-drawer--credentials .tls-lms-profile-records h3{color:#27395f}
+.tls-lms-profile-drawer--credentials .tls-lms-profile-record{border-color:#e9edf5;background:#fff}
+.tls-lms-profile-drawer--credentials .tls-lms-record-heading-icon{background:#e8edff;color:#4059b0}
+.tls-lms-profile-drawer--credentials .tls-lms-record-mark{background:#eef2ff;color:#5368b7}
+.tls-lms-profile-drawer--credentials .tls-lms-record-copy strong{color:#283854}
+.tls-lms-profile-drawer--credentials .tls-lms-record-copy span{color:#64748b}
+.tls-lms-profile-drawer--credentials .tls-lms-record-copy small{color:#7b879b}
+@media(max-width:700px){.tls-lms-profile-drawer--credentials .tls-lms-profile-credentials{grid-template-columns:1fr}.tls-lms-profile-drawer--credentials .tls-lms-profile-drawer-body--credentials{padding:12px}}
+
+
+/* 1.3.16 — combined family and privacy workspace. */
+.tls-lms-dashboard-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:6px;border:1px solid #e3e9f3;border-radius:14px;background:#f6f8fc}
+.tls-lms-dashboard-tabs a{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:9px 15px;border:1px solid transparent;border-radius:10px;color:#4a5872;font-size:14px;font-weight:700;text-decoration:none;transition:background .15s,border-color .15s,color .15s}
+.tls-lms-dashboard-tabs a .tls-ico{width:17px;height:17px}
+.tls-lms-dashboard-tabs a.is-active{border-color:#d8e1fa;background:#fff;color:#3153b8;box-shadow:0 2px 8px rgba(30,55,100,.07)}
+.tls-lms-dashboard-tabs a:focus-visible{outline:2px solid #3e63dd;outline-offset:2px}
+.tls-lms-guardian-course{display:grid;gap:7px;padding:9px 0}
+.tls-lms-guardian-course>div:first-child{display:flex;flex-wrap:wrap;align-items:center;gap:7px}
+.tls-lms-guardian-progress{display:grid;gap:4px;max-width:420px;color:#60708b;font-size:12px}
+.tls-lms-guardian-progress-track{height:7px;overflow:hidden;border-radius:99px;background:#e8edf5}
+.tls-lms-guardian-progress-track>span{display:block;height:100%;border-radius:inherit;background:#4e70d8}
+.tls-lms-guardian-assessments{margin:14px 0 0;padding-top:12px;border-top:1px solid #edf0f5}
+.tls-lms-guardian-assessments h4{display:flex;align-items:center;gap:8px;margin:0 0 8px;color:#354563;font-size:14px}
+.tls-lms-guardian-assessments h4 .tls-ico{width:16px;height:16px;color:#5368b7}
+.tls-lms-guardian-assessments ul{display:grid;gap:7px;margin:0;padding:0;list-style:none}
+.tls-lms-guardian-assessments li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:5px 12px;padding:7px 0;border-bottom:1px solid #f1f3f7;font-size:13px}
+.tls-lms-guardian-assessments li strong{color:#354563}
+.tls-lms-guardian-assessments li span{color:#6b7890}
+@media(max-width:600px){.tls-lms-dashboard-tabs{display:grid;grid-template-columns:1fr 1fr}.tls-lms-dashboard-tabs a{padding:8px 9px;font-size:13px}.tls-lms-guardian-assessments li{display:grid;gap:3px}}
+
+/* 1.3.17 — calmer course cards: concise description, More link, category at the bottom. */
+.tls-lms-course-card .tls-course-description{display:flex;align-items:flex-end;gap:5px;margin:12px 0 8px;color:#66748b;font-size:13px;line-height:1.55}
+.tls-lms-course-card .tls-course-description-text{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-width:0;flex:1}
+.tls-lms-course-card .tls-course-more{display:inline-flex;flex:none;color:#365bd6;font-weight:750;text-decoration:none;white-space:nowrap}
+.tls-lms-course-card .tls-course-more:hover{text-decoration:underline}
+.tls-lms-course-card .tls-course-category{display:flex;align-items:center;gap:6px;margin:0 0 12px;color:#52627c;font-size:12px;font-weight:700;line-height:1.4}
+.tls-lms-course-card .tls-course-category .tls-ico{width:14px;height:14px;color:#6278b9}
+.tls-lms-course-card .tls-course-copy footer{margin-top:auto}
+
+/* 1.3.22 — native Tutor LMS Pro gift recipient selector and guardian free-course permission. */
+.tls-parent-gift-recipient-picker{margin:12px 0 10px;padding:13px 14px;border:1px solid #dbe5f2;border-radius:10px;background:#f7faff}
+.tls-parent-gift-recipient-picker label{display:block;margin:0 0 7px;color:#273c5d;font-size:13px;font-weight:700}
+.tls-parent-gift-recipient-picker__select{display:block;width:100%;min-height:42px;padding:8px 11px;border:1px solid #cbd7e6;border-radius:8px;background:#fff;color:#20344f}
+.tls-parent-gift-recipient-picker__hint{margin:7px 0 0;color:#63728a;font-size:12px;line-height:1.45}
+.tls-guardian-gift-recipient-locked{background:#f4f7fb!important;color:#33445d!important;cursor:not-allowed}
+.tls-lms-child-free-enrollment{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:10px 0;padding:12px;border:1px solid #dbe5f2;border-radius:10px;background:#f8faff}
+.tls-lms-child-free-enrollment .tls-lms-check{flex:1 1 260px;margin:0}
+.tls-lms-child-free-enrollment .tls-lms-button{white-space:nowrap}
+.tls-lms-child-free-enrollment__note{flex:1 0 100%;margin:0;color:#66748b;font-size:12px;line-height:1.45}
+@media(max-width:600px){.tls-parent-gift-recipient-picker{padding:11px}.tls-lms-child-free-enrollment{align-items:stretch}.tls-lms-child-free-enrollment .tls-lms-button{width:100%}}
+
+/* Child feedback moderation queue */
+.tls-feedback-parent-queue{margin:24px 0;padding:18px;border:1px solid #e5e9f2;border-radius:16px;background:#fbfcff}.tls-feedback-parent-queue>h2{margin:0 0 6px}.tls-feedback-child-queue{margin-top:18px}.tls-feedback-card{margin:12px 0;padding:16px;border:1px solid #e5e9f2;border-radius:12px;background:#fff}.tls-feedback-card__head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;color:#26334a}.tls-feedback-stars{margin:9px 0;color:#b7791f;letter-spacing:2px}.tls-feedback-card__content{margin:10px 0;line-height:1.6;overflow-wrap:anywhere}.tls-feedback-card__actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.tls-feedback-card__actions form{margin:0}
+
+.tls-feedback-parent-request-edits{display:grid;gap:8px;padding:10px 0;border-top:1px solid var(--tls-border,#e5e7eb)}.tls-feedback-parent-request-edits textarea{display:block;width:100%;min-height:64px;border:1px solid var(--tls-border,#d9dee7);border-radius:8px;padding:9px;font:inherit}.tls-feedback-child-notices{margin:16px 0}.tls-feedback-child-notices .tls-feedback-card{border-left:3px solid var(--tls-warning,#d97706)}
